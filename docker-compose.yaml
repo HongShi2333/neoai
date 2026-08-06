@@ -18,6 +18,8 @@ services:
       - chatnio-network
 
   redis:
+    # switch to valkey/valkey:latest or dragonflydb/dragonfly:latest to use
+    # valkey or dragonfly as the cache driver (wire-compatible with redis).
     image: redis:latest
     container_name: redis
     restart: always
@@ -53,6 +55,8 @@ services:
           REDIS_PORT: 6379
           REDIS_PASSWORD: ""
           REDIS_DB: 0
+          # cache driver: redis (default), valkey or dragonfly
+          REDIS_TYPE: redis
           SERVE_STATIC: "true"
       volumes:
         - ./config:/config

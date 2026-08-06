@@ -1,0 +1,19 @@
+﻿go : # github.com/chai2010/webp
+At C:\Users\Lenovo\AppData\Local\Temp\trae-agent-toolhost\jobs\job-5d59c833d52e477e920b1b92b6324d0b\command.ps1:15 char
+:6163
++ ... thub\neoai; go build ./connection/... ./manager/community/... 2>&1 |  ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (# github.com/chai2010/webp:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+C:\Users\Lenovo\go\pkg\mod\github.com\chai2010\webp@v1.1.1\webp.go:22:9: undefined: webpGetInfo
+C:\Users\Lenovo\go\pkg\mod\github.com\chai2010\webp@v1.1.1\webp.go:26:20: undefined: webpDecodeGray
+C:\Users\Lenovo\go\pkg\mod\github.com\chai2010\webp@v1.1.1\webp.go:39:20: undefined: webpDecodeRGB
+C:\Users\Lenovo\go\pkg\mod\github.com\chai2010\webp@v1.1.1\webp.go:52:20: undefined: webpDecodeRGBA
+C:\Users\Lenovo\go\pkg\mod\github.com\chai2010\webp@v1.1.1\webp.go:68:14: undefined: webpDecodeGrayToSize
+C:\Users\Lenovo\go\pkg\mod\github.com\chai2010\webp@v1.1.1\webp.go:82:14: undefined: webpDecodeRGBToSize
+C:\Users\Lenovo\go\pkg\mod\github.com\chai2010\webp@v1.1.1\webp.go:96:14: undefined: webpDecodeRGBAToSize
+C:\Users\Lenovo\go\pkg\mod\github.com\chai2010\webp@v1.1.1\webp.go:109:7: undefined: toGrayImage
+C:\Users\Lenovo\go\pkg\mod\github.com\chai2010\webp@v1.1.1\webp.go:110:14: undefined: webpEncodeGray
+C:\Users\Lenovo\go\pkg\mod\github.com\chai2010\webp@v1.1.1\webp.go:119:14: undefined: webpEncodeRGB
+C:\Users\Lenovo\go\pkg\mod\github.com\chai2010\webp@v1.1.1\webp.go:119:14: too many errors

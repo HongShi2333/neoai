@@ -627,7 +627,15 @@
       "new-group-buy-price": "購入レート",
       "new-group-consume-price": "消費比率",
       "new-group-description": "説明",
-      "update-group": "ユーザーグループを更新する"
+      "update-group": "ユーザーグループを更新する",
+      "model-placeholder": "モデル名を入力、カンマ・スペース区切りで一括追加可能",
+      "json-editor": "JSON 価格エディタ",
+      "json-editor-tip": "視覚的および JSON 形式での価格ルール一括編集をサポート、送信後に既存ルールを上書きします",
+      "json-import": "インポートして上書き",
+      "json-invalid": "JSON 形式エラー",
+      "json-invalid-array": "JSON 内容は配列形式である必要があります",
+      "json-invalid-empty": "有効な価格ルールが見つかりません（モデルリストが空です）",
+      "json-invalid-format": "JSON 形式が正しいか確認してください"
     },
     "system": {
       "general": "全般設定",
@@ -1132,7 +1140,40 @@
     "custom-group-action-desc": "カスタムグループ名を入力してください",
     "group-setting": "グループ設定",
     "notifications": "プッシュセンター",
-    "notify-all": "すべてのユーザーに通知"
+    "notify-all": "すべてのユーザーに通知",
+    "community": {
+      "title": "コミュニティチャンネル",
+      "create": "チャンネルを作成",
+      "edit": "ãã£ã³ãã«ãç·¨é",
+      "delete": "チャンネルを削除",
+      "delete-confirm": "チャンネル\"{{ name }}\"を削除してもよろしいですか？この操作を元に戻すことはできず、チャンネル内のすべてのメッセージがクリアされます。",
+      "id": "I D",
+      "name": "ãã£ã³ãã«å",
+      "name-placeholder": "チャンネル名を入力してください",
+      "name-required": "チャンネル名を空にすることはできません",
+      "topic": "チャンネルテーマ",
+      "topic-placeholder": "チャンネルテーマの簡単な説明（任意）",
+      "description": "チャンネルの説明",
+      "description-placeholder": "チャンネルの説明（任意）",
+      "visibility": "表示",
+      "public": "公開",
+      "private": "Private",
+      "position": "順位",
+      "created-by": "作成ソフト",
+      "action": "操作",
+      "visible-groups": "表示されているユーザーグループ",
+      "visible-groups-placeholder": "{{length}}ユーザーグループが選択されました",
+      "visible-groups-tip": "この公開チャンネルを見ることができるユーザーグループを選択します（すべてのユーザーは空白のままにします）",
+      "post-groups": "話しやすいユーザーグループ",
+      "post-groups-placeholder": "{{length}}ユーザーグループが選択されました",
+      "post-groups-tip": "チャンネル内でメッセージを送信できるユーザーのグループを選択します（表示されているすべてのユーザーが発言できるように空白のままにします）",
+      "members": "チャンネルメンバー",
+      "members-placeholder": "ユーザー名、カンマまたは改行",
+      "members-tip": "プライベートチャンネルの表示されているメンバーのリスト。管理者のみ空白のままにします",
+      "posters": "話しやすいメンバー",
+      "posters-placeholder": "ユーザー名、カンマまたは改行",
+      "posters-tip": "通話を許可された追加のユーザー名のリスト（ユーザーグループの制限を上書き）"
+    }
   },
   "mask": {
     "title": "プリセット",
@@ -1359,7 +1400,9 @@
     "account-full": "アカウント管理",
     "admin-full": "管理者",
     "key": "鍵",
-    "key-full": "トークン管理"
+    "key-full": "トークン管理",
+    "community": "ãã£ã³ãã«",
+    "community-full": "コミュニティチャンネル"
   },
   "notify": "お知らせ",
   "new-notify": "新しい通知",
@@ -1670,5 +1713,17 @@
       "pending": "決済待ち",
       "rate": "リベート率"
     }
+  },
+  "community": {
+    "title": "コミュニティチャンネル",
+    "empty": "表示されているチャンネルはまだありません",
+    "select-channel": "チャットを開始するチャンネルを選択してください",
+    "no-messages": "まだメッセージはありません。最初のメッセージを送信してください",
+    "input-placeholder": "メッセージを入力し、送信するにはEnterキー、折り返すにはShift + Enterキーを押します",
+    "readonly": "現在のチャンネルは読み取り専用であり、メッセージを送信する権限がありません",
+    "send": "送信する",
+    "send-failed": "送信失敗",
+    "public": "公開",
+    "private": "Private"
   }
 }

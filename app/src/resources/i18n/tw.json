@@ -831,7 +831,15 @@
       "add-new-group": "新增用戶群組",
       "new-group-buy-price": "購買倍率",
       "new-group-consume-price": "消費倍率",
-      "new-group-description": "描述"
+      "new-group-description": "描述",
+      "model-placeholder": "輸入模型名稱，支援逗號、空格分隔批量添加",
+      "json-editor": "JSON 定價編輯器",
+      "json-editor-tip": "支援視覺化與 JSON 格式批量編輯定價規則，提交後將覆蓋現有規則",
+      "json-import": "匯入並覆蓋",
+      "json-invalid": "JSON 格式錯誤",
+      "json-invalid-array": "JSON 內容必須為陣列格式",
+      "json-invalid-empty": "未發現有效的定價規則（模型列表為空）",
+      "json-invalid-format": "請檢查 JSON 格式是否正確"
     },
     "system": {
       "general": "一般設定",
@@ -1207,6 +1215,39 @@
       },
       "purchase": "購買授權",
       "pro-required": "此功能為CoAI Pro 專屬，請在授權管理頁面購買CoAI Pro 授權以使用該功能"
+    },
+    "community": {
+      "title": "社區頻道",
+      "create": "建立頻道",
+      "edit": "編輯頻道",
+      "delete": "刪除頻道",
+      "delete-confirm": "確定刪除頻道&quot;{{name}}&quot; 嗎？此操作不可恢復，頻道內所有訊息將會清除。",
+      "id": "ID",
+      "name": "頻道名稱",
+      "name-placeholder": "請輸入頻道名稱",
+      "name-required": "頻道名稱不能為空白",
+      "topic": "頻道主題",
+      "topic-placeholder": "簡短描述頻道主題（可選）",
+      "description": "頻道描述",
+      "description-placeholder": "頻道詳細描述（可選）",
+      "visibility": "可見性",
+      "public": "公開",
+      "private": "私人",
+      "position": "排序",
+      "created-by": "創建者",
+      "action": "操作",
+      "visible-groups": "可見用戶群組",
+      "visible-groups-placeholder": "已選{{length}} 個使用者群組",
+      "visible-groups-tip": "選擇可看到此公開頻道的使用者群組（留空表示所有使用者可見）",
+      "post-groups": "可發言用戶群組",
+      "post-groups-placeholder": "已選{{length}} 個使用者群組",
+      "post-groups-tip": "選擇可在頻道內發送訊息的使用者群組（留空表示所有可見用戶均可發言）",
+      "members": "頻道成員",
+      "members-placeholder": "用戶名，逗號或換行分隔",
+      "members-tip": "私有頻道的可見成員列表，留空表示僅管理員可見",
+      "posters": "可發言成員",
+      "posters-placeholder": "用戶名，逗號或換行分隔",
+      "posters-tip": "額外允許發言的用戶名清單（覆蓋用戶群組限制）"
     }
   },
   "mask": {
@@ -1506,7 +1547,9 @@
     "account": "帳戶",
     "account-full": "帳戶管理",
     "admin": "後台",
-    "admin-full": "後台管理"
+    "admin-full": "後台管理",
+    "community": "頻道",
+    "community-full": "社區頻道"
   },
   "account": {
     "title": "帳號管理",
@@ -1672,5 +1715,17 @@
       "pending": "待結算",
       "rate": "返傭率"
     }
+  },
+  "community": {
+    "title": "社區頻道",
+    "empty": "暫無可見頻道",
+    "select-channel": "請選擇一個頻道開始聊天",
+    "no-messages": "暫無訊息，發送第一則訊息吧",
+    "input-placeholder": "輸入訊息，Enter 發送，Shift+Enter 換行",
+    "readonly": "目前頻道為唯讀，你無權發送訊息",
+    "send": "發送",
+    "send-failed": "發送失敗",
+    "public": "公開",
+    "private": "私人"
   }
 }

@@ -11,6 +11,7 @@ import {
   Gauge,
   GitFork,
   History,
+  Hash,
   Radio,
   ServerCrash,
   Settings,
@@ -79,6 +80,11 @@ function MenuBar() {
         title={t("admin.broadcast")}
         icon={<Radio />}
         path={"/broadcast"}
+      />
+      <MenuItem
+        title={t("admin.community.title")}
+        icon={<Hash />}
+        path={"/community"}
       />
       <MenuItem
         title={t("admin.channel")}

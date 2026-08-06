@@ -81,7 +81,7 @@ function CustomAction({ onPost }: CustomActionProps) {
     <div className={`flex flex-row grow gap-0 custom-action`}>
       <Input
         value={model}
-        placeholder={t("admin.channels.add-custom-model")}
+        placeholder={t("admin.channels.add-custom-model-placeholder")}
         className={`rounded-r-none`}
         onChange={(e) => setModel(e.target.value)}
         onKeyDown={(e) => {
@@ -363,7 +363,11 @@ function ChannelEditor({
               </DropdownMenu>
               <CustomAction
                 onPost={(model) => {
-                  const models = model.split(" ");
+                  // NewAPI-style: support comma, space and newline separated models
+                  const models = model
+                    .split(/[\s,]+/)
+                    .map((s) => s.trim())
+                    .filter((s) => s.length > 0);
                   dispatch({ type: "add-models", value: models });
                 }}
               />

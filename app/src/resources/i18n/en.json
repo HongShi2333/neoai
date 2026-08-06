@@ -627,7 +627,15 @@
       "new-group-buy-price": "Purchase Rate",
       "new-group-consume-price": "Consumption ratio",
       "new-group-description": "Description",
-      "update-group": "Update User"
+      "update-group": "Update User",
+      "model-placeholder": "Enter model name, supports comma/space separated batch input",
+      "json-editor": "JSON Pricing Editor",
+      "json-editor-tip": "Supports visual and JSON format batch editing of pricing rules. Submitting will overwrite existing rules",
+      "json-import": "Import & Overwrite",
+      "json-invalid": "Invalid JSON format",
+      "json-invalid-array": "JSON content must be an array",
+      "json-invalid-empty": "No valid pricing rules found (model list is empty)",
+      "json-invalid-format": "Please check the JSON format"
     },
     "system": {
       "general": "General Settings",
@@ -1132,7 +1140,40 @@
     "custom-group-action-desc": "Please enter a custom group name",
     "group-setting": "Group settings",
     "notifications": "Push to site",
-    "notify-all": "Notify all users"
+    "notify-all": "Notify all users",
+    "community": {
+      "title": "Community Channels",
+      "create": "Create Channels Roles",
+      "edit": "Edit Services",
+      "delete": "Removing Service",
+      "delete-confirm": "Are you sure you want to delete channel \"{{name}}\"? This action cannot be undone and all messages in the channel will be cleared.",
+      "id": "ID.",
+      "name": "Channel Name",
+      "name-placeholder": "Please enter a channel name",
+      "name-required": "Channel name cannot be empty",
+      "topic": "Channel Topics:",
+      "topic-placeholder": "Short description of the channel theme (optional)",
+      "description": "Service Description",
+      "description-placeholder": "Channel description (optional)",
+      "visibility": "Visibility",
+      "public": "Publ.",
+      "private": "Privately owned",
+      "position": "Sort",
+      "created-by": "creator",
+      "action": "OPERATIONS",
+      "visible-groups": "Visible User Groups",
+      "visible-groups-placeholder": "{{length}} user groups selected",
+      "visible-groups-tip": "Select the user groups that can see this public channel (leave blank for all users)",
+      "post-groups": "Speakable User Groups",
+      "post-groups-placeholder": "{{length}} user groups selected",
+      "post-groups-tip": "Select the groups of users who can send messages within the channel (leave blank for all visible users to speak)",
+      "members": "Listeners of a Channel",
+      "members-placeholder": "Username, comma or line break",
+      "members-tip": "List of visible members of private channels, leave blank for admin only",
+      "posters": "Speakable Members",
+      "posters-placeholder": "Username, comma or line break",
+      "posters-tip": "List of additional usernames allowed to speak (overrides user group restrictions)"
+    }
   },
   "mask": {
     "title": "Preset",
@@ -1359,7 +1400,9 @@
     "account-full": "Account",
     "admin-full": "Dashboard",
     "key": "key",
-    "key-full": "API"
+    "key-full": "API",
+    "community": "Channel",
+    "community-full": "Community Channels"
   },
   "notify": "Notice",
   "new-notify": "New notification",
@@ -1670,5 +1713,17 @@
     "withdraw-failed": "Withdraw failed.",
     "withdraw-failed-prompt": "Withdrawal failed! Reason: {{reason}}",
     "invalid-amount": "Invalid amount"
+  },
+  "community": {
+    "title": "Community Channels",
+    "empty": "No visible channels yet",
+    "select-channel": "Please select a channel to start chatting",
+    "no-messages": "No messages yet, send your first one",
+    "input-placeholder": "Enter a message, Enter to send, Shift + Enter to wrap",
+    "readonly": "The current channel is read-only and you do not have permission to send messages",
+    "send": "Send",
+    "send-failed": "Sending Failed",
+    "public": "Publ.",
+    "private": "Privately owned"
   }
 }

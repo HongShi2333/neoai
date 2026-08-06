@@ -23,6 +23,7 @@ import {
   Shield,
   User,
   Wallet,
+  Hash,
 } from "lucide-react";
 import Icon from "@/components/utils/Icon.tsx";
 
@@ -69,6 +70,7 @@ function MenuBar({ children, className }: MenuBarProps) {
             <BarItem icon={<MessageCircle />} path={`/`} name={"chat"} />
             <BarItem icon={<LibraryBig />} path={`/model`} name={"model"} />
             {/* <BarItem icon={<Compass />} path={`/preset`} name={"preset"} /> */}
+            <BarItem icon={<Hash />} path={`/community`} name={"community"} />
             <BarItem icon={<Wallet />} path={`/wallet`} name={"wallet"} />
             {/* <BarItem icon={<DraftingCompass />} path={`/key`} name={"key"} /> */}
             <BarItem icon={<User />} path={`/account`} name={"account"} />
