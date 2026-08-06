@@ -1,62 +1,59 @@
 <div align="center">
 
-![chatnio](/app/public/logo.png)
+![neoai](/app/public/logo.png)
 
-# [🥳 CoAI.Dev](https://coai.dev)
+# 🥳 NeoAI
 
-#### 🚀 Next Generation AIGC One-Stop Business Solution
+#### 🚀 Next-Generation AIGC One-Stop Business Solution (Based on CoAI)
 
-#### *"CoAI.Dev > [Next Web](https://github.com/ChatGPTNextWeb/ChatGPT-Next-Web) + [One API](https://github.com/songquanpeng/one-api)"*
+#### *"NeoAI = [CoAI](https://github.com/coaidev/coai) Core + Community Channels + Multi-Cache Driver + Enhanced Pricing"*
 
+[English](./README.md) · [简体中文](./README_zh-CN.md) · [日本語](./README_ja-JP.md)
 
-English · [简体中文](./README_zh-CN.md) · [日本語](./README_ja-JP.md) · [Docs](https://coai.dev) · [Discord](https://discord.gg/rpzNSmqaF2) · [Deployment Guide](https://coai.dev/docs/deploy)
-
-[![CoAI.Dev: #1 Repo Of The Day](https://trendshift.io/api/badge/repositories/6369)](https://trendshift.io/repositories/6369)
-
-<img alt="CoAI.Dev Preview" src="./screenshot/coai.png" width="100%" style="border-radius: 8px">
+<img alt="NeoAI Preview" src="./screenshot/coai.png" width="100%" style="border-radius: 8px">
 
 </div>
 
-## 📝 Features
-1. 🤖️ **Rich Model Support**: Multi-model service provider support (OpenAI / Anthropic / Gemini / Midjourney and more than ten compatible formats & private LLM support)
-2. 🤯 **Beautiful UI Design**: UI compatible with PC / Pad / Mobile, following [Shadcn UI](https://ui.shadcn.com) & [Tremor Charts](https://blocks.tremor.so) design standards, rich and beautiful interface design and backend dashboard
-3. 🎃 **Complete Markdown Support**: Support for **LaTeX formulas** / **Mermaid mind maps** / table rendering / code highlighting / chart drawing / progress bars and other advanced Markdown syntax support
-4. 👀 **Multi-theme Support**: Support for multiple theme switching, including **Light Mode** for light themes and **Dark Mode** for dark themes. 👉 [Custom Color Scheme](https://github.com/coaidev/coai/blob/main/app/src/assets/globals.less)
-5. 📚 **Internationalization Support**: Support for internationalization, multi-language switching 🇨🇳 🇺🇸 🇯🇵 🇷🇺 👉 Welcome to contribute translations [Pull Request](https://github.com/coaidev/coai/pulls)
-6. 🎨 **Text-to-Image Support**: Support for multiple text-to-image models: **OpenAI DALL-E**✅ & **Midjourney** (support for **U/V/R** operations)✅ & Stable Diffusion✅ etc.
-7. 📡 **Powerful Conversation Sync**: **Zero-cost cross-device conversation sync support for users**, support for **conversation sharing** (link sharing & save as image & share management), **no need for WebDav / WebRTC and other dependencies and complex learning costs**
-8. 🎈 **Model Market & Preset System**: Support for customizable model market in the backend, providing model introductions, tags, and other parameters. Site owners can customize model introductions according to the situation. Also supports a preset system, including **custom presets** and **cloud synchronization** functions.
-9. 📖 **Rich File Parsing**: **Out-of-the-box**, supports file parsing for **all models** (PDF / Docx / Pptx / Excel / image formats parsing), **supports more cloud image storage solutions** (S3 / R2 / MinIO etc.), **supports OCR image recognition** 👉 See project [CoAI.Dev Blob Service](https://github.com/coaidev/blob-service) for details (supports Vercel / Docker one-click deployment)
-10. 🌏 **Full Model Internet Search**: Based on the [SearXNG](https://github.com/searxng/searxng) open-source engine, supports rich search engines such as Google / Bing / DuckDuckGo / Yahoo / Wikipedia / Arxiv / Qwant, supports safe search mode, content truncation, image proxy, test search availability, and other functions.
-11. 💕 **Progressive Web App (PWA)**: Supports PWA applications & desktop support (desktop based on [Tauri](https://github.com/tauri-apps/tauri))
-12. 🤩 **Comprehensive Backend Management**: Supports beautiful and rich dashboard, announcement & notification management, user management, subscription management, gift code & redemption code management, price setting, subscription setting, custom model market, custom site name & logo, SMTP email settings, and other functions
-13. 🤑 **Multiple Billing Methods**: Supports 💴 **Subscription** and 💴 **Elastic Billing** two billing methods. Elastic billing supports per-request billing / token billing / no billing / anonymous calls and **minimum request points** detection and other powerful features
-14. 🎉 **Innovative Model Caching**: Supports enabling model caching: i.e., under the same request parameter hash, if it has been requested before, it will directly return the cached result (hitting the cache will not be billed), reducing the number of requests. You can customize whether to cache models, cache time, multiple cache result numbers, and other advanced cache settings
-15. 🥪 **Additional Features** (Support Discontinued): 🍎 **AI Project Generator Function** / 📂 **Batch Article Generation Function** / 🥪 **AI Card Function** (Deprecated)
-16. 😎 **Excellent Channel Management**: Self-written excellent channel algorithm, supports ⚡ **multi-channel management**, supports 🥳**priority** setting for channel call order, supports 🥳**weight** setting for load balancing probability distribution of channels at the same priority, supports 🥳**user grouping**, 🥳**automatic retry on failure**, 🥳**model redirection**, 🥳**built-in upstream hiding**, 🥳**channel status management** and other powerful **enterprise-level functions**
-17. ⭐ **OpenAI API Distribution & Proxy System**: Supports calling various large models in **OpenAI API** standard format, integrates powerful channel management functions, only needs to deploy one site to achieve simultaneous development of B/C-end business💖
-18. 👌 **Quick Upstream Synchronization**: Channel settings, model market, price settings, and other settings can quickly synchronize with upstream sites, modify your site configuration based on this, quickly build your site, save time and effort, one-click synchronization, quick launch
-19. 👋 **SEO Optimization**: Supports SEO optimization, supports custom site name, site logo, and other SEO optimization settings to make search engines crawl faster, making your site stand out👋
-20. 🎫 **Multiple Redemption Code Systems**: Supports multiple redemption code systems, supports gift codes and redemption codes, supports batch generation, gift codes are suitable for promotional distribution, redemption codes are suitable for card sales, for gift codes of one type, a user can only redeem one code, which to some extent reduces the situation of one user redeeming multiple times in promotions😀
-21. 🥰 **Business-Friendly License**: Adopts the **Apache-2.0** open-source license, friendly for commercial secondary development & distribution (please also comply with the provisions of the Apache-2.0 license, do not use for illegal purposes)
+## 📌 About This Project
 
-> ### ✨ CoAI.Dev Business
->
-> ![Pro Version Preview](./screenshot/coai-pro.png)
->
-> - ✅ Beautiful commercial-grade UI, elegant frontend interface and backend management
-> - ✅ Supports TTS & STT, plugin marketplace, RAG knowledge base and other rich features and modules
-> - ✅ More payment providers, more billing models and advanced order management
-> - ✅ Supports more authentication methods, including SMS login, OAuth login, etc.
-> - ✅ Supports model monitoring, channel health detection, fault alarm automatic channel switching
-> - ✅ Supports multi-tenant API Key distribution system, enterprise-level token permission management and visitor restrictions
-> - ✅ Supports security auditing, logging, model rate limiting, API Gateway and other advanced features
-> - ✅ Supports promotion rewards, professional data statistics, user profile analysis and other business analysis capabilities
-> - ✅ Supports Discord/Telegram/Feishu and other bot integration capabilities (extension modules)
-> - ...
->
-> [👉 Learn More](https://www.coai.dev/docs/contact)
+**NeoAI** is a secondary development project based on the open-source project [CoAI](https://github.com/coaidev/coai) (Apache-2.0 license). It inherits CoAI's excellent AIGC commercial capabilities while enhancing three key areas: community interaction, cache architecture, and channel pricing.
 
+> 🙏 Special thanks to the [CoAI.Dev](https://coai.dev) open-source community for providing the outstanding foundational project. NeoAI extends and customizes it further.
+
+### ✨ NeoAI Enhancements Over the Original
+
+1. 🗄️ **Multi-Cache Driver Support**: While the original only supports Redis, NeoAI adds optional support for **Valkey** and **Dragonfly** — two high-performance Redis-compatible cache databases. Switch seamlessly with a single config change; all three drivers use the Redis protocol and share identical connection parameters.
+2. 💬 **Community Channel System (Discord-like)**: A brand-new community channel feature where admins can create multiple channels with fine-grained controls:
+   - **Channel Visibility**: Specify which user groups and members can see each channel
+   - **Posting Permissions**: Control which users are allowed to send messages in a channel
+   - **Real-time Message Sync**: WebSocket-based real-time message broadcasting; all messages are persisted to MySQL
+   - **History Loading**: Historical messages are automatically loaded when entering a channel
+3. 🎛️ **Enhanced Channel & Pricing Management (NewAPI-style)**:
+   - **Batch Model Input**: Both the channel editor and pricing editor support **comma / space / newline separated** batch model input — no more adding models one by one
+   - **JSON Pricing Editor**: In addition to the original visual pricing editor, a **JSON batch editor** is now available. Export current pricing rules, edit in bulk, and import to overwrite — ideal for large-scale pricing adjustments
+
+## 📝 Core Features Inherited from CoAI
+
+1. 🤖️ **Rich Model Support**: Multi-provider support (OpenAI / Anthropic / Gemini / Midjourney and 10+ compatible formats & private LLMs)
+2. 🤯 **Beautiful UI Design**: Responsive UI for PC / Pad / Mobile, following [Shadcn UI](https://ui.shadcn.com) & [Tremor Charts](https://blocks.tremor.so) design standards
+3. 🎃 **Complete Markdown Support**: **LaTeX formulas** / **Mermaid mind maps** / tables / code highlighting / charts / progress bars
+4. 👀 **Multi-Theme Support**: Light mode and dark mode with customizable color schemes
+5. 📚 **Internationalization Support**: Multi-language switching 🇨🇳 🇺🇸 🇯🇵 🇷🇺
+6. 🎨 **Text-to-Image Support**: **OpenAI DALL-E**✅ & **Midjourney** (with **U/V/R** actions)✅ & Stable Diffusion✅
+7. 📡 **Powerful Conversation Sync**: Zero-cost cross-device conversation sync with link sharing & save-as-image
+8. 🎈 **Model Market & Preset System**: Customizable model market and preset system with cloud sync
+9. 📖 **Rich File Parsing**: Out-of-the-box file parsing for all models (PDF / Docx / Pptx / Excel / images) with OCR support
+10. 🌏 **Full Internet Search**: Based on [SearXNG](https://github.com/searxng/searxng), supporting Google / Bing / DuckDuckGo and more
+11. 💕 **PWA Support**: Progressive Web App with desktop support via [Tauri](https://github.com/tauri-apps/tauri)
+12. 🤩 **Comprehensive Backend**: Dashboard, announcements, user management, subscriptions, gift codes, pricing, SMTP, and more
+13. 🤑 **Multiple Billing Methods**: Subscription and elastic billing (per-request / token / free / anonymous calls)
+14. 🎉 **Model Caching**: Return cached results for identical request parameter hashes (cache hits are not billed)
+15. 😎 **Channel Management**: Multi-channel with priority, weight, user grouping, auto-retry, model redirection
+16. ⭐ **OpenAI API Distribution & Proxy**: Call all major LLMs via the standard OpenAI API format
+17. 👌 **Upstream Sync**: Quickly sync channel settings, model market, and pricing from upstream sites
+18. 👋 **SEO Optimization**: Custom site name, logo, and other SEO settings
+19. 🎫 **Redemption Code System**: Gift codes and redemption codes with batch generation
+20. 🥰 **Business-Friendly License**: Inherits the **Apache-2.0** open-source license
 
 ## 🔨 Supported Models
 1. OpenAI & Azure OpenAI *(✅ Vision ✅ Function Calling)*
@@ -64,7 +61,7 @@ English · [简体中文](./README_zh-CN.md) · [日本語](./README_ja-JP.md) �
 3. Google Gemini & PaLM2 *(✅ Vision)*
 4. Midjourney *(✅ Mode Toggling ✅ U/V/R Actions)*
 5. iFlytek SparkDesk *(✅ Vision ✅ Function Calling)*
-6. Zhipu AI ChatGLM *(✅ Vision)*
+6. Zhipu ChatGLM *(✅ Vision)*
 7. Alibaba Tongyi Qwen
 8. Tencent Hunyuan
 9. Baichuan AI
@@ -87,46 +84,31 @@ English · [简体中文](./README_zh-CN.md) · [日本語](./README_ja-JP.md) �
 > [!TIP]
 > **After successful deployment, the admin account is `root`, with the default password `chatnio123456`**
 
-### ✨ Zeabur (One-Click)
-[![Deploy on Zeabur](https://zeabur.com/button.svg)](https://zeabur.com/templates/M86XJI)
-
-> Zeabur provides a certain free quota, you can use non-paid regions for one-click deployment, and also supports plan subscriptions and elastic billing for flexible expansion.
-> 1. Click `Deploy` to deploy, and enter the domain name you wish to bind, wait for the deployment to complete.
-> 2. After deployment is complete, please visit your domain name and log in to the backend management using the username `root` and password `chatnio123456`. Please follow the prompts to change the password in the chatnio backend in a timely manner.
-
-### 🐳 BTPanel (One-Click)
-
-1. Install Baota Panel by visiting [BTPanel](https://www.bt.cn/new/download.html) and install using the stable version script.
-2. Log in to the panel and click **Docker** on the left to enter Docker management.
-3. If prompted that Docker / Docker Compose is not installed, you can install according to the guide above.
-4. After installation is complete, enter **App Store**, search for `CoAI` and click **Install**.
-5. Configure basic application information such as your domain name, port, etc., and click **Confirm** (default configuration can be used).
-6. First-time installation may take 1-2 minutes to complete database initialization. If you encounter issues, please check the panel running logs for troubleshooting.
-7. Visit your configured domain or server `http://[ip]:[port]`, log in to the backend management using username `root` and password `chatnio123456`.
-
-### AlibabaCloud ComputeNest (One-Click)
-[![Deploy on AlibabaCloud ComputeNest International Edition](https://service-info-public.oss-cn-hangzhou.aliyuncs.com/computenest-en.svg)](https://computenest.console.aliyun.com/service/instance/create/ap-southeast-1?type=user&ServiceName=CoAI%20%20Community%20Edition)
-1. Access the CoAI service on [ComputeNest International Edition](https://computenest.console.aliyun.com/service/instance/create/ap-southeast-1?type=user&ServiceName=CoAI%20%20Community%20Edition). If you are in China, please visit [ComputeNest](https://computenest.console.aliyun.com/service/instance/create/default?type=user&ServiceName=CoAI社区版), and fill in the deployment parameters as prompted.
-2. Select the payment type, fill in the instance parameters and network parameters, and click **Next: Confirm Order**.
-3. After confirming the deployment parameters and checking the estimated price, click Create Now and wait for the service instance to be deployed.
-4. Click **Service Instance** on the left. After the service instance is deployed, click the instance ID to enter the details interface.
-5. Click the address in **Use Now** on the details interface to enter the CoAI interface. The default username is `root` and the password is `chatnio123456` to log in to the backend management.
-6. For more operation details and payment information, see：[Service Details](https://computenest.console.aliyun.com/service/detail/ap-southeast-1/service-27e11d3a5c9b40628505/1?type=user&isRecommend=true).
-
-
 ### ⚡ Docker Compose Installation (Recommended)
 > [!NOTE]
 > After successful execution, the host machine mapping address is `http://localhost:8000`
 
 ```shell
-git clone --depth=1 --branch=main --single-branch https://github.com/coaidev/coai.git
-cd chatnio
+git clone --depth=1 https://github.com/your-org/neoai.git
+cd neoai
 docker-compose up -d # Run the service
-# To use the stable version, use docker-compose -f docker-compose.stable.yaml up -d instead
-# To use Watchtower for automatic updates, use docker-compose -f docker-compose.watch.yaml up -d instead
 ```
 
-Version update (_If Watchtower automatic updates are enabled, manual updates are not necessary_):
+#### Switching the Cache Driver
+
+NeoAI supports three cache drivers — Redis / Valkey / Dragonfly — all using the Redis protocol with identical connection parameters. Just modify two entries in `docker-compose.yaml` to switch:
+
+```yaml
+  redis:
+    # Switch to valkey/valkey:latest or dragonflydb/dragonfly:latest to use the corresponding driver
+    image: redis:latest            # or valkey/valkey:latest or dragonflydb/dragonfly:latest
+
+  chatnio:
+      environment:
+          REDIS_TYPE: redis        # Allowed values: redis (default) / valkey / dragonfly
+```
+
+Version update:
 ```shell
 docker-compose down 
 docker-compose pull
@@ -134,17 +116,15 @@ docker-compose up -d
 ```
 
 > - MySQL database mount directory: ~/**db**
-> - Redis database mount directory: ~/**redis**
+> - Cache database mount directory: ~/**redis**
 > - Configuration file mount directory: ~/**config**
 
-### ⚡ Docker Installation (Lightweight runtime, commonly used for external _MYSQL/RDS_ services)
+### ⚡ Docker Installation (Lightweight runtime, commonly used with external _MYSQL/RDS_ services)
 > [!NOTE]
 > After successful execution, the host machine address is `http://localhost:8094`.
-> 
-> To use the stable version, use `programzmh/chatnio:stable` instead of `programzmh/chatnio:latest`
 
 ```shell
-docker run -d --name chatnio \
+docker run -d --name neoai \
    --network host \
    -v ~/config:/config \
    -v ~/logs:/logs \
@@ -156,35 +136,25 @@ docker run -d --name chatnio \
    -e MYSQL_PASSWORD=chatnio123456 \
    -e REDIS_HOST=localhost \
    -e REDIS_PORT=6379 \
+   -e REDIS_TYPE=redis \
    -e SECRET=secret \
    -e SERVE_STATIC=true \
-   programzmh/chatnio:latest
+   neoai:latest
 ```
 
-> - *--network host* means using the host machine's network, allowing the Docker container to use the host's network. You can modify this as needed.
-> - SECRET: JWT secret key, generate a random string and modify accordingly
-> - SERVE_STATIC: Whether to enable static file serving (normally this doesn't need to be changed, see FAQ below for details)
-> - *-v ~/config:/config* mounts the configuration file, *-v ~/logs:/logs* mounts the host machine directory for log files, *-v ~/storage:/storage* mounts the directory for additional feature generated files
-> - MySQL and Redis services need to be configured. Please refer to the information above to modify the environment variables accordingly
-
-Version update (_After enabling Watchtower, manual updates are not necessary. After execution, follow the steps above to run again_):
-
-```shell
-docker stop chatnio
-docker rm chatnio
-docker pull programzmh/chatnio:latest
-```
+> - `REDIS_TYPE`: Cache driver type. Allowed values: `redis` (default) / `valkey` / `dragonfly`
+> - `SECRET`: JWT secret key — generate a random string and modify accordingly
+> - `SERVE_STATIC`: Whether to enable static file serving (normally no need to change)
 
 ### ⚒ Compile and Install
-
 > [!NOTE]
-> After successful deployment, the default port is **8094**, and the access address is `http://localhost:8094`
-> 
-> Config settings (~/config/**config.yaml**) can be overridden using environment variables. For example, the `MYSQL_HOST` environment variable can override the `mysql.host` configuration item
+> After successful deployment, the default port is **8094**, accessible at `http://localhost:8094`
+>
+> Config settings (~/config/**config.yaml**) can be overridden using environment variables. For example, the `MYSQL_HOST` environment variable overrides the `mysql.host` config item
 
 ```shell
-git clone https://github.com/coaidev/coai.git
-cd chatnio
+git clone https://github.com/your-org/neoai.git
+cd neoai
 
 cd app
 npm install -g pnpm
@@ -192,41 +162,85 @@ pnpm install
 pnpm build
 
 cd ..
-go build -o chatnio
+go build -o neoai
 
-# e.g. using nohup (you can also use systemd or other service manager)
-nohup ./chatnio > output.log & # using nohup to run in background
+# e.g. using nohup (you can also use systemd or other service managers)
+nohup ./neoai > output.log &
 ```
 
-## 📦 Tech Stack
+#### Configuration Example (`config.yaml`)
 
+```yaml
+mysql:
+  db: chatnio
+  host: localhost
+  password: chatnio123456
+  port: 3306
+  user: root
+  tls: false
+
+redis:
+  # cache driver: "redis" (default), "valkey" or "dragonfly"
+  # valkey and dragonfly are wire-compatible with the redis protocol,
+  # so the connection options below apply to all three.
+  type: redis
+  host: localhost
+  port: 6379
+  db: 0
+  password: ""
+
+secret: secret
+serve_static: true
+server:
+  port: 8094
+```
+
+## 🆕 New Features Guide
+
+### Multi-Cache Driver
+
+As described above, switch between Redis / Valkey / Dragonfly via the `redis.type` config item or the `REDIS_TYPE` environment variable. The backend logs the active cache driver on startup for easy troubleshooting.
+
+### Community Channels
+
+1. **Admin creates a channel**: Log in to the backend → "Community Channels" in the left sidebar → click "New Channel", fill in the name and description, then set the visible user groups, visible members, and posting members.
+2. **Users enter a channel**: After logging in, users click "Community" in the navigation bar to see the list of channels they have permission to view, then click a channel to enter the chat.
+3. **Message sync**: All sent messages are pushed in real time to online users in the channel via WebSocket and simultaneously written to the database. Re-entering a channel automatically loads historical messages.
+
+### Enhanced Channel & Pricing Management
+
+1. **Batch model input**: In the channel editor or pricing editor's "Add custom model" input box, you can type `gpt-4, gpt-4o  gpt-4-turbo` (commas, spaces, and newlines all work as separators), then click add to insert multiple models at once.
+2. **JSON pricing editor**: On the "Pricing Management" page, click the "JSON Pricing Editor" button:
+   - On open, all current pricing rules are automatically exported as formatted JSON
+   - Edit the JSON directly in the editor (real-time JSON format validation)
+   - Click "Import & Overwrite" to write the edited pricing rules back to the database
+
+## ❓ FAQ
+1. **Why can I access pages and log in after deployment, but chat keeps loading?**
+   - Chat and similar features communicate via WebSocket. Please ensure your service supports WebSocket.
+   - If you use Nginx, Apache, or other reverse proxies, make sure WebSocket support is configured.
+2. **What's the difference between Valkey / Dragonfly and Redis? Which should I choose?**
+   - Valkey is the open-source fork of Redis, maintained by the Linux Foundation; Dragonfly is a Redis-protocol-compatible cache with a multi-threaded architecture for higher throughput. All three are fully compatible at the application layer in NeoAI — switch freely as needed. The default Redis is fine for most cases; try Dragonfly for higher throughput; choose Valkey if you care about open-source governance sustainability.
+3. **Do community channel messages consume database space?**
+   - Yes. All channel messages are persisted to the `community_message` table in MySQL for historical tracing and auditing. To clean up, manually delete the corresponding records in the database.
+4. **Does the JSON pricing editor import overwrite existing pricing?**
+   - Yes. To avoid ambiguity, the JSON editor import uses overwrite mode. It automatically exports the current pricing rules as a reference before import — we recommend backing up before editing.
+5. **My Midjourney Proxy channel keeps loading or reports `please provide available notify url`**
+   - Make sure your Midjourney Proxy service is running and that the channel type is set to Midjourney, not OpenAI.
+   - Check that the **backend domain** in system settings is correctly configured.
+6. **How do I change the default Root password?**
+   - Click your avatar in the top-right to enter the backend, then click "Change Root Password" under System Settings → General Settings.
+
+## 📦 Tech Stack
 - 🥗 Frontend: React + Redux + Radix UI + Tailwind CSS
-- 🍎 Backend: Golang + Gin + Redis + MySQL
+- 🍎 Backend: Golang + Gin + Redis/Valkey/Dragonfly + MySQL
 - 🍒 Application Technology: PWA + WebSocket
 
-## 🤯 Why Create This Project & Project Advantages
+## 📄 License
 
-- We found that most AIGC commercial sites on the market are frontend-oriented lightweight deployment projects with beautiful UI interface designs, such as the commercial version of [Next Chat](https://github.com/ChatGPTNextWeb/ChatGPT-Next-Web). Due to its personal privatization-oriented design, there are some limitations in secondary commercial development, presenting some issues, such as:
-  1. **Difficult conversation synchronization**, for example, requiring services like WebDav, high user learning costs, and difficulties in real-time cross-device synchronization.
-  2. **Insufficient billing**, for example, only supporting elastic billing or only subscription-based, unable to meet the needs of different users.
-  3. **Inconvenient file parsing**, for example, only supporting uploading images to an image hosting service first, then returning to the site to input the URL direct link in the input box, without built-in file parsing functionality.
-  4. **No support for conversation URL sharing**, for example, only supporting conversation screenshot sharing, unable to support conversation URL sharing (or only supporting tools like ShareGPT, which cannot promote the site).
-  5. **Insufficient channel management**, for example, the backend only supports OpenAI format channels, making it difficult to be compatible with other format channels. And only one channel can be filled in, unable to support multi-channel management.
-  6. **No API call support**, for example, only supporting user interface calls, unable to support API proxying and management.
+This project is derived from [CoAI](https://github.com/coaidev/coai) and inherits the **Apache-2.0** open-source license. Commercial secondary development and distribution are welcome — please comply with the Apache-2.0 license and do not use it for illegal purposes.
 
-- Another type is API distribution-oriented sites with powerful distribution systems, such as projects based on [One API](https://github.com/songquanpeng/one-api).
-Although these projects support powerful API proxying and management, they lack interface design and some C-end features, such as:
-  1. **Insufficient user interface**, for example, only supporting API calls, without built-in user interface chat. User interface chat requires manually copying the key and going to other sites to use, which has a high learning cost for ordinary users.
-  2. **No subscription system**, for example, only supporting elastic billing, lacking billing design for C-end users, unable to meet different user needs, and not user-friendly in terms of cost perception for users without a foundation.
-  3. **Insufficient C-end features**, for example, only supporting API calls, not supporting conversation synchronization, conversation sharing, file parsing, and other functions.
-  4. **Insufficient load balancing**, the open-source version does not support the **weight** parameter, unable to achieve balanced load distribution probability for channels at the same priority ([New API](https://github.com/Calcium-Ion/new-api) also solves this pain point, with a more beautiful UI).
+## ❤ Acknowledgements & Donations
 
-Therefore, we hope to combine the advantages of these two types of projects to create a project that has both a powerful API distribution system and a rich user interface design,
-thus meeting the needs of C-end users while developing B-end business, improving user experience, reducing user learning costs, and increasing user stickiness.
-
-Thus, **CoAI.Dev** was born. We hope to create a project that has both a powerful API distribution system and a rich user interface design, becoming the next-generation open-source AIGC project's one-stop commercial solution.
-
-
-## ❤ Donations
-
-If you find this project helpful, you can give it a Star to show your support!
+- 🙏 Thanks to [CoAI.Dev](https://coai.dev) and its contributors for the excellent open-source foundational project
+- If you find this project helpful, please give it a Star to show your support!
