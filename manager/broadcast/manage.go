@@ -1,9 +1,9 @@
 package broadcast
 
 import (
-	"neoai/auth"
-	"neoai/globals"
-	"neoai/utils"
+	"chat/auth"
+	"chat/globals"
+	"chat/utils"
 	"context"
 	"github.com/gin-gonic/gin"
 )

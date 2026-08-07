@@ -1,8 +1,8 @@
 package palm2
 
 import (
-	"neoai/globals"
-	"neoai/utils"
+	"chat/globals"
+	"chat/utils"
 	"strings"
 )
 

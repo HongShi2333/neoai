@@ -1,9 +1,9 @@
 package dify
 
 import (
-	adaptercommon "neoai/adapter/common"
-	"neoai/globals"
-	"neoai/utils"
+	adaptercommon "chat/adapter/common"
+	"chat/globals"
+	"chat/utils"
 	"encoding/json"
 	"errors"
 	"fmt"

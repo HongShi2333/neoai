@@ -1,8 +1,8 @@
 package admin
 
 import (
-	"neoai/globals"
-	"neoai/utils"
+	"chat/globals"
+	"chat/utils"
 	"database/sql"
 	"errors"
 	"fmt"

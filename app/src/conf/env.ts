@@ -1,3 +1,4 @@
+import axios from "axios";
 import { updateDocumentTitle, updateFavicon } from "@/utils/dom.ts";
 import { setMemory } from "@/utils/memory.ts";
 
@@ -10,16 +11,19 @@ export let appLogo =
 export let blobEndpoint =
   localStorage.getItem("blob_endpoint") ||
   import.meta.env.VITE_BLOB_ENDPOINT ||
-  "https://blob.neoai.dev";
+  "https://blob.coai.dev";
 export let docsEndpoint =
   localStorage.getItem("docs_url") ||
   import.meta.env.VITE_DOCS_ENDPOINT ||
-  "https://neoai.dev";
+  "https://coai.dev";
 export let buyLink =
   localStorage.getItem("buy_link") || import.meta.env.VITE_BUY_LINK || "";
 
 export const useDeeptrain = !!import.meta.env.VITE_USE_DEEPTRAIN;
-export const backendEndpoint = import.meta.env.VITE_BACKEND_ENDPOINT || "/api";
+export let backendEndpoint =
+  localStorage.getItem("backend_endpoint") ||
+  import.meta.env.VITE_BACKEND_ENDPOINT ||
+  "/api";
 export const deeptrainEndpoint =
   import.meta.env.VITE_DEEPTRAIN_ENDPOINT || "https://deeptrain.net";
 export const deeptrainAppName = import.meta.env.VITE_DEEPTRAIN_APP || "neoai";
@@ -93,7 +97,7 @@ export function setDocsUrl(url: string): void {
   /**
    * set the docs url in localStorage
    */
-  url = url.trim() || "https://neoai.dev";
+  url = url.trim() || "https://coai.dev";
   setMemory("docs_url", url);
   docsEndpoint = url;
 }
@@ -102,7 +106,7 @@ export function setBlobEndpoint(endpoint: string): void {
   /**
    * set the blob endpoint in localStorage
    */
-  endpoint = endpoint.trim() || "https://blob.neoai.dev";
+  endpoint = endpoint.trim() || "https://blob.coai.dev";
   setMemory("blob_endpoint", endpoint);
   blobEndpoint = endpoint;
 }
@@ -114,5 +118,18 @@ export function setBuyLink(link: string): void {
   link = link.trim() || "";
   setMemory("buy_link", link);
   buyLink = link;
+}
+
+export function setBackendEndpoint(endpoint: string): void {
+  /**
+   * set the backend endpoint in localStorage and update axios defaults
+   */
+  endpoint = endpoint.trim();
+  if (endpoint.length === 0) return;
+  setMemory("backend_endpoint", endpoint);
+  backendEndpoint = endpoint;
+
+  // update axios defaults so subsequent requests use the new endpoint
+  axios.defaults.baseURL = endpoint;
 }
 

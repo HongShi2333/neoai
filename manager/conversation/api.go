@@ -1,8 +1,8 @@
 package conversation
 
 import (
-	"neoai/auth"
-	"neoai/utils"
+	"chat/auth"
+	"chat/utils"
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"strconv"

@@ -1,10 +1,10 @@
 package channel
 
 import (
-	"neoai/adapter"
-	adaptercommon "neoai/adapter/common"
-	"neoai/globals"
-	"neoai/utils"
+	"chat/adapter"
+	adaptercommon "chat/adapter/common"
+	"chat/globals"
+	"chat/utils"
 	"fmt"
 	"time"
 

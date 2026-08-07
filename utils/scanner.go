@@ -3,7 +3,7 @@ package utils
 import (
 	"bufio"
 	"bytes"
-	"neoai/globals"
+	"chat/globals"
 	"fmt"
 	"io"
 	"net/http"

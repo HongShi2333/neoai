@@ -1,7 +1,7 @@
 package broadcast
 
 import (
-	"neoai/auth"
+	"chat/auth"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )

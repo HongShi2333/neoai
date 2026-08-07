@@ -1,39 +1,21 @@
 mysql:
-  db: neoai
+  db: chatnio
   host: localhost
-  password: neoai123456
+  password: chatnio123456
   port: 3306
   user: root
   tls: false
 
-# Cache / KV store.
-# NeoAI supports three wire-protocol compatible backends. Pick any one of:
-#   - redis       (default, https://redis.io)
-#   - valkey      (https://valkey.io — Redis fork, drop-in replacement)
-#   - dragonfly   (https://dragonflydb.io — multi-threaded Redis-compatible)
-#
-# All three speak RESP, so the same client works against any of them.
-# The `type` field only affects logging/health reporting — no code path
-# is wired to a specific vendor.
-#
-# Two config blocks are accepted:
-#   1. `cache:` (preferred — explicit, supports all three backends)
-#   2. `redis:` (legacy — kept for backwards compatibility with coai configs)
-# If both are present, `cache:` wins.
-cache:
-  type: valkey           # redis | valkey | dragonfly
+redis:
+  # cache driver: "redis" (default), "valkey" or "dragonfly"
+  # valkey and dragonfly are wire-compatible with the redis protocol,
+  # so the connection options below apply to all three.
+  type: redis
   host: localhost
   port: 6379
   db: 0
   password: ""
 
-# Legacy block — still parsed when `cache:` is absent.
-# Commented out by default to encourage migration to the `cache:` block.
-# redis:
-#   host: localhost
-#   port: 6379
-#   db: 0
-#   password: ""
 
 secret: secret
 serve_static: true
@@ -52,24 +34,3 @@ system:
   search:
     endpoint: https://duckduckgo-api.vercel.app
     query: 5
-
-  # NeoAI: gated registration. When enabled, new users must supply a
-  # valid registration code during signup. Toggle at runtime via the
-  # admin "Registration Codes" page.
-  registration:
-    require_code: false
-
-  # NeoAI: OAuth provider config. Leave client_id empty to disable.
-  # Configure from the admin "OAuth Login" page; values below are
-  # written there.
-  oauth:
-    linuxdo:
-      client_id: ""
-      client_secret: ""
-    github:
-      client_id: ""
-      client_secret: ""
-    # Where to redirect the user after OAuth callback completes.
-    # e.g. https://app.example.com
-    frontend_url: ""
-

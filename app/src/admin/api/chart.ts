@@ -245,7 +245,6 @@ export async function updateEmail(
   }
 }
 
-// Admin renames a user. Backend endpoint: POST /admin/user/username
 export async function updateUsername(
   id: number,
   username: string,

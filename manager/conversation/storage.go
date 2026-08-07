@@ -1,9 +1,9 @@
 package conversation
 
 import (
-	"neoai/auth"
-	"neoai/globals"
-	"neoai/utils"
+	"chat/auth"
+	"chat/globals"
+	"chat/utils"
 	"database/sql"
 	"fmt"
 )

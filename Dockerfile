@@ -1,6 +1,6 @@
 # Author: ProgramZmh
 # License: Apache-2.0
-# Description: Dockerfile for neoai
+# Description: Dockerfile for chatnio
 
 FROM --platform=$TARGETPLATFORM golang:1.20-alpine AS backend
 
@@ -23,7 +23,7 @@ RUN apk update && \
     linux-headers
 
 # Build backend
-RUN go build -o neoai -a -ldflags="-extldflags=-static" .
+RUN go build -o chat -a -ldflags="-extldflags=-static" .
 
 FROM node:18 AS frontend
 
@@ -50,7 +50,7 @@ RUN echo "Asia/Shanghai" > /etc/timezone && \
 WORKDIR /
 
 # Copy dist
-COPY --from=backend /backend/neoai /neoai
+COPY --from=backend /backend/chat /chat
 COPY --from=backend /backend/config.example.yaml /config.example.yaml
 COPY --from=backend /backend/utils/templates /utils/templates
 COPY --from=backend /backend/addition/article/template.docx /addition/article/template.docx
@@ -63,4 +63,4 @@ VOLUME ["/config", "/logs", "/storage"]
 EXPOSE 8094
 
 # Run application
-CMD ["./neoai"]
+CMD ["./chat"]

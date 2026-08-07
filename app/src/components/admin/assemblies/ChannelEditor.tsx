@@ -32,7 +32,7 @@ import {
   Search,
   Kanban,
   X,
-  Sparkles,
+  Download,
 } from "lucide-react";
 import {
   DropdownMenu,
@@ -48,9 +48,9 @@ import {
 import Markdown from "@/components/Markdown.tsx";
 import {
   createChannel,
+  fetchChannelModels,
   getChannel,
   updateChannel,
-  fetchChannelModels,
 } from "@/admin/api/channel.ts";
 import { useEffectAsync } from "@/utils/hook.ts";
 import Paragraph, {
@@ -83,7 +83,7 @@ function CustomAction({ onPost }: CustomActionProps) {
     <div className={`flex flex-row grow gap-0 custom-action`}>
       <Input
         value={model}
-        placeholder={t("admin.channels.add-custom-model-tip")}
+        placeholder={t("admin.channels.add-custom-model-placeholder")}
         className={`rounded-r-none`}
         onChange={(e) => setModel(e.target.value)}
         onKeyDown={(e) => {
@@ -173,6 +173,7 @@ function ChannelEditor({
   const enabled = useMemo(() => validator(edit), [edit]);
 
   const [loading, setLoading] = useState(false);
+  const [fetching, setFetching] = useState(false);
 
   function close(clear?: boolean) {
     if (clear) dispatch({ type: "clear" });
@@ -365,39 +366,14 @@ function ChannelEditor({
               </DropdownMenu>
               <CustomAction
                 onPost={(model) => {
-                  // new-api style: split on commas AND spaces so admins
-                  // can paste a comma-separated list from any source.
+                  // NewAPI-style: support comma, space and newline separated models
                   const models = model
                     .split(/[\s,]+/)
                     .map((s) => s.trim())
-                    .filter(Boolean);
+                    .filter((s) => s.length > 0);
                   dispatch({ type: "add-models", value: models });
                 }}
               />
-              <Button
-                variant={`outline`}
-                onClick={async () => {
-                  // Auto-fetch models from the upstream /v1/models endpoint.
-                  // Only works for OpenAI-compatible channel types — for
-                  // others the backend returns an empty list with a note.
-                  if (!edit.endpoint || !edit.secret) {
-                    return;
-                  }
-                  const resp = await fetchChannelModels({
-                    type: edit.type,
-                    endpoint: edit.endpoint,
-                    secret: edit.secret,
-                  });
-                  if (resp.status && resp.data) {
-                    dispatch({ type: "add-models", value: resp.data });
-                  }
-                }}
-                title={t("admin.channels.fetch-models-tip")}
-                disabled={!edit.endpoint || !edit.secret}
-              >
-                <Sparkles className={`h-4 w-4 mr-1.5`} />
-                {t("admin.channels.fetch-models")}
-              </Button>
               <Button
                 onClick={() =>
                   dispatch({ type: "add-models", value: info.models })
@@ -406,6 +382,28 @@ function ChannelEditor({
                 {t("admin.channels.fill-template-models", {
                   number: info.models.length,
                 })}
+              </Button>
+              <Button
+                variant={`outline`}
+                disabled={fetching || !edit.endpoint}
+                onClick={async () => {
+                  setFetching(true);
+                  const resp = await fetchChannelModels(
+                    edit.endpoint,
+                    edit.secret,
+                  );
+                  setFetching(false);
+                  if (resp.status && resp.data && resp.data.length > 0) {
+                    dispatch({ type: "add-models", value: resp.data });
+                  }
+                }}
+              >
+                {fetching ? (
+                  <Loader2 className={`h-4 w-4 mr-2 animate-spin`} />
+                ) : (
+                  <Download className={`h-4 w-4 mr-2`} />
+                )}
+                {t("admin.channels.fetch-models")}
               </Button>
               <Button
                 variant={`outline`}

@@ -1,9 +1,9 @@
 package palm2
 
 import (
-	adaptercommon "neoai/adapter/common"
-	"neoai/globals"
-	"neoai/utils"
+	adaptercommon "chat/adapter/common"
+	"chat/globals"
+	"chat/utils"
 	"fmt"
 	"strings"
 )

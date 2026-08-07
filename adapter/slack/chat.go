@@ -1,8 +1,8 @@
 package slack
 
 import (
-	adaptercommon "neoai/adapter/common"
-	"neoai/globals"
+	adaptercommon "chat/adapter/common"
+	"chat/globals"
 	"context"
 )
 

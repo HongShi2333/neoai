@@ -1,6 +1,6 @@
 package zhipuai
 
-import "neoai/globals"
+import "chat/globals"
 
 const (
 	GLM4       = "glm-4"

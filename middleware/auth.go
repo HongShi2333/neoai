@@ -1,8 +1,8 @@
 package middleware
 
 import (
-	"neoai/auth"
-	"neoai/utils"
+	"chat/auth"
+	"chat/utils"
 	"github.com/gin-gonic/gin"
 	"github.com/spf13/viper"
 	"net/http"

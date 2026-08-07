@@ -1,8 +1,8 @@
 package adaptercommon
 
 import (
-	"neoai/globals"
-	"neoai/utils"
+	"chat/globals"
+	"chat/utils"
 )
 
 type RequestProps struct {

@@ -1,6 +1,6 @@
 package openai
 
-import "neoai/globals"
+import "chat/globals"
 
 type ImageUrl struct {
 	Url    string  `json:"url"`

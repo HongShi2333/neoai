@@ -1,8 +1,8 @@
 package palm2
 
 import (
-	factory "neoai/adapter/common"
-	"neoai/globals"
+	factory "chat/adapter/common"
+	"chat/globals"
 )
 
 type ChatInstance struct {

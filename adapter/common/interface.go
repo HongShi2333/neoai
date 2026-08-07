@@ -1,7 +1,7 @@
 package adaptercommon
 
 import (
-	"neoai/globals"
+	"chat/globals"
 )
 
 type Factory interface {

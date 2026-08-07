@@ -1,8 +1,8 @@
 package sparkdesk
 
 import (
-	factory "neoai/adapter/common"
-	"neoai/globals"
+	factory "chat/adapter/common"
+	"chat/globals"
 	"crypto/hmac"
 	"crypto/sha256"
 	"encoding/base64"

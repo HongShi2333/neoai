@@ -1,7 +1,7 @@
 package auth
 
 import (
-	"neoai/utils"
+	"chat/utils"
 	"fmt"
 	"github.com/go-redis/redis/v8"
 	"time"

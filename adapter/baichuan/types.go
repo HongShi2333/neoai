@@ -1,6 +1,6 @@
 package baichuan
 
-import "neoai/globals"
+import "chat/globals"
 
 // Baichuan AI API is similar to OpenAI API
 

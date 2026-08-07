@@ -1,8 +1,8 @@
 package skylark
 
 import (
-	factory "neoai/adapter/common"
-	"neoai/globals"
+	factory "chat/adapter/common"
+	"chat/globals"
 
 	"github.com/volcengine/volcengine-go-sdk/service/arkruntime"
 )

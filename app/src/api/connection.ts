@@ -1,9 +1,9 @@
-import { tokenField, websocketEndpoint } from "@/conf/bootstrap.ts";
+import { tokenField, getWebsocketEndpoint } from "@/conf/bootstrap.ts";
 import { getMemory } from "@/utils/memory.ts";
 import { getErrorMessage } from "@/utils/base.ts";
 import { Mask } from "@/masks/types.ts";
 
-export const endpoint = `${websocketEndpoint}/chat`;
+export const getEndpoint = (): string => `${getWebsocketEndpoint()}/chat`;
 export const maxRetry = 60; // 30s max websocket retry
 export const maxConnection = 5;
 
@@ -88,7 +88,7 @@ export class Connection {
   }
 
   public init(): void {
-    this.connection = new WebSocket(endpoint);
+    this.connection = new WebSocket(getEndpoint());
     this.state = false;
     this.connection.onopen = () => {
       this.state = true;
@@ -104,7 +104,7 @@ export class Connection {
         error: "websocket connection failed",
         code: event.code,
         reason: event.reason,
-        endpoint: endpoint,
+        endpoint: getEndpoint(),
       };
 
       setTimeout(() => {
@@ -152,7 +152,7 @@ export class Connection {
     const trace = JSON.stringify(
       this.stack ?? {
         message: data.message,
-        endpoint: endpoint,
+        endpoint: getEndpoint(),
       },
       null,
       2,

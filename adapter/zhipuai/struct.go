@@ -1,9 +1,9 @@
 package zhipuai
 
 import (
-	factory "neoai/adapter/common"
-	"neoai/globals"
-	"neoai/utils"
+	factory "chat/adapter/common"
+	"chat/globals"
+	"chat/utils"
 	"fmt"
 	"strings"
 	"time"

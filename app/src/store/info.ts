@@ -49,10 +49,6 @@ export const infoSlice = createSlice({
     hide_key_docs: getBooleanMemory("hide_key_docs", false),
     backend: getMemory("backend"),
     group_pricing: {},
-    // NeoAI additions
-    registration_code: getBooleanMemory("registration_code", false),
-    linuxdo_oauth_enabled: getBooleanMemory("linuxdo_oauth_enabled", false),
-    github_oauth_enabled: getBooleanMemory("github_oauth_enabled", false),
 
     broadcast: getMemory("broadcast_data")
       ? (JSON.parse(getMemory("broadcast_data")) as BroadcastEvent)
@@ -85,9 +81,6 @@ export const infoSlice = createSlice({
       state.hide_key_docs = form.hide_key_docs ?? false;
       state.backend = form.backend ?? state.backend;
       state.payment_aggregation = form.payment_aggregation ?? false;
-      state.registration_code = form.registration_code ?? false;
-      state.linuxdo_oauth_enabled = form.linuxdo_oauth_enabled ?? false;
-      state.github_oauth_enabled = form.github_oauth_enabled ?? false;
       state.broadcast = form.broadcast ?? {
         message: "",
         firstReceived: false,
@@ -110,9 +103,6 @@ export const infoSlice = createSlice({
       setBooleanMemory("relay_plan", state.relay_plan);
       setArrayMemory("payment", state.payment);
       setBooleanMemory("payment_aggregation", state.payment_aggregation);
-      setBooleanMemory("registration_code", state.registration_code);
-      setBooleanMemory("linuxdo_oauth_enabled", state.linuxdo_oauth_enabled);
-      setBooleanMemory("github_oauth_enabled", state.github_oauth_enabled);
       setMemory("broadcast_data", JSON.stringify(state.broadcast));
     },
   },
@@ -149,12 +139,6 @@ export const infoBackendSelector = (state: RootState): string | undefined =>
   (state.info as any).backend;
 export const infoBroadcastSelector = (state: RootState): BroadcastEvent =>
   state.info.broadcast;
-export const infoRegistrationCodeSelector = (state: RootState): boolean =>
-  (state.info as any).registration_code ?? false;
-export const infoLinuxDoOAuthSelector = (state: RootState): boolean =>
-  (state.info as any).linuxdo_oauth_enabled ?? false;
-export const infoGitHubOAuthSelector = (state: RootState): boolean =>
-  (state.info as any).github_oauth_enabled ?? false;
 
 export const useCurrency = (): Currency => {
   const currency = useSelector(infoCurrencySelector);

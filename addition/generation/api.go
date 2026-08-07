@@ -1,9 +1,9 @@
 package generation
 
 import (
-	"neoai/auth"
-	"neoai/globals"
-	"neoai/utils"
+	"chat/auth"
+	"chat/globals"
+	"chat/utils"
 	"fmt"
 	"strings"
 

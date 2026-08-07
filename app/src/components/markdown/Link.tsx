@@ -29,12 +29,12 @@ type LinkProps = {
 export default function ({ href, children }: LinkProps) {
   const url: string = href?.toString() || "";
 
-  if (url.startsWith("https://neoai.virtual/reference::")) {
-    const referenceUrl = url.slice("https://neoai.virtual/reference::".length);
+  if (url.startsWith("https://coai.virtual/reference::")) {
+    const referenceUrl = url.slice("https://coai.virtual/reference::".length);
     return <VirtualMessage message={`reference::${referenceUrl}`}>{children}</VirtualMessage>;
   }
 
-  if (url.startsWith("https://neoai.virtual")) {
+  if (url.startsWith("https://coai.virtual")) {
     const message = url.slice(20);
 
     return <VirtualMessage message={message}>{children}</VirtualMessage>;

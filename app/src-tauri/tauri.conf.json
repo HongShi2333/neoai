@@ -7,7 +7,7 @@
     "distDir": "../dist"
   },
   "package": {
-    "productName": "coai",
+    "productName": "neoai",
     "version": "4.0.0"
   },
   "tauri": {
@@ -66,7 +66,7 @@
         "fullscreen": false,
         "height": 600,
         "resizable": true,
-        "title": "CoAI",
+        "title": "NeoAI",
         "width": 1000
       }
     ],

@@ -415,10 +415,10 @@ function SettingsDialog() {
                     "flex flex-row items-center",
                     !useDeeptrain && "hidden",
                   )}
-                  href={`https://github.com/neoaidev/neoai`}
+                  href={`https://github.com/coaidev/coai`}
                 >
                   <Github className={`inline-block h-4 w-4 mr-1.5`} />
-                  CoAI v{version}
+                  NeoAI v{version}
                   {desktop && <Badge className={`ml-1`}>App</Badge>}
                 </a>
               </div>

@@ -1,8 +1,8 @@
 package zhinao
 
 import (
-	factory "neoai/adapter/common"
-	"neoai/globals"
+	factory "chat/adapter/common"
+	"chat/globals"
 	"fmt"
 )
 

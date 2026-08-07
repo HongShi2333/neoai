@@ -248,7 +248,7 @@ export const ChannelInfos: Record<string, ChannelInfo> = {
     format: "<secret>",
     models: ["bing-creative", "bing-balanced", "bing-precise"],
     description:
-      "> New Bing 服务搭建详情请参考 [chatnio-bing-service](https://github.com/neoaidev/chatnio-bing-service) \n " +
+      "> New Bing 服务搭建详情请参考 [chatnio-bing-service](https://github.com/coaidev/chatnio-bing-service) \n " +
       "> bing2api (如 [bingo](https://github.com/weaigc/bingo)) 可直接使用 **OpenAI** 格式而非 **New Bing** 格式 \n " +
       "> 接入点填写你部署的站点即可，如 *http://localhost:8765* ",
   },

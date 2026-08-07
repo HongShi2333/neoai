@@ -1,15 +1,15 @@
 package manager
 
 import (
-	"neoai/adapter"
-	adaptercommon "neoai/adapter/common"
-	"neoai/addition/web"
-	"neoai/admin"
-	"neoai/auth"
-	"neoai/channel"
-	"neoai/globals"
-	"neoai/manager/conversation"
-	"neoai/utils"
+	"chat/adapter"
+	adaptercommon "chat/adapter/common"
+	"chat/addition/web"
+	"chat/admin"
+	"chat/auth"
+	"chat/channel"
+	"chat/globals"
+	"chat/manager/conversation"
+	"chat/utils"
 	"time"
 
 	"database/sql"

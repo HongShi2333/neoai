@@ -1,7 +1,7 @@
 package adapter
 
 import (
-	"neoai/adapter/midjourney"
+	"chat/adapter/midjourney"
 	"github.com/gin-gonic/gin"
 )
 

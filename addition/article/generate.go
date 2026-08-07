@@ -1,10 +1,10 @@
 package article
 
 import (
-	"neoai/auth"
-	"neoai/globals"
-	"neoai/manager"
-	"neoai/utils"
+	"chat/auth"
+	"chat/globals"
+	"chat/manager"
+	"chat/utils"
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"strings"

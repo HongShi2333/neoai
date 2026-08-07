@@ -1,8 +1,8 @@
 package cli
 
 import (
-	"neoai/auth"
-	"neoai/connection"
+	"chat/auth"
+	"chat/connection"
 	"fmt"
 	"strconv"
 )

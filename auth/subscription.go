@@ -1,9 +1,9 @@
 package auth
 
 import (
-	"neoai/channel"
-	"neoai/globals"
-	"neoai/utils"
+	"chat/channel"
+	"chat/globals"
+	"chat/utils"
 	"database/sql"
 	"errors"
 	"fmt"

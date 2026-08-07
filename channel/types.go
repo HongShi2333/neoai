@@ -1,7 +1,7 @@
 package channel
 
 import (
-	"neoai/globals"
+	"chat/globals"
 )
 
 type Channel struct {
@@ -30,6 +30,7 @@ type Manager struct {
 	Sequence          Sequence            `json:"sequence"`
 	PreflightSequence map[string]Sequence `json:"preflight_sequence"`
 	Models            []string            `json:"models"`
+	ModelSet          map[string]bool     `json:"-"`
 }
 
 type Ticker struct {

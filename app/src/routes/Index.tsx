@@ -9,6 +9,7 @@ import {
   Wallet,
   LibraryBig,
   User,
+  Hash,
 } from "lucide-react";
 import React from "react";
 import Icon from "@/components/utils/Icon.tsx";
@@ -113,6 +114,7 @@ function ToolBar() {
       <BarItem icon={<MessageCircle />} path={`/`} name={"chat"} />
       <BarItem icon={<LibraryBig />} path={`/model`} name={"model"} />
       {/* <BarItem icon={<Compass />} path={`/preset`} name={"preset"} /> */}
+      <BarItem icon={<Hash />} path={`/community`} name={"community"} />
       <BarItem icon={<Wallet />} path={`/wallet`} name={"wallet"} />
       {/* <BarItem icon={<DraftingCompass />} path={`/key`} name={"key"} /> */}
       {/* <BarItem icon={<PieChart />} path={`/log`} name={"log"} /> */}

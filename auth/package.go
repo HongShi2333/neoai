@@ -1,7 +1,7 @@
 package auth
 
 import (
-	"neoai/globals"
+	"chat/globals"
 	"database/sql"
 )
 

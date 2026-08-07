@@ -1,8 +1,8 @@
 package channel
 
 import (
-	"neoai/globals"
-	"neoai/utils"
+	"chat/globals"
+	"chat/utils"
 
 	"github.com/spf13/viper"
 )

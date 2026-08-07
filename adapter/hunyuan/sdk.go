@@ -19,7 +19,7 @@ package hunyuan
 import (
 	"bufio"
 	"bytes"
-	"neoai/globals"
+	"chat/globals"
 	"context"
 	"crypto/hmac"
 	"crypto/sha1"

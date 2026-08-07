@@ -1,7 +1,7 @@
 package deepseek
 
 import (
-	"neoai/globals"
+	"chat/globals"
 )
 
 // DeepSeek API is similar to OpenAI API with additional reasoning content

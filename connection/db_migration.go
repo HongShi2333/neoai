@@ -1,7 +1,7 @@
 package connection
 
 import (
-	"neoai/globals"
+	"chat/globals"
 	"database/sql"
 	"strings"
 )

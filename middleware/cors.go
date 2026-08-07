@@ -1,7 +1,7 @@
 package middleware
 
 import (
-	"neoai/globals"
+	"chat/globals"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )

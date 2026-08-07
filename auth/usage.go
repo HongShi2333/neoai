@@ -1,7 +1,7 @@
 package auth
 
 import (
-	"neoai/channel"
+	"chat/channel"
 	"database/sql"
 	"math"
 	"time"

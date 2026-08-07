@@ -1,7 +1,7 @@
 package utils
 
 import (
-	"neoai/globals"
+	"chat/globals"
 	"fmt"
 	"image"
 	"image/gif"
@@ -13,7 +13,7 @@ import (
 	"path"
 	"strings"
 
-	"github.com/chai2010/webp"
+	"golang.org/x/image/webp"
 )
 
 type Image struct {

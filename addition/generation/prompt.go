@@ -1,11 +1,11 @@
 package generation
 
 import (
-	adaptercommon "neoai/adapter/common"
-	"neoai/admin"
-	"neoai/channel"
-	"neoai/globals"
-	"neoai/utils"
+	adaptercommon "chat/adapter/common"
+	"chat/admin"
+	"chat/channel"
+	"chat/globals"
+	"chat/utils"
 	"fmt"
 )
 

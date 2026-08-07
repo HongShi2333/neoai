@@ -55,7 +55,7 @@ import {
   Search,
   Shield,
   ShieldMinus,
-  UserCog,
+  UserRoundCog,
 } from "lucide-react";
 import { Input } from "@/components/ui/input.tsx";
 import PopupDialog, { popupTypes } from "@/components/PopupDialog.tsx";
@@ -152,6 +152,25 @@ function OperationMenu({ user, onRefresh }: OperationMenuProps) {
         }}
       />
       <PopupDialog
+        type={popupTypes.Text}
+        title={t("admin.username-action")}
+        name={t("admin.username")}
+        description={t("admin.username-action-desc")}
+        open={usernameOpen}
+        setOpen={setUsernameOpen}
+        defaultValue={user.username}
+        onSubmit={async (newUsername) => {
+          const resp = await updateUsername(user.id, newUsername);
+          doToast(t, resp);
+
+          if (resp.status) {
+            username === user.username && location.reload();
+            onRefresh?.();
+          }
+          return resp.status;
+        }}
+      />
+      <PopupDialog
         destructive={true}
         type={popupTypes.Text}
         title={t("admin.email-action")}
@@ -165,31 +184,6 @@ function OperationMenu({ user, onRefresh }: OperationMenuProps) {
           doToast(t, resp);
 
           if (resp.status) onRefresh?.();
-          return resp.status;
-        }}
-      />
-      <PopupDialog
-        destructive={true}
-        type={popupTypes.Text}
-        title={t("admin.username-action") || "Change username"}
-        name={t("auth.username") || "Username"}
-        description={
-          t("admin.username-action-desc") ||
-          "Rename the user. Their existing JWT stays valid."
-        }
-        open={usernameOpen}
-        setOpen={setUsernameOpen}
-        defaultValue={user.username}
-        onSubmit={async (newUsername) => {
-          const resp = await updateUsername(user.id, newUsername);
-          doToast(t, resp);
-
-          if (resp.status) {
-            // If the admin renamed themselves, reload so the navbar /
-            // menu reflects the new username.
-            if (username === user.username) location.reload();
-            onRefresh?.();
-          }
           return resp.status;
         }}
       />
@@ -337,13 +331,13 @@ function OperationMenu({ user, onRefresh }: OperationMenuProps) {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent className={`min-w-[8.75rem]`}>
+          <DropdownMenuItem onClick={() => setUsernameOpen(true)}>
+            <UserRoundCog className={`h-4 w-4 mr-2`} />
+            {t("admin.username-action")}
+          </DropdownMenuItem>
           <DropdownMenuItem onClick={() => setPasswordOpen(true)}>
             <KeyRound className={`h-4 w-4 mr-2`} />
             {t("admin.password-action")}
-          </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => setUsernameOpen(true)}>
-            <UserCog className={`h-4 w-4 mr-2`} />
-            {t("admin.username-action") || "Change username"}
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => setEmailOpen(true)}>
             <Mail className={`h-4 w-4 mr-2`} />

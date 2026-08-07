@@ -1,8 +1,8 @@
 package hunyuan
 
 import (
-	adaptercommon "neoai/adapter/common"
-	"neoai/globals"
+	adaptercommon "chat/adapter/common"
+	"chat/globals"
 	"context"
 	"fmt"
 )

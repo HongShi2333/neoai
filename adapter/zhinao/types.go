@@ -1,6 +1,6 @@
 package zhinao
 
-import "neoai/globals"
+import "chat/globals"
 
 // 360 ZhiNao API is similar to OpenAI API
 

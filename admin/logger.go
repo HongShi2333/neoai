@@ -1,8 +1,8 @@
 package admin
 
 import (
-	"neoai/globals"
-	"neoai/utils"
+	"chat/globals"
+	"chat/utils"
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"strings"
