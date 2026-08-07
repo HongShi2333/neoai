@@ -1,12 +1,12 @@
 package auth
 
 import (
-	"chat/channel"
+	"neoai/channel"
 	"database/sql"
 	"fmt"
 
-	"chat/globals"
-	"chat/utils"
+	"neoai/globals"
+	"neoai/utils"
 
 	"github.com/go-redis/redis/v8"
 )

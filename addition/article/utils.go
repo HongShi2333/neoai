@@ -1,8 +1,8 @@
 package article
 
 import (
-	"chat/globals"
-	"chat/utils"
+	"neoai/globals"
+	"neoai/utils"
 	"fmt"
 	"github.com/lukasjarosch/go-docx"
 )

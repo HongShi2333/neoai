@@ -1,9 +1,9 @@
 package bing
 
 import (
-	adaptercommon "chat/adapter/common"
-	"chat/globals"
-	"chat/utils"
+	adaptercommon "neoai/adapter/common"
+	"neoai/globals"
+	"neoai/utils"
 	"fmt"
 	"strings"
 )

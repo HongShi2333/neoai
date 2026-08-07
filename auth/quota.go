@@ -1,8 +1,8 @@
 package auth
 
 import (
-	"chat/channel"
-	"chat/globals"
+	"neoai/channel"
+	"neoai/globals"
 	"database/sql"
 )
 

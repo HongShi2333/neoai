@@ -1,13 +1,13 @@
 package manager
 
 import (
-	adaptercommon "chat/adapter/common"
-	"chat/addition/web"
-	"chat/admin"
-	"chat/auth"
-	"chat/channel"
-	"chat/globals"
-	"chat/utils"
+	adaptercommon "neoai/adapter/common"
+	"neoai/addition/web"
+	"neoai/admin"
+	"neoai/auth"
+	"neoai/channel"
+	"neoai/globals"
+	"neoai/utils"
 	"fmt"
 	"runtime/debug"
 

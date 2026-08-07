@@ -1,0 +1,61 @@
+# Dockerfile.frontend — build only the SPA, for split deployments.
+#
+# Build:
+#   docker build -f Dockerfile.frontend \
+#     --build-arg VITE_BACKEND_ENDPOINT=https://api.your-domain.com \
+#     -t neoai-frontend .
+# Run:
+#   docker run -p 80:80 neoai-frontend
+#
+# Required build arg:
+#   VITE_BACKEND_ENDPOINT — full URL of the backend API, e.g.
+#     https://api.example.com (no trailing slash).
+# Optional build args:
+#   VITE_APP_NAME          (default: NeoAI)
+#   VITE_APP_LOGO          (default: /favicon.ico)
+#   VITE_DOCS_ENDPOINT     (default: https://neoai.dev)
+#   VITE_BLOB_ENDPOINT     (default: https://blob.neoai.dev)
+
+FROM node:18 AS builder
+
+WORKDIR /app
+COPY ./app .
+
+ARG VITE_BACKEND_ENDPOINT
+ARG VITE_APP_NAME=NeoAI
+ARG VITE_APP_LOGO=/favicon.ico
+ARG VITE_DOCS_ENDPOINT=https://neoai.dev
+ARG VITE_BLOB_ENDPOINT=https://blob.neoai.dev
+ARG VITE_USE_DEEPTRAIN=false
+
+ENV VITE_BACKEND_ENDPOINT=$VITE_BACKEND_ENDPOINT
+ENV VITE_APP_NAME=$VITE_APP_NAME
+ENV VITE_APP_LOGO=$VITE_APP_LOGO
+ENV VITE_DOCS_ENDPOINT=$VITE_DOCS_ENDPOINT
+ENV VITE_BLOB_ENDPOINT=$VITE_BLOB_ENDPOINT
+ENV VITE_USE_DEEPTRAIN=$VITE_USE_DEEPTRAIN
+
+RUN npm install -g pnpm && \
+    pnpm install && \
+    pnpm run build && \
+    rm -rf node_modules src
+
+FROM nginx:alpine
+
+COPY --from=builder /app/dist /usr/share/nginx/html
+
+# SPA fallback: any unknown path serves index.html so client-side
+# routing works on a static host.
+RUN printf 'server {\n\
+  listen 80;\n\
+  server_name _;\n\
+  root /usr/share/nginx/html;\n\
+  index index.html;\n\
+  location / {\n\
+    try_files $uri $uri/ /index.html;\n\
+  }\n\
+}\n' > /etc/nginx/conf.d/default.conf
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]

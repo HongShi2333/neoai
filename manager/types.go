@@ -1,8 +1,8 @@
 package manager
 
 import (
-	"chat/globals"
-	"chat/utils"
+	"neoai/globals"
+	"neoai/utils"
 	"fmt"
 )
 

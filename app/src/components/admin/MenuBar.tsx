@@ -8,7 +8,6 @@ import {
   FileClock,
   Gauge,
   GitFork,
-  Hash,
   Radio,
   Settings,
   Users,
@@ -70,11 +69,6 @@ function MenuBar() {
         path={"/broadcast"}
       />
       <MenuItem
-        title={t("admin.community.title")}
-        icon={<Hash />}
-        path={"/community"}
-      />
-      <MenuItem
         title={t("admin.channel")}
         icon={<GitFork />}
         path={"/channel"}
@@ -86,6 +80,7 @@ function MenuBar() {
         path={"/subscription"}
       />
       <MenuItem
+        // pro
         title={t("admin.settings")}
         icon={<Settings />}
         path={"/system"}

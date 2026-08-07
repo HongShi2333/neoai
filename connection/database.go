@@ -1,8 +1,8 @@
 package connection
 
 import (
-	"chat/globals"
-	"chat/utils"
+	"neoai/globals"
+	"neoai/utils"
 	"crypto/tls"
 	"database/sql"
 	"fmt"
@@ -90,8 +90,6 @@ func ConnectDatabase() *sql.DB {
 	CreateInvitationTable(db)
 	CreateRedeemTable(db)
 	CreateBroadcastTable(db)
-	CreateCommunityChannelTable(db)
-	CreateCommunityMessageTable(db)
 
 	if err := doMigration(db); err != nil {
 		fmt.Println(fmt.Sprintf("migration error: %s", err))
@@ -312,48 +310,6 @@ func CreateBroadcastTable(db *sql.DB) {
 		  content TEXT,
 		  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
 		  FOREIGN KEY (poster_id) REFERENCES auth(id)
-		);
-	`)
-	if err != nil {
-		fmt.Println(err)
-	}
-}
-
-// CreateCommunityChannelTable creates the discord-like channel (频道) table.
-func CreateCommunityChannelTable(db *sql.DB) {
-	_, err := globals.ExecDb(db, `
-		CREATE TABLE IF NOT EXISTS community_channel (
-		  id INT PRIMARY KEY AUTO_INCREMENT,
-		  name VARCHAR(255) NOT NULL,
-		  description TEXT,
-		  topic VARCHAR(255),
-		  visibility VARCHAR(32) NOT NULL DEFAULT 'public',
-		  visible_groups TEXT,
-		  post_groups TEXT,
-		  members TEXT,
-		  posters TEXT,
-		  position INT NOT NULL DEFAULT 0,
-		  created_by VARCHAR(255),
-		  created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-		);
-	`)
-	if err != nil {
-		fmt.Println(err)
-	}
-}
-
-// CreateCommunityMessageTable creates the channel message table.
-func CreateCommunityMessageTable(db *sql.DB) {
-	_, err := globals.ExecDb(db, `
-		CREATE TABLE IF NOT EXISTS community_message (
-		  id INT PRIMARY KEY AUTO_INCREMENT,
-		  channel_id INT NOT NULL,
-		  sender_id INT NOT NULL,
-		  sender_username VARCHAR(255) NOT NULL,
-		  content TEXT,
-		  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-		  INDEX idx_channel_id (channel_id),
-		  INDEX idx_created_at (created_at)
 		);
 	`)
 	if err != nil {

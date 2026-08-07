@@ -1,9 +1,9 @@
 package web
 
 import (
-	"chat/globals"
-	"chat/manager/conversation"
-	"chat/utils"
+	"neoai/globals"
+	"neoai/manager/conversation"
+	"neoai/utils"
 	"fmt"
 	"time"
 )

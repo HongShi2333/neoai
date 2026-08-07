@@ -111,7 +111,7 @@ function Login() {
 
       if (
         form.username.trim() === "root" &&
-        form.password.trim() === "coai123456"
+        form.password.trim() === "neoai123456"
       ) {
         toast.warning(t("admin.default-password"), {
           description: t("admin.default-password-prompt"),

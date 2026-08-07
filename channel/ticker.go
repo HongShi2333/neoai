@@ -1,6 +1,6 @@
 package channel
 
-import "chat/utils"
+import "neoai/utils"
 
 func NewTicker(seq Sequence, group string) *Ticker {
 	stack := make(Sequence, 0)
@@ -9,6 +9,8 @@ func NewTicker(seq Sequence, group string) *Ticker {
 			stack = append(stack, channel)
 		}
 	}
+
+	stack.Sort()
 
 	return &Ticker{
 		Sequence: stack,

@@ -1,9 +1,9 @@
 package auth
 
 import (
-	"chat/channel"
-	"chat/globals"
-	"chat/utils"
+	"neoai/channel"
+	"neoai/globals"
+	"neoai/utils"
 	"net/http"
 	"strings"
 
@@ -39,10 +39,6 @@ type ResetForm struct {
 
 type BuyForm struct {
 	Quota int `json:"quota" binding:"required"`
-}
-
-type UpdateUsernameForm struct {
-	Username string `form:"username" json:"username" binding:"required"`
 }
 
 type SubscribeForm struct {
@@ -297,49 +293,6 @@ func UserInfoAPI(c *gin.Context) {
 			"error":  err.Error(),
 		})
 	}
-}
-
-func UpdateUsernameAPI(c *gin.Context) {
-	user := RequireAuth(c)
-	if user == nil {
-		return
-	}
-
-	var form UpdateUsernameForm
-	if err := c.ShouldBind(&form); err != nil {
-		c.JSON(http.StatusOK, gin.H{
-			"status": false,
-			"error":  "bad request",
-		})
-		return
-	}
-
-	db := utils.GetDBFromContext(c)
-	cache := utils.GetCacheFromContext(c)
-	user.ID = user.GetID(db)
-
-	if err := user.UpdateUsername(db, cache, form.Username); err != nil {
-		c.JSON(http.StatusOK, gin.H{
-			"status": false,
-			"error":  err.Error(),
-		})
-		return
-	}
-
-	token, err := user.GenerateTokenSafe(db)
-	if err != nil {
-		c.JSON(http.StatusOK, gin.H{
-			"status": false,
-			"error":  err.Error(),
-		})
-		return
-	}
-
-	c.JSON(http.StatusOK, gin.H{
-		"status": true,
-		"token":  token,
-		"username": user.Username,
-	})
 }
 
 func IndexAPI(c *gin.Context) {

@@ -1,5 +1,5 @@
 
-const SERVICE_NAME = "neoai";
+const SERVICE_NAME = "coai";
 
 self.addEventListener('activate', function (event) {
   console.debug("[service] service worker activated");

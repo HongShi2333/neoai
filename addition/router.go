@@ -1,9 +1,9 @@
 package addition
 
 import (
-	"chat/addition/article"
-	"chat/addition/card"
-	"chat/addition/generation"
+	"neoai/addition/article"
+	"neoai/addition/card"
+	"neoai/addition/generation"
 	"github.com/gin-gonic/gin"
 )
 

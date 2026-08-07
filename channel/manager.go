@@ -1,12 +1,12 @@
 package channel
 
 import (
-	"chat/globals"
-	"chat/utils"
-	"errors"
-	"time"
+        "neoai/globals"
+        "neoai/utils"
+        "errors"
+        "time"
 
-	"github.com/spf13/viper"
+        "github.com/spf13/viper"
 )
 
 var ConduitInstance *Manager
@@ -15,182 +15,208 @@ var SystemInstance *SystemConfig
 var PlanInstance *PlanManager
 
 func InitManager() {
-	ConduitInstance = NewChannelManager()
-	ChargeInstance = NewChargeManager()
-	SystemInstance = NewSystemConfig()
-	PlanInstance = NewPlanManager()
+        ConduitInstance = NewChannelManager()
+        ChargeInstance = NewChargeManager()
+        SystemInstance = NewSystemConfig()
+        PlanInstance = NewPlanManager()
 }
 
 func NewChannelManager() *Manager {
-	var seq Sequence
-	if err := viper.UnmarshalKey("channel", &seq); err != nil {
-		panic(err)
-	}
+        var seq Sequence
+        if err := viper.UnmarshalKey("channel", &seq); err != nil {
+                panic(err)
+        }
 
-	// sort by priority
+        // sort by priority
 
-	manager := &Manager{
-		Sequence:          seq,
-		Models:            make([]string, 0, len(seq)),
-		PreflightSequence: map[string]Sequence{},
-	}
-	manager.Load()
+        manager := &Manager{
+                Sequence:          seq,
+                Models:            []string{},
+                PreflightSequence: map[string]Sequence{},
+        }
+        manager.Load()
 
-	return manager
+        return manager
 }
 
 func (m *Manager) Load() {
-	// load channels
-	for _, channel := range m.Sequence {
-		if channel != nil {
-			channel.Load()
-		}
-	}
+        // load channels
+        for _, channel := range m.Sequence {
+                if channel != nil {
+                        channel.Load()
+                }
+        }
 
-	active := m.GetActiveSequence()
+        // init support models
+        m.Models = []string{}
+        for _, channel := range m.GetActiveSequence() {
+                for _, model := range channel.GetHitModels() {
+                        if !utils.Contains(model, m.Models) {
+                                m.Models = append(m.Models, model)
+                        }
+                }
+        }
 
-	// init support models (deduplicated)
-	modelSet := make(map[string]bool, 64)
-	m.Models = m.Models[:0]
-	for _, channel := range active {
-		for _, model := range channel.GetHitModels() {
-			if !modelSet[model] {
-				modelSet[model] = true
-				m.Models = append(m.Models, model)
-			}
-		}
-	}
-	m.ModelSet = modelSet
+        // init preflight sequence
+        m.PreflightSequence = map[string]Sequence{}
+        for _, model := range m.Models {
+                var seq Sequence
+                for _, channel := range m.GetActiveSequence() {
+                        if channel.IsHit(model) {
+                                seq = append(seq, channel)
+                        }
+                }
+                seq.Sort()
+                m.PreflightSequence[model] = seq
+        }
 
-	// init preflight sequence (deduplicated channel lookup)
-	m.PreflightSequence = make(map[string]Sequence, len(m.Models))
-	for _, model := range m.Models {
-		var seq Sequence
-		for _, channel := range active {
-			if channel.IsHit(model) {
-				seq = append(seq, channel)
-			}
-		}
-		m.PreflightSequence[model] = seq
-	}
+        stamp := time.Now().Unix()
 
-	stamp := time.Now().Unix()
-
-	globals.SupportModels = m.Models
-	globals.V1ListModels = globals.ListModels{
-		Object: "list",
-		Data: utils.Each(m.Models, func(model string) globals.ListModelsItem {
-			return globals.ListModelsItem{
-				Id:      model,
-				Object:  "model",
-				Created: stamp,
-				OwnedBy: "system",
-			}
-		}),
-	}
+        globals.SupportModels = m.Models
+        globals.V1ListModels = globals.ListModels{
+                Object: "list",
+                Data: utils.Each(m.Models, func(model string) globals.ListModelsItem {
+                        return globals.ListModelsItem{
+                                Id:      model,
+                                Object:  "model",
+                                Created: stamp,
+                                OwnedBy: "system",
+                        }
+                }),
+        }
 }
 
 func (m *Manager) GetSequence() Sequence {
-	return m.Sequence
+        return m.Sequence
 }
 
 func (m *Manager) GetActiveSequence() Sequence {
-	var seq Sequence
-	for _, channel := range m.Sequence {
-		if channel.GetState() {
-			seq = append(seq, channel)
-		}
-	}
-	seq.Sort()
-	return seq
+        var seq Sequence
+        for _, channel := range m.Sequence {
+                if channel.GetState() {
+                        seq = append(seq, channel)
+                }
+        }
+        seq.Sort()
+        return seq
 }
 
 func (m *Manager) GetModels() []string {
-	return m.Models
+        return m.Models
 }
 
 func (m *Manager) GetPreflightSequence() map[string]Sequence {
-	return m.PreflightSequence
+        return m.PreflightSequence
 }
 
 // HitSequence returns the preflight sequence of the model
 func (m *Manager) HitSequence(model string) Sequence {
-	return m.PreflightSequence[model]
+        return m.PreflightSequence[model]
 }
 
 // HasChannel returns whether the channel exists
 func (m *Manager) HasChannel(model string) bool {
-	return m.ModelSet[model]
+        return utils.Contains(model, m.Models)
 }
 
 func (m *Manager) GetTicker(model, group string) *Ticker {
-	if !m.HasChannel(model) {
-		return nil
-	}
+        if !m.HasChannel(model) {
+                return nil
+        }
 
-	return NewTicker(m.HitSequence(model), group)
+        return NewTicker(m.HitSequence(model), group)
 }
 
 func (m *Manager) Len() int {
-	return len(m.Sequence)
+        return len(m.Sequence)
 }
 
 func (m *Manager) GetMaxId() int {
-	var max int
-	for _, channel := range m.Sequence {
-		if channel.Id > max {
-			max = channel.Id
-		}
-	}
-	return max
+        var max int
+        for _, channel := range m.Sequence {
+                if channel.Id > max {
+                        max = channel.Id
+                }
+        }
+        return max
 }
 
 func (m *Manager) SaveConfig() error {
-	return utils.SaveConfig("channel", m.Sequence)
+        return utils.SaveConfig("channel", m.Sequence)
+}
+
+// reloadAfterMutation re-runs Load() so that globals.V1ListModels,
+// m.Models and m.PreflightSequence reflect the latest channel set.
+//
+// Without this, /v1/models keeps returning the stale list captured at
+// startup, which is why channel-added models never showed up in the
+// marketplace / pricing pages (the user-visible bug).
+func (m *Manager) reloadAfterMutation() {
+        m.Load()
 }
 
 func (m *Manager) CreateChannel(channel *Channel) error {
-	channel.Id = m.GetMaxId() + 1
-	m.Sequence = append(m.Sequence, channel)
-	return m.SaveConfig()
+        channel.Id = m.GetMaxId() + 1
+        m.Sequence = append(m.Sequence, channel)
+        if err := m.SaveConfig(); err != nil {
+                return err
+        }
+        m.reloadAfterMutation()
+        return nil
 }
 
 func (m *Manager) UpdateChannel(id int, channel *Channel) error {
-	for i, item := range m.Sequence {
-		if item.Id == id {
-			m.Sequence[i] = channel
-			return m.SaveConfig()
-		}
-	}
-	return errors.New("channel not found")
+        for i, item := range m.Sequence {
+                if item.Id == id {
+                        m.Sequence[i] = channel
+                        if err := m.SaveConfig(); err != nil {
+                                return err
+                        }
+                        m.reloadAfterMutation()
+                        return nil
+                }
+        }
+        return errors.New("channel not found")
 }
 
 func (m *Manager) DeleteChannel(id int) error {
-	for i, item := range m.Sequence {
-		if item.Id == id {
-			m.Sequence = append(m.Sequence[:i], m.Sequence[i+1:]...)
-			return m.SaveConfig()
-		}
-	}
-	return errors.New("channel not found")
+        for i, item := range m.Sequence {
+                if item.Id == id {
+                        m.Sequence = append(m.Sequence[:i], m.Sequence[i+1:]...)
+                        if err := m.SaveConfig(); err != nil {
+                                return err
+                        }
+                        m.reloadAfterMutation()
+                        return nil
+                }
+        }
+        return errors.New("channel not found")
 }
 
 func (m *Manager) ActivateChannel(id int) error {
-	for i, item := range m.Sequence {
-		if item.Id == id {
-			m.Sequence[i].State = true
-			return m.SaveConfig()
-		}
-	}
-	return errors.New("channel not found")
+        for i, item := range m.Sequence {
+                if item.Id == id {
+                        m.Sequence[i].State = true
+                        if err := m.SaveConfig(); err != nil {
+                                return err
+                        }
+                        m.reloadAfterMutation()
+                        return nil
+                }
+        }
+        return errors.New("channel not found")
 }
 
 func (m *Manager) DeactivateChannel(id int) error {
-	for i, item := range m.Sequence {
-		if item.Id == id {
-			m.Sequence[i].State = false
-			return m.SaveConfig()
-		}
-	}
-	return errors.New("channel not found")
+        for i, item := range m.Sequence {
+                if item.Id == id {
+                        m.Sequence[i].State = false
+                        if err := m.SaveConfig(); err != nil {
+                                return err
+                        }
+                        m.reloadAfterMutation()
+                        return nil
+                }
+        }
+        return errors.New("channel not found")
 }

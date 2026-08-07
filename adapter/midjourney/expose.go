@@ -1,8 +1,8 @@
 package midjourney
 
 import (
-	"chat/globals"
-	"chat/utils"
+	"neoai/globals"
+	"neoai/utils"
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"net/http"

@@ -1,4 +1,12 @@
 version: '3'
+
+# NeoAI docker-compose — pick a cache backend by editing the `cache` service below.
+# Two example profiles are provided; uncomment the one you want to use.
+#
+# Profile A — Valkey (Redis fork, Linux Foundation)   [default]
+# Profile B — Dragonfly (multi-threaded, drop-in)     [alternative]
+#
+# Both speak RESP, so the NeoAI backend does not care which one is running.
 services:
   mysql:
     image: mysql:latest
@@ -6,65 +14,90 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: chatnio
-      MYSQL_USER: chatnio
-      MYSQL_PASSWORD: chatnio123456!
+      MYSQL_DATABASE: neoai
+      MYSQL_USER: neoai
+      MYSQL_PASSWORD: neoai123456!
       TZ: Asia/Shanghai
     expose:
       - "3306"
     volumes:
         - ./db:/var/lib/mysql
     networks:
-      - chatnio-network
+      - neoai-network
 
-  redis:
-    # switch to valkey/valkey:latest or dragonflydb/dragonfly:latest to use
-    # valkey or dragonfly as the cache driver (wire-compatible with redis).
-    image: redis:latest
-    container_name: redis
+  # ---------------------------------------------------------------------
+  # Profile A: Valkey (default)
+  # Docs: https://valkey.io
+  # ---------------------------------------------------------------------
+  cache:
+    image: valkey/valkey:latest
+    container_name: cache
     restart: always
     expose:
       - "6379"
     volumes:
-      - ./redis:/data
+      - ./cache:/data
     networks:
-      - chatnio-network
+      - neoai-network
 
-  chatnio:
-      image: programzmh/chatnio
-      container_name: chatnio
+  # ---------------------------------------------------------------------
+  # Profile B: Dragonfly (alternative — comment out the `cache` service
+  # above and uncomment this block to switch backends).
+  # Docs: https://dragonflydb.io
+  # ---------------------------------------------------------------------
+  # cache:
+  #   image: docker.dragonflydb.io/dragonflydb/dragonfly:latest
+  #   container_name: cache
+  #   restart: always
+  #   command: dragonfly --logtostderr --port=6379
+  #   expose:
+  #     - "6379"
+  #   volumes:
+  #     - ./cache:/data
+  #   networks:
+  #     - neoai-network
+
+  neoai:
+      image: neoai/neoai
+      build: .
+      container_name: neoai
       restart: always
       ports:
           - "8000:8094"
       depends_on:
           - mysql
-          - redis
+          - cache
       links:
           - mysql
-          - redis
+          - cache
       ulimits:
         nofile:
           soft: 65535
           hard: 65535
       environment:
           MYSQL_HOST: mysql
-          MYSQL_USER: chatnio
-          MYSQL_PASSWORD: chatnio123456!
-          MYSQL_DB: chatnio
-          REDIS_HOST: redis
+          MYSQL_USER: neoai
+          MYSQL_PASSWORD: neoai123456!
+          MYSQL_DB: neoai
+          # Cache backend selection (redis | valkey | dragonfly)
+          CACHE_TYPE: valkey
+          CACHE_HOST: cache
+          CACHE_PORT: 6379
+          CACHE_PASSWORD: ""
+          CACHE_DB: 0
+          # Legacy env vars (still respected for backwards compatibility)
+          REDIS_HOST: cache
           REDIS_PORT: 6379
           REDIS_PASSWORD: ""
           REDIS_DB: 0
-          # cache driver: redis (default), valkey or dragonfly
-          REDIS_TYPE: redis
           SERVE_STATIC: "true"
       volumes:
         - ./config:/config
         - ./logs:/logs
         - ./storage:/storage
       networks:
-        - chatnio-network
+        - neoai-network
 
 networks:
-  chatnio-network:
+  neoai-network:
     driver: bridge

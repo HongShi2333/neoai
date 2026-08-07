@@ -19,7 +19,7 @@ import Index from "@/routes/Index.tsx";
 const Model = lazyFactor(() => import("@/routes/Model.tsx"));
 const Wallet = lazyFactor(() => import("@/routes/Wallet.tsx"));
 const Account = lazyFactor(() => import("@/routes/Account.tsx"));
-const Community = lazyFactor(() => import("@/routes/Community.tsx"));
+const Community = lazyFactor(() => import("@/routes/community/Community.tsx"));
 
 const Generation = lazyFactor(() => import("@/routes/Generation.tsx"));
 const Sharing = lazyFactor(() => import("@/routes/Sharing.tsx"));
@@ -33,9 +33,6 @@ const AdminSystem = lazyFactor(() => import("@/routes/admin/System.tsx"));
 const AdminCharge = lazyFactor(() => import("@/routes/admin/Charge.tsx"));
 const AdminUsers = lazyFactor(() => import("@/routes/admin/Users.tsx"));
 const AdminBroadcast = lazyFactor(() => import("@/routes/admin/Broadcast.tsx"));
-const AdminCommunity = lazyFactor(
-  () => import("@/routes/admin/Community.tsx"),
-);
 const AdminSubscription = lazyFactor(
   () => import("@/routes/admin/Subscription.tsx"),
 );
@@ -76,6 +73,33 @@ const router = createBrowserRouter([
           </Suspense>
         ),
       },
+      // {
+      //   id: "log",
+      //   path: "log",
+      //   element: (
+      //     <Suspense>
+      //       <License />
+      //     </Suspense>
+      //   ),
+      // },
+      // {
+      //   id: "preset",
+      //   path: "preset",
+      //   element: (
+      //     <Suspense>
+      //       <Preset />
+      //     </Suspense>
+      //   ),
+      // },
+      // {
+      //   id: "key",
+      //   path: "key",
+      //   element: (
+      //     <Suspense>
+      //       <License />
+      //     </Suspense>
+      //   ),
+      // },
       {
         id: "account",
         path: "account",
@@ -95,7 +119,6 @@ const router = createBrowserRouter([
             </Suspense>
           </AuthRequired>
         ),
-        ErrorBoundary: NotFound,
       },
       {
         id: "login",
@@ -178,15 +201,6 @@ const router = createBrowserRouter([
             element: (
               <Suspense>
                 <AdminBroadcast />
-              </Suspense>
-            ),
-          },
-          {
-            id: "admin-community",
-            path: "community",
-            element: (
-              <Suspense>
-                <AdminCommunity />
               </Suspense>
             ),
           },

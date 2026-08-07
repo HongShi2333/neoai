@@ -1,8 +1,8 @@
 package channel
 
 import (
-	"chat/globals"
-	"chat/utils"
+	"neoai/globals"
+	"neoai/utils"
 	"errors"
 	"fmt"
 	"net/url"

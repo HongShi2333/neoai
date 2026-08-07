@@ -1,8 +1,8 @@
 package broadcast
 
 import (
-	"chat/globals"
-	"chat/utils"
+	"neoai/globals"
+	"neoai/utils"
 	"context"
 	"github.com/gin-gonic/gin"
 	"time"

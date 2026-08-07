@@ -1,8 +1,8 @@
 package skylark
 
 import (
-	"chat/globals"
-	"chat/utils"
+	"neoai/globals"
+	"neoai/utils"
 	"github.com/volcengine/volcengine-go-sdk/service/arkruntime/model"
 
 	structpb "github.com/golang/protobuf/ptypes/struct"

@@ -1,8 +1,7 @@
-import { tokenField, getWebsocketEndpoint } from "@/conf/bootstrap.ts";
+import { tokenField, websocketEndpoint } from "@/conf/bootstrap.ts";
 import { getMemory } from "@/utils/memory.ts";
 
-export const getEndpoint = (): string =>
-  `${getWebsocketEndpoint()}/generation/create`;
+export const endpoint = `${websocketEndpoint}/generation/create`;
 
 export type GenerationForm = {
   token: string;
@@ -98,7 +97,7 @@ export class GenerationManager {
     this.setProcessing(true);
     const token = getMemory(tokenField) || "anonymous";
     if (token) {
-      this.connection = new WebSocket(getEndpoint());
+      this.connection = new WebSocket(endpoint);
       this.connection.onopen = () => {
         this.connection?.send(
           JSON.stringify({ token, prompt, model } as GenerationForm),

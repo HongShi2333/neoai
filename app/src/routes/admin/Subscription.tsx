@@ -416,7 +416,7 @@ function PlanConfig() {
         open={open}
         setOpen={setOpen}
         defaultValue={"https://api.chatnio.net"}
-        alert={t("admin.coai-format-only")}
+        alert={t("admin.neoai-format-only")}
         onSubmit={async (endpoint): Promise<boolean> => {
           const conf = await getExternalPlanConfig(endpoint);
           setConf(conf);

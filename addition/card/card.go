@@ -1,8 +1,8 @@
 package card
 
 import (
-	"chat/globals"
-	"chat/manager"
+	"neoai/globals"
+	"neoai/manager"
 	"github.com/gin-gonic/gin"
 	"github.com/russross/blackfriday/v2"
 	"net/http"

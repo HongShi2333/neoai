@@ -1,9 +1,9 @@
 package admin
 
 import (
-	"chat/adapter"
-	"chat/connection"
-	"chat/utils"
+	"neoai/adapter"
+	"neoai/connection"
+	"neoai/utils"
 	"time"
 
 	"github.com/go-redis/redis/v8"

@@ -1,9 +1,9 @@
 package hunyuan
 
 import (
-	factory "chat/adapter/common"
-	"chat/globals"
-	"chat/utils"
+	factory "neoai/adapter/common"
+	"neoai/globals"
+	"neoai/utils"
 )
 
 type ChatInstance struct {

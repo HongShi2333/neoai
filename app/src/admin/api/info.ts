@@ -2,7 +2,6 @@ import axios from "axios";
 import {
   setAppLogo,
   setAppName,
-  setBackendEndpoint,
   setBlobEndpoint,
   setBuyLink,
   setDocsUrl,
@@ -78,7 +77,6 @@ export function syncSiteInfo() {
     setDocsUrl(info.docs);
     setBlobEndpoint(info.file);
     setBuyLink(info.buy_link);
-    if (info.backend) setBackendEndpoint(info.backend);
     initGoogleAnalytics(info.ga_tracking_id);
 
     infoEvent.emit(info);

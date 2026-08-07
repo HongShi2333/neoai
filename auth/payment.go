@@ -1,7 +1,7 @@
 package auth
 
 import (
-	"chat/utils"
+	"neoai/utils"
 	"database/sql"
 	"errors"
 	"github.com/go-redis/redis/v8"

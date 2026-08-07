@@ -1,9 +1,9 @@
 package manager
 
 import (
-	"chat/admin"
-	"chat/channel"
-	"chat/globals"
+	"neoai/admin"
+	"neoai/channel"
+	"neoai/globals"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )

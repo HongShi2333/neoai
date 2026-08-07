@@ -1,21 +1,39 @@
 mysql:
-  db: chatnio
+  db: neoai
   host: localhost
-  password: chatnio123456
+  password: neoai123456
   port: 3306
   user: root
   tls: false
 
-redis:
-  # cache driver: "redis" (default), "valkey" or "dragonfly"
-  # valkey and dragonfly are wire-compatible with the redis protocol,
-  # so the connection options below apply to all three.
-  type: redis
+# Cache / KV store.
+# NeoAI supports three wire-protocol compatible backends. Pick any one of:
+#   - redis       (default, https://redis.io)
+#   - valkey      (https://valkey.io — Redis fork, drop-in replacement)
+#   - dragonfly   (https://dragonflydb.io — multi-threaded Redis-compatible)
+#
+# All three speak RESP, so the same client works against any of them.
+# The `type` field only affects logging/health reporting — no code path
+# is wired to a specific vendor.
+#
+# Two config blocks are accepted:
+#   1. `cache:` (preferred — explicit, supports all three backends)
+#   2. `redis:` (legacy — kept for backwards compatibility with coai configs)
+# If both are present, `cache:` wins.
+cache:
+  type: valkey           # redis | valkey | dragonfly
   host: localhost
   port: 6379
   db: 0
   password: ""
 
+# Legacy block — still parsed when `cache:` is absent.
+# Commented out by default to encourage migration to the `cache:` block.
+# redis:
+#   host: localhost
+#   port: 6379
+#   db: 0
+#   password: ""
 
 secret: secret
 serve_static: true

@@ -17,11 +17,11 @@ import {
   AlertCircle,
   BoxIcon,
   Cloud,
-  Code,
   Copy,
   DownloadCloud,
   Eraser,
   EyeOff,
+  FileJson,
   KanbanSquareDashed,
   Minus,
   PencilLine,
@@ -84,7 +84,7 @@ import { getPricing } from "@/admin/datasets/charge.ts";
 import { useAllModels } from "@/admin/hook.tsx";
 import { toast } from "sonner";
 import { formatDecimal } from "@/utils/base.ts";
-import { JSONEditorProvider } from "@/components/EditorProvider.tsx";
+import { JSONChargeDialog } from "@/components/admin/JSONChargeDialog.tsx";
 
 const initialState: ChargeProps = {
   id: -1,
@@ -105,12 +105,6 @@ function reducer(state: ChargeProps, action: any): ChargeProps {
       const model = action.payload.trim();
       if (model.length === 0 || state.models.includes(model)) return state;
       return { ...state, models: [...state.models, model] };
-    case "add-models":
-      const incoming = action.payload
-        .map((m: string) => m.trim())
-        .filter((m: string) => m.length > 0 && !state.models.includes(m));
-      if (incoming.length === 0) return state;
-      return { ...state, models: [...state.models, ...incoming] };
     case "toggle-model":
       if (action.payload.trim().length === 0) return state;
       return state.models.includes(action.payload)
@@ -227,7 +221,7 @@ function SyncDialog({
         open={open && !builtin}
         setOpen={setOpen}
         defaultValue={"https://api.chatnio.net"}
-        alert={system === "" ? t("admin.coai-format-only") : undefined}
+        alert={system === "" ? t("admin.neoai-format-only") : undefined}
         onSubmit={async (endpoint): Promise<boolean> => {
           const path = system === "newapi"
             ? `${endpoint.replace(/\/$/, "")}/api/ratio_config`
@@ -309,14 +303,12 @@ type ChargeActionProps = {
   loading: boolean;
   onRefresh: () => void;
   currentModels: string[];
-  data: ChargeProps[];
 };
 
 function ChargeAction({
   loading,
   onRefresh,
   currentModels,
-  data,
 }: ChargeActionProps) {
   const { t } = useTranslation();
   const [popup, setPopup] = useState(false);
@@ -328,74 +320,7 @@ function ChargeAction({
     setPopup(true);
   };
 
-  // JSON pricing editor state
   const [jsonOpen, setJsonOpen] = useState(false);
-  const [jsonValue, setJsonValue] = useState("");
-  const [_, setJsonSubmitting] = useState(false);
-
-  const openJsonEditor = () => {
-    // Export current pricing rules as formatted JSON
-    const exportData = data.map((charge) => ({
-      type: charge.type,
-      models: charge.models,
-      anonymous: charge.anonymous,
-      input: charge.input,
-      output: charge.output,
-    }));
-    setJsonValue(JSON.stringify(exportData, null, 2));
-    setJsonOpen(true);
-  };
-
-  const importJsonPricing = async (raw?: string) => {
-    const content = raw ?? jsonValue;
-    try {
-      const parsed = JSON.parse(content);
-      if (!Array.isArray(parsed)) {
-        toast.error(t("admin.charge.json-invalid"), {
-          description: t("admin.charge.json-invalid-array"),
-        });
-        return;
-      }
-
-      const charges: ChargeProps[] = parsed
-        .map((item: any, index: number): ChargeProps => ({
-          id: index,
-          type:
-            typeof item.type === "string" ? item.type : defaultChargeType,
-          models: Array.isArray(item.models)
-            ? item.models.filter(
-                (m: any) => typeof m === "string" && m.trim() !== "",
-              )
-            : [],
-          anonymous: !!item.anonymous,
-          input: Number(item.input) || 0,
-          output: Number(item.output) || 0,
-        }))
-        .filter((charge: ChargeProps) => charge.models.length > 0);
-
-      if (charges.length === 0) {
-        toast.error(t("admin.charge.json-invalid"), {
-          description: t("admin.charge.json-invalid-empty"),
-        });
-        return;
-      }
-
-      setJsonSubmitting(true);
-      const resp = await syncCharge({ data: charges, overwrite: true });
-      withNotify(t, resp, true);
-
-      if (resp.status) {
-        setJsonOpen(false);
-        onRefresh();
-      }
-    } catch (e) {
-      toast.error(t("admin.charge.json-invalid"), {
-        description: t("admin.charge.json-invalid-format"),
-      });
-    } finally {
-      setJsonSubmitting(false);
-    }
-  };
 
   return (
     <div className={`flex flex-row w-full h-max`}>
@@ -407,9 +332,22 @@ function ChargeAction({
         setOpen={setPopup}
         system={system}
       />
+      <JSONChargeDialog
+        open={jsonOpen}
+        onOpenChange={setJsonOpen}
+        onRefresh={onRefresh}
+      />
       <Button variant={`default`} className={`mr-2`} onClick={() => open(true)}>
         <KanbanSquareDashed className={`w-4 h-4 mr-2`} />
         {t("admin.charge.sync-builtin")}
+      </Button>
+      <Button
+        variant={`outline`}
+        className={`mr-2`}
+        onClick={() => setJsonOpen(true)}
+      >
+        <FileJson className={`w-4 h-4 mr-2`} />
+        {t("admin.charge.json-editor") || "JSON Pricing"}
       </Button>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
@@ -425,7 +363,7 @@ function ChargeAction({
               open(false);
             }}
           >
-            NeoAI
+            CoAI
           </DropdownMenuItem>
           <DropdownMenuItem
             onSelect={() => {
@@ -437,27 +375,6 @@ function ChargeAction({
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
-      <Button
-        variant={`outline`}
-        className={`ml-2`}
-        onClick={openJsonEditor}
-      >
-        <Code className={`w-4 h-4 mr-2`} />
-        {t("admin.charge.json-editor")}
-      </Button>
-      <JSONEditorProvider
-        value={jsonValue}
-        onChange={setJsonValue}
-        open={jsonOpen}
-        setOpen={setJsonOpen}
-        submittable={true}
-        closeOnSubmit={false}
-        title={t("admin.charge.json-editor")}
-        onSubmit={(value) => {
-          setJsonValue(value);
-          importJsonPricing(value);
-        }}
-      />
       <div className={`grow`} />
       <Button variant={`outline`} size={`icon`} onClick={onRefresh}>
         <RotateCw className={cn("w-4 h-4", loading && "animate-spin")} />
@@ -590,16 +507,7 @@ function ChargeEditor({
       <div className={`flex flex-row w-full h-max mb-4`}>
         <Button
           onClick={() => {
-            // NewAPI-style: support comma, space and newline separated models
-            const models = model
-              .split(/[\s,]+/)
-              .map((s) => s.trim())
-              .filter((s) => s.length > 0);
-            if (models.length === 0) {
-              dispatch({ type: "add-model", payload: model });
-            } else {
-              dispatch({ type: "add-models", payload: models });
-            }
+            dispatch({ type: "add-model", payload: model });
             setModel("");
           }}
           size={`icon`}
@@ -610,18 +518,10 @@ function ChargeEditor({
         <Input
           value={model}
           onChange={(e) => setModel(e.target.value)}
-          placeholder={t("admin.charge.model-placeholder")}
+          placeholder={t("admin.channels.model")}
           onKeyDown={(e) => {
             if (isEnter(e)) {
-              const models = model
-                .split(/[\s,]+/)
-                .map((s) => s.trim())
-                .filter((s) => s.length > 0);
-              if (models.length === 0) {
-                dispatch({ type: "add-model", payload: model });
-              } else {
-                dispatch({ type: "add-models", payload: models });
-              }
+              dispatch({ type: "add-model", payload: model });
               setModel("");
             }
           }}
@@ -917,7 +817,6 @@ function ChargeWidget() {
         loading={loading}
         onRefresh={refresh}
         currentModels={currentModels}
-        data={data}
       />
       <ChargeAlert
         models={unusedModels}

@@ -1,9 +1,9 @@
 package auth
 
 import (
-	"chat/channel"
-	"chat/globals"
-	"chat/utils"
+	"neoai/channel"
+	"neoai/globals"
+	"neoai/utils"
 	"context"
 	"database/sql"
 	"errors"
@@ -293,28 +293,6 @@ func (u *User) UpdatePassword(db *sql.DB, cache *redis.Client, password string) 
 
 	cache.Del(context.Background(), fmt.Sprintf("nio:user:%s", u.Username))
 
-	return nil
-}
-
-func (u *User) UpdateUsername(db *sql.DB, cache *redis.Client, username string) error {
-	username = strings.TrimSpace(username)
-	if !validateUsername(username) {
-		return errors.New("invalid username format (2-24 characters)")
-	}
-
-	if IsUserExist(db, username) {
-		return fmt.Errorf("username is already taken")
-	}
-
-	oldUsername := u.Username
-
-	if _, err := globals.ExecDb(db, `UPDATE auth SET username = ? WHERE id = ?`, username, u.ID); err != nil {
-		return err
-	}
-
-	cache.Del(context.Background(), fmt.Sprintf("nio:user:%s", oldUsername))
-
-	u.Username = username
 	return nil
 }
 

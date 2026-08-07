@@ -2,245 +2,306 @@
 
 ![neoai](/app/public/logo.png)
 
-# 🥳 NeoAI
+# 🚀 NeoAI
 
-#### 🚀 Next-Generation AIGC One-Stop Business Solution (Based on NeoAI)
+#### Next Generation AIGC One-Stop Business Solution — forked from [coai](https://github.com/coaidev/coai)
 
-#### *"NeoAI = [NeoAI](https://github.com/coaidev/coai) Core + Community Channels + Multi-Cache Driver + Enhanced Pricing"*
-
-[English](./README.md) · [简体中文](./README_zh-CN.md) · [日本語](./README_ja-JP.md)
-
-<img alt="NeoAI Preview" src="./screenshot/coai.png" width="100%" style="border-radius: 8px">
+#### *NeoAI = [Next Web](https://github.com/ChatGPTNextWeb/ChatGPTNext-Web) + [One API](https://github.com/songquanpeng/one-api) + Community Channels*
 
 </div>
 
-## 📌 About This Project
+---
 
-**NeoAI** is a secondary development project based on the open-source project [NeoAI](https://github.com/coaidev/coai) (Apache-2.0 license). It inherits NeoAI's excellent AIGC commercial capabilities while enhancing three key areas: community interaction, cache architecture, and channel pricing.
+## 📖 简介
 
-> 🙏 Special thanks to the [NeoAI.Dev](https://coai.dev) open-source community for providing the outstanding foundational project. NeoAI extends and customizes it further.
+NeoAI 是基于 coai 的二开版本，针对**前后端分离部署**、**社区频道（类 Discord）**、**新型缓存后端**做了若干改进。后端用 Go + Gin + MySQL 编写，前端是 React + Vite + TypeScript SPA。
 
-### ✨ NeoAI Enhancements Over the Original
+### 与原版 coai 的差异
 
-1. 🗄️ **Multi-Cache Driver Support**: While the original only supports Redis, NeoAI adds optional support for **Valkey** and **Dragonfly** — two high-performance Redis-compatible cache databases. Switch seamlessly with a single config change; all three drivers use the Redis protocol and share identical connection parameters.
-2. 💬 **Community Channel System (Discord-like)**: A brand-new community channel feature where admins can create multiple channels with fine-grained controls:
-   - **Channel Visibility**: Specify which user groups and members can see each channel
-   - **Posting Permissions**: Control which users are allowed to send messages in a channel
-   - **Real-time Message Sync**: WebSocket-based real-time message broadcasting; all messages are persisted to MySQL
-   - **History Loading**: Historical messages are automatically loaded when entering a channel
-3. 🎛️ **Enhanced Channel & Pricing Management (NewAPI-style)**:
-   - **Batch Model Input**: Both the channel editor and pricing editor support **comma / space / newline separated** batch model input — no more adding models one by one
-   - **JSON Pricing Editor**: In addition to the original visual pricing editor, a **JSON batch editor** is now available. Export current pricing rules, edit in bulk, and import to overwrite — ideal for large-scale pricing adjustments
+| 特性 | 原版 coai | NeoAI |
+| --- | --- | --- |
+| 缓存后端 | 仅 Redis | Redis / Valkey / Dragonfly 任选（`cache.type` 切换） |
+| 社区频道 | ❌ | ✅ 类 Discord，可见性 + 发送权限双层控制，WebSocket 实时推送 |
+| 渠道模型输入 | 单个添加 | 逗号分隔批量输入（new-api 风格） |
+| 渠道自动获取模型 | ❌ | ✅ 调上游 `/v1/models` 一键拉取 |
+| 定价设置 | 仅可视化 | 可视化 + JSON 批量编辑（replace / merge） |
+| 用户名修改 | ❌ | 管理员可改任意用户 + 用户可在个人中心改自己 |
+| Pro / License / 广告页面 | 含 | 已移除 |
+| 渠道模型刷新 bug | 添加渠道后 `/v1/models` 不刷新 | 已修复（mutation 后立即 `Load()`） |
+| 健康检查 | ❌ | ✅ `/healthz` + `/ready` |
+| 分端部署 | 单一镜像 | 提供 `Dockerfile.backend` / `Dockerfile.frontend` / `docker-compose.split.yaml` |
 
-## 📝 Core Features Inherited from NeoAI
+完整变更说明见 [DEPLOYMENT.md](./DEPLOYMENT.md)。
 
-1. 🤖️ **Rich Model Support**: Multi-provider support (OpenAI / Anthropic / Gemini / Midjourney and 10+ compatible formats & private LLMs)
-2. 🤯 **Beautiful UI Design**: Responsive UI for PC / Pad / Mobile, following [Shadcn UI](https://ui.shadcn.com) & [Tremor Charts](https://blocks.tremor.so) design standards
-3. 🎃 **Complete Markdown Support**: **LaTeX formulas** / **Mermaid mind maps** / tables / code highlighting / charts / progress bars
-4. 👀 **Multi-Theme Support**: Light mode and dark mode with customizable color schemes
-5. 📚 **Internationalization Support**: Multi-language switching 🇨🇳 🇺🇸 🇯🇵 🇷🇺
-6. 🎨 **Text-to-Image Support**: **OpenAI DALL-E**✅ & **Midjourney** (with **U/V/R** actions)✅ & Stable Diffusion✅
-7. 📡 **Powerful Conversation Sync**: Zero-cost cross-device conversation sync with link sharing & save-as-image
-8. 🎈 **Model Market & Preset System**: Customizable model market and preset system with cloud sync
-9. 📖 **Rich File Parsing**: Out-of-the-box file parsing for all models (PDF / Docx / Pptx / Excel / images) with OCR support
-10. 🌏 **Full Internet Search**: Based on [SearXNG](https://github.com/searxng/searxng), supporting Google / Bing / DuckDuckGo and more
-11. 💕 **PWA Support**: Progressive Web App with desktop support via [Tauri](https://github.com/tauri-apps/tauri)
-12. 🤩 **Comprehensive Backend**: Dashboard, announcements, user management, subscriptions, gift codes, pricing, SMTP, and more
-13. 🤑 **Multiple Billing Methods**: Subscription and elastic billing (per-request / token / free / anonymous calls)
-14. 🎉 **Model Caching**: Return cached results for identical request parameter hashes (cache hits are not billed)
-15. 😎 **Channel Management**: Multi-channel with priority, weight, user grouping, auto-retry, model redirection
-16. ⭐ **OpenAI API Distribution & Proxy**: Call all major LLMs via the standard OpenAI API format
-17. 👌 **Upstream Sync**: Quickly sync channel settings, model market, and pricing from upstream sites
-18. 👋 **SEO Optimization**: Custom site name, logo, and other SEO settings
-19. 🎫 **Redemption Code System**: Gift codes and redemption codes with batch generation
-20. 🥰 **Business-Friendly License**: Inherits the **Apache-2.0** open-source license
+---
 
-## 🔨 Supported Models
-1. OpenAI & Azure OpenAI *(✅ Vision ✅ Function Calling)*
-2. Anthropic Claude *(✅ Vision ✅ Function Calling)*
-3. Google Gemini & PaLM2 *(✅ Vision)*
-4. Midjourney *(✅ Mode Toggling ✅ U/V/R Actions)*
-5. iFlytek SparkDesk *(✅ Vision ✅ Function Calling)*
-6. Zhipu ChatGLM *(✅ Vision)*
-7. Alibaba Tongyi Qwen
-8. Tencent Hunyuan
-9. Baichuan AI
-10. Moonshot AI (👉 OpenAI)
-11. DeepSeek AI (👉 OpenAI)
-12. ByteDance Skylark *(✅ Function Calling)*
-13. Groq Cloud AI
-14. OpenRouter (👉 OpenAI)
-15. 360 GPT
-16. LocalAI / Ollama (👉 OpenAI)
+## ✨ 功能特性
 
-## 👻 OpenAI Compatible API Proxy
-   - [x] Chat Completions _(/v1/chat/completions)_
-   - [x] Image Generation _(/v1/images)_
-   - [x] Model List _(/v1/models)_
-   - [x] Dashboard Billing _(/v1/billing)_
+- 🤖 **70+ 模型集成**：OpenAI / Claude / Gemini / 通义千问 / 讯飞星火 / 智谱 / 月之暗面 / 混元 / 360 / 百川 / 火山方舟 / DeepSeek / Coze / Dify / Midjourney / Bing 等
+- 🌐 **社区频道**：类 Discord 的文本频道，管理员可精细控制谁可见、谁可发消息
+- 💰 **灵活计费**：按 Token / 按次 / 免计费三种模式，支持 JSON 批量导入导出
+- 👥 **多用户管理**：管理员后台完整 CRUD、用户配额、订阅、API Key 管理
+- 🔌 **OpenAI 兼容 API**：`/v1/chat/completions`、`/v1/models`、`/v1/images/generations`、`/v1/videos`
+- 🛡️ **限流 + 防滥用**：基于 IP 的请求频率限制，黑名单机制
+- 📨 **公告 / 广播系统**：管理员可推送站点公告
+- 🐳 **多种部署模式**：一体化、前后端分离、纯二进制
+- 🔄 **缓存后端可选**：Redis / Valkey / Dragonfly 一键切换
 
+---
 
-## 📦 Deployment
-> [!TIP]
-> **After successful deployment, the admin account is `root`, with the default password `chatnio123456`**
+## 🚀 快速开始
 
-### ⚡ Docker Compose Installation (Recommended)
-> [!NOTE]
-> After successful execution, the host machine mapping address is `http://localhost:8000`
+### 一体化部署（最简单，适合个人 / 小团队）
 
-```shell
-git clone --depth=1 https://github.com/your-org/neoai.git
-cd neoai
-docker-compose up -d # Run the service
-```
-
-#### Switching the Cache Driver
-
-NeoAI supports three cache drivers — Redis / Valkey / Dragonfly — all using the Redis protocol with identical connection parameters. Just modify two entries in `docker-compose.yaml` to switch:
-
-```yaml
-  redis:
-    # Switch to valkey/valkey:latest or dragonflydb/dragonfly:latest to use the corresponding driver
-    image: redis:latest            # or valkey/valkey:latest or dragonflydb/dragonfly:latest
-
-  chatnio:
-      environment:
-          REDIS_TYPE: redis        # Allowed values: redis (default) / valkey / dragonfly
-```
-
-Version update:
-```shell
-docker-compose down 
-docker-compose pull
-docker-compose up -d
-```
-
-> - MySQL database mount directory: ~/**db**
-> - Cache database mount directory: ~/**redis**
-> - Configuration file mount directory: ~/**config**
-
-### ⚡ Docker Installation (Lightweight runtime, commonly used with external _MYSQL/RDS_ services)
-> [!NOTE]
-> After successful execution, the host machine address is `http://localhost:8094`.
-
-```shell
-docker run -d --name neoai \
-   --network host \
-   -v ~/config:/config \
-   -v ~/logs:/logs \
-   -v ~/storage:/storage \
-   -e MYSQL_HOST=localhost \
-   -e MYSQL_PORT=3306 \
-   -e MYSQL_DB=chatnio \
-   -e MYSQL_USER=root \
-   -e MYSQL_PASSWORD=chatnio123456 \
-   -e REDIS_HOST=localhost \
-   -e REDIS_PORT=6379 \
-   -e REDIS_TYPE=redis \
-   -e SECRET=secret \
-   -e SERVE_STATIC=true \
-   neoai:latest
-```
-
-> - `REDIS_TYPE`: Cache driver type. Allowed values: `redis` (default) / `valkey` / `dragonfly`
-> - `SECRET`: JWT secret key — generate a random string and modify accordingly
-> - `SERVE_STATIC`: Whether to enable static file serving (normally no need to change)
-
-### ⚒ Compile and Install
-> [!NOTE]
-> After successful deployment, the default port is **8094**, accessible at `http://localhost:8094`
->
-> Config settings (~/config/**config.yaml**) can be overridden using environment variables. For example, the `MYSQL_HOST` environment variable overrides the `mysql.host` config item
-
-```shell
+```bash
 git clone https://github.com/your-org/neoai.git
 cd neoai
-
-cd app
-npm install -g pnpm
-pnpm install
-pnpm build
-
-cd ..
-go build -o neoai
-
-# e.g. using nohup (you can also use systemd or other service managers)
-nohup ./neoai > output.log &
+docker compose up -d
 ```
 
-#### Configuration Example (`config.yaml`)
+打开 `http://localhost:8000`，默认管理员账号 `root` / 密码 `chatnio123456`。
+
+### 前后端分离部署（推荐生产环境）
+
+详见 [DEPLOYMENT.md](./DEPLOYMENT.md) 的「部署模式 B」章节。简而言之：
+
+- **后端**：`docker compose -f docker-compose.split.yaml up -d backend`，或在 VPS 上直接跑二进制
+- **前端**：构建后部署到 Cloudflare Pages / Vercel / Netlify / 任何静态托管
+
+---
+
+## 📦 部署指南
+
+### 后端部署
+
+支持三种方式，任选其一：
+
+#### 方式一：Docker（推荐）
+
+```bash
+# 一体化（前端 + 后端打包）
+docker compose up -d
+
+# 仅后端（分端部署）
+docker compose -f docker-compose.split.yaml up -d backend
+```
+
+#### 方式二：源码编译
+
+```bash
+# 需要 Go 1.20+
+go build -o neoai .
+./neoai
+```
+
+#### 方式三：下载预编译二进制
+
+从 [Releases](../../releases) 下载对应平台的二进制，直接运行。
+
+#### 配置文件
+
+后端启动时会自动从 `config.example.yaml` 复制一份到 `config/config.yaml`。关键配置：
 
 ```yaml
 mysql:
-  db: chatnio
   host: localhost
-  password: chatnio123456
   port: 3306
   user: root
-  tls: false
+  password: secret
+  db: neoai
 
-redis:
-  # cache driver: "redis" (default), "valkey" or "dragonfly"
-  # valkey and dragonfly are wire-compatible with the redis protocol,
-  # so the connection options below apply to all three.
-  type: redis
+cache:                    # 三选一：redis / valkey / dragonfly
+  type: valkey
   host: localhost
   port: 6379
   db: 0
   password: ""
 
-secret: secret
-serve_static: true
+secret: "<至少 32 字节的随机字符串>"
+serve_static: false       # 分端部署时设为 false
 server:
   port: 8094
 ```
 
-## 🆕 New Features Guide
+环境变量等价覆盖（适合 docker / k8s）：
 
-### Multi-Cache Driver
+```
+MYSQL_HOST=...
+CACHE_TYPE=valkey
+CACHE_HOST=...
+SERVE_STATIC=false
+ALLOW_ORIGINS=https://your-frontend.pages.dev
+```
 
-As described above, switch between Redis / Valkey / Dragonfly via the `redis.type` config item or the `REDIS_TYPE` environment variable. The backend logs the active cache driver on startup for easy troubleshooting.
+健康检查：`GET /healthz`（始终 200）、`GET /ready`（DB + Cache 都可达才 200）。
 
-### Community Channels
+---
 
-1. **Admin creates a channel**: Log in to the backend → "Community Channels" in the left sidebar → click "New Channel", fill in the name and description, then set the visible user groups, visible members, and posting members.
-2. **Users enter a channel**: After logging in, users click "Community" in the navigation bar to see the list of channels they have permission to view, then click a channel to enter the chat.
-3. **Message sync**: All sent messages are pushed in real time to online users in the channel via WebSocket and simultaneously written to the database. Re-entering a channel automatically loads historical messages.
+### 前端部署（Cloudflare Pages）
 
-### Enhanced Channel & Pricing Management
+NeoAI 前端是纯静态 SPA，可直接部署到 Cloudflare Pages。详细步骤见 [DEPLOYMENT.md](./DEPLOYMENT.md) 的「Cloudflare Pages 部署」章节。简版：
 
-1. **Batch model input**: In the channel editor or pricing editor's "Add custom model" input box, you can type `gpt-4, gpt-4o  gpt-4-turbo` (commas, spaces, and newlines all work as separators), then click add to insert multiple models at once.
-2. **JSON pricing editor**: On the "Pricing Management" page, click the "JSON Pricing Editor" button:
-   - On open, all current pricing rules are automatically exported as formatted JSON
-   - Edit the JSON directly in the editor (real-time JSON format validation)
-   - Click "Import & Overwrite" to write the edited pricing rules back to the database
+1. 在 Cloudflare Pages 上连接你的 GitHub 仓库
+2. 构建命令：`cd app && npm install --legacy-peer-deps && npm run build`
+3. 输出目录：`app/dist`
+4. 环境变量：
+   - `VITE_BACKEND_ENDPOINT` = `https://api.your-domain.com`（**必填**，后端公网地址）
+   - `VITE_APP_NAME` = `NeoAI`（可选）
+5. 部署后 SPA 路由已自动 fallback 到 `index.html`
 
-## ❓ FAQ
-1. **Why can I access pages and log in after deployment, but chat keeps loading?**
-   - Chat and similar features communicate via WebSocket. Please ensure your service supports WebSocket.
-   - If you use Nginx, Apache, or other reverse proxies, make sure WebSocket support is configured.
-2. **What's the difference between Valkey / Dragonfly and Redis? Which should I choose?**
-   - Valkey is the open-source fork of Redis, maintained by the Linux Foundation; Dragonfly is a Redis-protocol-compatible cache with a multi-threaded architecture for higher throughput. All three are fully compatible at the application layer in NeoAI — switch freely as needed. The default Redis is fine for most cases; try Dragonfly for higher throughput; choose Valkey if you care about open-source governance sustainability.
-3. **Do community channel messages consume database space?**
-   - Yes. All channel messages are persisted to the `community_message` table in MySQL for historical tracing and auditing. To clean up, manually delete the corresponding records in the database.
-4. **Does the JSON pricing editor import overwrite existing pricing?**
-   - Yes. To avoid ambiguity, the JSON editor import uses overwrite mode. It automatically exports the current pricing rules as a reference before import — we recommend backing up before editing.
-5. **My Midjourney Proxy channel keeps loading or reports `please provide available notify url`**
-   - Make sure your Midjourney Proxy service is running and that the channel type is set to Midjourney, not OpenAI.
-   - Check that the **backend domain** in system settings is correctly configured.
-6. **How do I change the default Root password?**
-   - Click your avatar in the top-right to enter the backend, then click "Change Root Password" under System Settings → General Settings.
+---
 
-## 📦 Tech Stack
-- 🥗 Frontend: React + Redux + Radix UI + Tailwind CSS
-- 🍎 Backend: Golang + Gin + Redis/Valkey/Dragonfly + MySQL
-- 🍒 Application Technology: PWA + WebSocket
+## 🗂️ 项目结构
+
+```
+neoai/
+├── main.go                 # Go 后端入口
+├── go.mod / go.sum         # Go 依赖（module 名：neoai）
+├── config.example.yaml     # 配置模板
+├── Dockerfile              # 一体化镜像
+├── Dockerfile.backend      # 仅后端镜像
+├── Dockerfile.frontend     # 仅前端镜像（nginx + SPA fallback）
+├── docker-compose.yaml     # 一体化部署
+├── docker-compose.split.yaml  # 前后端分离部署
+├── nginx.conf              # 反向代理示例
+│
+├── adapter/                # 各 LLM 适配器（openai/claude/gemini/...）
+├── admin/                  # 管理员 API（用户、邀请、兑换码、日志、统计）
+├── auth/                   # 鉴权、JWT、用户、配额、订阅
+├── channel/                # 渠道管理、计费规则、模型列表
+├── community/              # ✨ 新增：社区频道（类 Discord）
+│   ├── types.go            #   数据模型
+│   ├── migration.go        #   自动建表
+│   ├── store.go            #   DB 操作 + 权限判断
+│   └── router.go           #   REST + WebSocket 路由
+├── middleware/             # CORS、限流、鉴权、健康检查
+├── manager/                # 聊天、对话、relay、broadcast
+├── connection/             # MySQL + 缓存连接管理
+├── addition/               # 文章生成、图片生成、搜索
+├── globals/                # 全局常量、变量、工具函数
+├── utils/                  # 通用工具
+├── cli/                    # 命令行子命令
+│
+├── app/                    # 前端项目（React + Vite + TS）
+│   ├── package.json
+│   ├── vite.config.ts
+│   ├── .env.example        # 前端环境变量模板
+│   ├── public/             # 静态资源（favicon、logo、icon）
+│   └── src/
+│       ├── api/            # API 客户端
+│       │   └── community.ts  # ✨ 新增：社区频道 API
+│       ├── routes/
+│       │   └── community/
+│       │       └── Community.tsx  # ✨ 新增：社区频道页面
+│       ├── components/
+│       │   └── admin/
+│       │       └── JSONChargeDialog.tsx  # ✨ 新增：JSON 定价编辑器
+│       ├── admin/          # 后台类型与 API
+│       ├── store/          # Redux store
+│       └── ...
+│
+└── DEPLOYMENT.md           # 详细部署文档
+```
+
+---
+
+## 🔌 主要 API 速查
+
+### 社区频道（新增）
+
+| 方法 | 路径 | 鉴权 | 说明 |
+| --- | --- | --- | --- |
+| GET | `/community/channels` | 可选 | 列出当前用户可见的频道 |
+| POST | `/community/channels` | 管理员 | 创建频道 |
+| GET | `/community/channels/:id` | 可选 | 获取单个频道 |
+| POST | `/community/channels/:id` | 管理员 | 更新频道 |
+| DELETE | `/community/channels/:id` | 管理员 | 删除频道（级联删除消息） |
+| GET | `/community/channels/:id/messages` | 可选 | 拉取最近消息（`?limit=200`） |
+| POST | `/community/channels/:id/messages` | 已登录 | 发送消息 |
+| POST | `/community/messages/:id` | 已登录 | 编辑自己的消息 |
+| DELETE | `/community/messages/:id` | 已登录 | 删除消息（作者或管理员） |
+| GET | `/community/ws` | 已登录 | WebSocket 实时推送 |
+
+### 用户名修改（新增）
+
+| 方法 | 路径 | 鉴权 | 说明 |
+| --- | --- | --- | --- |
+| POST | `/admin/user/username` | 管理员 | 改任意用户的用户名 |
+| POST | `/profile/username` | 已登录 | 改自己的用户名 |
+
+### 渠道自动获取模型（新增）
+
+| 方法 | 路径 | 鉴权 | 说明 |
+| --- | --- | --- | --- |
+| POST | `/admin/channel/fetch-models` | 管理员 | 调上游 `/v1/models` 拉取模型列表 |
+
+### 定价 JSON 批量编辑（新增）
+
+| 方法 | 路径 | 鉴权 | 说明 |
+| --- | --- | --- | --- |
+| GET | `/admin/charge/json` | 管理员 | 导出当前计费规则为 JSON |
+| POST | `/admin/charge/json?mode=replace\|merge` | 管理员 | 批量导入计费规则 |
+
+### 健康检查（新增）
+
+| 方法 | 路径 | 鉴权 | 说明 |
+| --- | --- | --- | --- |
+| GET | `/healthz` | 公开 | 进程存活探针 |
+| GET | `/ready` | 公开 | 就绪探针（DB + Cache 都可达才 200） |
+
+---
+
+## 🛠️ 开发
+
+### 后端开发
+
+```bash
+go run .                    # 直接运行
+go run . --debug            # 调试模式（刷新缓存、详细日志）
+go build ./... && go vet ./...  # 类型检查
+```
+
+CLI 子命令：
+
+```bash
+./neoai --admin --username foo --password bar  # 创建管理员
+./neoai --invite --number 10 --quota 100        # 生成邀请码
+./neoai --token --username foo                  # 生成 JWT
+```
+
+### 前端开发
+
+```bash
+cd app
+cp .env.example .env
+# 编辑 .env，将 VITE_BACKEND_ENDPOINT 设为后端地址（默认 http://localhost:8094）
+npm install --legacy-peer-deps
+npm run dev       # 开发模式（热更新，默认 5173）
+npm run build     # 生产构建
+```
+
+### 国际化
+
+支持简中、繁中、英文、日文、俄文。新增的社区频道字符串已添加到 `app/src/resources/i18n/*.json` 的 `community` 段。
+
+---
+
+## 🔒 安全建议
+
+1. **生产环境务必修改 `secret`**，至少 32 字节随机字符串（`openssl rand -hex 32`）
+2. **管理员密码立即修改**：登录后到「账户」页改密码，或 CLI `./neoai --admin --username root --password <新密码>`
+3. **CORS 白名单**：分端部署时设置 `ALLOW_ORIGINS=https://your-frontend.pages.dev`
+4. **数据库密码**：docker-compose 默认 `neoai123456!` 仅作示例，生产环境请改强密码
+5. **HTTPS**：前端走 Cloudflare Pages 自动 HTTPS，后端建议套 Caddy / nginx + Let's Encrypt
+
+---
 
 ## 📄 License
 
-This project is derived from [NeoAI](https://github.com/coaidev/coai) and inherits the **Apache-2.0** open-source license. Commercial secondary development and distribution are welcome — please comply with the Apache-2.0 license and do not use it for illegal purposes.
+继承自原项目 coai 的 [LICENSE](./LICENSE)（Apache-2.0）。
 
-## ❤ Acknowledgements & Donations
+## 🙏 鸣谢
 
-- 🙏 Thanks to [NeoAI.Dev](https://coai.dev) and its contributors for the excellent open-source foundational project
-- If you find this project helpful, please give it a Star to show your support!
+- [coai](https://github.com/coaidev/coai) — 原项目
+- [QuantumNous/new-api](https://github.com/QuantumNous/new-api) — 渠道编辑器与 JSON 定价风格参考
+- [Discord](https://discord.com) — 社区频道设计灵感
