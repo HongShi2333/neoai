@@ -826,7 +826,7 @@
     "error": "请求失败",
     "default-password": "密码修改提示",
     "default-password-prompt": "您的管理员密码为默认密码，为了您的账号安全，请尽快修改密码。（前往后台管理 - 系统设置 - 修改 Root 密码）",
-    "coai-format-only": "此格式为 CoAI 独有格式",
+    "coai-format-only": "此格式为 NeoAI 独有格式",
     "identity": {
       "normal": "普通用户",
       "api_paid": "其他付费用户",
@@ -896,7 +896,7 @@
       "sync-option": "同步选项",
       "sync-site": "上游地址",
       "sync-tip": "同步上游模型市场",
-      "sync-placeholder": "请输入上游 CoAI 的 API 地址，如：https://api.chatnio.net",
+      "sync-placeholder": "请输入上游 NeoAI 的 API 地址，如：https://api.chatnio.net",
       "sync-failed": "同步失败",
       "sync-failed-prompt": "地址无法请求或者模型市场模型为空\n（端点：{{endpoint}}）",
       "sync-success": "同步成功",
@@ -940,7 +940,7 @@
       "sync": "同步上游",
       "sync-option": "同步选项",
       "sync-site": "上游地址",
-      "sync-placeholder": "请输入上游 CoAI 的 API 地址，如：https://api.chatnio.net",
+      "sync-placeholder": "请输入上游 NeoAI 的 API 地址，如：https://api.chatnio.net",
       "sync-result": "发现上游订阅规则数 {{length}} 个，涵盖模型 {{models}} 个, 是否覆盖本站点订阅规则？"
     },
     "channels": {
@@ -981,11 +981,11 @@
       "import": "导入已有渠道",
       "joint": "对接上游",
       "joint-endpoint": "上游地址",
-      "joint-endpoint-placeholder": "请输入上游 CoAI 的 API 地址，如：https://api.chatnio.net",
+      "joint-endpoint-placeholder": "请输入上游 NeoAI 的 API 地址，如：https://api.chatnio.net",
       "upstream-endpoint-placeholder": "请输入上游 OpenAI 地址，如：https://api.openai.com",
       "sync-secret-placeholder": "请输入上游渠道的 API 密钥",
       "joint-secret": "API 秘钥",
-      "joint-secret-placeholder": "请输入上游 CoAI 的 API 秘钥",
+      "joint-secret-placeholder": "请输入上游 NeoAI 的 API 秘钥",
       "sync-failed": "同步失败",
       "sync-failed-prompt": "地址无法请求或者模型市场模型为空\n（端点：{{endpoint}}）",
       "sync-success": "同步成功",
@@ -1080,7 +1080,7 @@
       "sync-option": "同步选项",
       "sync-site": "上游地址",
       "sync-tip": "同步上游计费规则",
-      "sync-placeholder": "请输入上游 CoAI 的 API 地址，如：https://api.chatnio.net",
+      "sync-placeholder": "请输入上游 NeoAI 的 API 地址，如：https://api.chatnio.net",
       "sync-failed": "同步失败",
       "sync-failed-prompt": "地址无法请求或者计费规则为空\n（端点：{{endpoint}}）",
       "sync-prompt": "已从上游获取 {{length}} 个模型的规则，将影响当前 {{influence}} 个模型的规则，是否继续？",
@@ -1328,7 +1328,7 @@
       "securityRemoveIPAddress": "删除 IP 地址",
       "autoTitle": {
         "title": "自动会话标题",
-        "tip": "使用 LLM 在首轮对话后自动总结并设置会话标题。设置自定义提示词为空时，默认使用 CoAI 内默认配置的提示词",
+        "tip": "使用 LLM 在首轮对话后自动总结并设置会话标题。设置自定义提示词为空时，默认使用 NeoAI 内默认配置的提示词",
         "enabled": "启用自动标题",
         "model": "生成模型",
         "modelPlaceholder": "留空表示使用当前会话模型",
@@ -1400,21 +1400,21 @@
     },
     "license": {
       "title": "授权管理",
-      "description": "CoAI Pro 版本授权管理",
+      "description": "NeoAI Pro 版本授权管理",
       "domain": "授权域名",
       "digest": "签名摘要",
       "module": "模块管理",
       "info": "授权信息",
       "purchase": "购买授权",
-      "pro-required": "该功能为 CoAI Pro 专属，请在授权管理页面购买 CoAI Pro 授权以使用该功能",
+      "pro-required": "该功能为 NeoAI Pro 专属，请在授权管理页面购买 NeoAI Pro 授权以使用该功能",
       "modules": {
         "bought": "已购买",
         "not-bought": "购买",
         "buy-tip": "请联系您的销售代表以购买此模块",
         "contact-for-price": "访问文档以获取报价",
         "coai-pro": {
-          "title": "CoAI Pro",
-          "description": "CoAI Pro 商业版授权，解锁对接多种支付渠道、用户（组）倍率控制、内容审核、会话日志等全部商业功能"
+          "title": "NeoAI Pro",
+          "description": "NeoAI Pro 商业版授权，解锁对接多种支付渠道、用户（组）倍率控制、内容审核、会话日志等全部商业功能"
         },
         "multiKey": { 
           "title": "多令牌管理",

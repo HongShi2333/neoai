@@ -257,7 +257,7 @@ func (c *SystemConfig) GetImageProxy() string {
 func (c *SystemConfig) GetAppName() string {
 	title := strings.TrimSpace(c.General.Title)
 	if len(title) == 0 {
-		return "CoAI.Dev"
+		return "NeoAI.Dev"
 	}
 
 	return title

@@ -13,7 +13,7 @@ import (
 	"path"
 	"strings"
 
-	"github.com/chai2010/webp"
+	"golang.org/x/image/webp"
 )
 
 type Image struct {

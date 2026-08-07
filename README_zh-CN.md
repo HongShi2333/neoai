@@ -4,9 +4,9 @@
 
 # 🥳 NeoAI
 
-#### 🚀 基于 CoAI 二次开发的下一代 AIGC 一站式商业解决方案
+#### 🚀 基于 NeoAI 二次开发的下一代 AIGC 一站式商业解决方案
 
-#### *"NeoAI = [CoAI](https://github.com/coaidev/coai) 内核 + 社区频道 + 多缓存驱动 + 增强定价"*
+#### *"NeoAI = [NeoAI](https://github.com/coaidev/coai) 内核 + 社区频道 + 多缓存驱动 + 增强定价"*
 
 [English](./README.md) · 简体中文 · [日本語](./README_ja-JP.md)
 
@@ -16,9 +16,9 @@
 
 ## 📌 项目说明
 
-**NeoAI** 是基于开源项目 [CoAI](https://github.com/coaidev/coai)（Apache-2.0 协议）进行的二次开发项目，旨在继承 CoAI 优秀的 AIGC 商业能力的同时，针对社区互动、缓存架构与渠道定价三大方向进行功能增强。
+**NeoAI** 是基于开源项目 [NeoAI](https://github.com/coaidev/coai)（Apache-2.0 协议）进行的二次开发项目，旨在继承 NeoAI 优秀的 AIGC 商业能力的同时，针对社区互动、缓存架构与渠道定价三大方向进行功能增强。
 
-> 🙏 特别感谢 [CoAI.Dev](https://coai.dev) 开源社区提供的优秀基础项目，本项目在其基础上进行了功能扩展与定制化改进。
+> 🙏 特别感谢 [NeoAI.Dev](https://coai.dev) 开源社区提供的优秀基础项目，本项目在其基础上进行了功能扩展与定制化改进。
 
 ### ✨ NeoAI 相对原版的增强功能
 
@@ -32,7 +32,7 @@
    - **批量模型添加**: 渠道编辑器和定价编辑器均支持 **逗号 / 空格 / 换行分隔** 批量添加模型，告别逐个输入
    - **JSON 定价编辑器**: 在原有可视化定价设置的基础上，新增 **JSON 格式批量编辑器**，支持一键导出当前定价规则、批量编辑、一键导入覆盖，适合大规模定价调整
 
-## 📝 继承自 CoAI 的核心功能
+## 📝 继承自 NeoAI 的核心功能
 
 1. 🤖️ **丰富模型支持**: 多模型服务商支持 (OpenAI / Anthropic / Gemini / Midjourney 等十余种格式兼容 & 私有化 LLM 支持)
 2. 🤯 **美观 UI 设计**: UI 兼容 PC / Pad / 移动三端，遵循 [Shadcn UI](https://ui.shadcn.com) & [Tremor Charts](https://blocks.tremor.so) 设计规范，丰富美观的界面设计和后台仪表盘
@@ -237,9 +237,9 @@ server:
 
 ## 📄 开源协议
 
-本项目继承自 [CoAI](https://github.com/coaidev/coai)，沿用 **Apache-2.0** 开源协议。商用二开 & 分发友好，请遵守 Apache-2.0 协议的规定，请勿用于违法用途。
+本项目继承自 [NeoAI](https://github.com/coaidev/coai)，沿用 **Apache-2.0** 开源协议。商用二开 & 分发友好，请遵守 Apache-2.0 协议的规定，请勿用于违法用途。
 
 ## ❤ 致谢与捐助
 
-- 🙏 感谢 [CoAI.Dev](https://coai.dev) 及其贡献者提供的优秀开源基础项目
+- 🙏 感谢 [NeoAI.Dev](https://coai.dev) 及其贡献者提供的优秀开源基础项目
 - 如果您觉得这个项目对您有所帮助, 您可以点个 Star 支持一下！

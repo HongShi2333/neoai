@@ -4,9 +4,9 @@
 
 # 🥳 NeoAI
 
-#### 🚀 Next-Generation AIGC One-Stop Business Solution (Based on CoAI)
+#### 🚀 Next-Generation AIGC One-Stop Business Solution (Based on NeoAI)
 
-#### *"NeoAI = [CoAI](https://github.com/coaidev/coai) Core + Community Channels + Multi-Cache Driver + Enhanced Pricing"*
+#### *"NeoAI = [NeoAI](https://github.com/coaidev/coai) Core + Community Channels + Multi-Cache Driver + Enhanced Pricing"*
 
 [English](./README.md) · [简体中文](./README_zh-CN.md) · [日本語](./README_ja-JP.md)
 
@@ -16,9 +16,9 @@
 
 ## 📌 About This Project
 
-**NeoAI** is a secondary development project based on the open-source project [CoAI](https://github.com/coaidev/coai) (Apache-2.0 license). It inherits CoAI's excellent AIGC commercial capabilities while enhancing three key areas: community interaction, cache architecture, and channel pricing.
+**NeoAI** is a secondary development project based on the open-source project [NeoAI](https://github.com/coaidev/coai) (Apache-2.0 license). It inherits NeoAI's excellent AIGC commercial capabilities while enhancing three key areas: community interaction, cache architecture, and channel pricing.
 
-> 🙏 Special thanks to the [CoAI.Dev](https://coai.dev) open-source community for providing the outstanding foundational project. NeoAI extends and customizes it further.
+> 🙏 Special thanks to the [NeoAI.Dev](https://coai.dev) open-source community for providing the outstanding foundational project. NeoAI extends and customizes it further.
 
 ### ✨ NeoAI Enhancements Over the Original
 
@@ -32,7 +32,7 @@
    - **Batch Model Input**: Both the channel editor and pricing editor support **comma / space / newline separated** batch model input — no more adding models one by one
    - **JSON Pricing Editor**: In addition to the original visual pricing editor, a **JSON batch editor** is now available. Export current pricing rules, edit in bulk, and import to overwrite — ideal for large-scale pricing adjustments
 
-## 📝 Core Features Inherited from CoAI
+## 📝 Core Features Inherited from NeoAI
 
 1. 🤖️ **Rich Model Support**: Multi-provider support (OpenAI / Anthropic / Gemini / Midjourney and 10+ compatible formats & private LLMs)
 2. 🤯 **Beautiful UI Design**: Responsive UI for PC / Pad / Mobile, following [Shadcn UI](https://ui.shadcn.com) & [Tremor Charts](https://blocks.tremor.so) design standards
@@ -238,9 +238,9 @@ As described above, switch between Redis / Valkey / Dragonfly via the `redis.typ
 
 ## 📄 License
 
-This project is derived from [CoAI](https://github.com/coaidev/coai) and inherits the **Apache-2.0** open-source license. Commercial secondary development and distribution are welcome — please comply with the Apache-2.0 license and do not use it for illegal purposes.
+This project is derived from [NeoAI](https://github.com/coaidev/coai) and inherits the **Apache-2.0** open-source license. Commercial secondary development and distribution are welcome — please comply with the Apache-2.0 license and do not use it for illegal purposes.
 
 ## ❤ Acknowledgements & Donations
 
-- 🙏 Thanks to [CoAI.Dev](https://coai.dev) and its contributors for the excellent open-source foundational project
+- 🙏 Thanks to [NeoAI.Dev](https://coai.dev) and its contributors for the excellent open-source foundational project
 - If you find this project helpful, please give it a Star to show your support!

@@ -3,7 +3,7 @@ import { updateDocumentTitle, updateFavicon } from "@/utils/dom.ts";
 import { setMemory } from "@/utils/memory.ts";
 
 export let appName =
-  localStorage.getItem("app_name") || import.meta.env.VITE_APP_NAME || "CoAI";
+  localStorage.getItem("app_name") || import.meta.env.VITE_APP_NAME || "NeoAI";
 export let appLogo =
   localStorage.getItem("app_logo") ||
   import.meta.env.VITE_APP_LOGO ||
@@ -26,7 +26,7 @@ export let backendEndpoint =
   "/api";
 export const deeptrainEndpoint =
   import.meta.env.VITE_DEEPTRAIN_ENDPOINT || "https://deeptrain.net";
-export const deeptrainAppName = import.meta.env.VITE_DEEPTRAIN_APP || "coai";
+export const deeptrainAppName = import.meta.env.VITE_DEEPTRAIN_APP || "neoai";
 export const deeptrainApiEndpoint =
   import.meta.env.VITE_DEEPTRAIN_API_ENDPOINT || "https://api.deeptrain.net";
 
@@ -75,7 +75,7 @@ export function setAppName(name: string): void {
   /**
    * set the app name in localStorage
    */
-  name = name.trim() || "CoAI";
+  name = name.trim() || "NeoAI";
   setMemory("app_name", name);
   appName = name;
 

@@ -331,7 +331,7 @@ function ChargeAction({
   // JSON pricing editor state
   const [jsonOpen, setJsonOpen] = useState(false);
   const [jsonValue, setJsonValue] = useState("");
-  const [jsonSubmitting, setJsonSubmitting] = useState(false);
+  const [_, setJsonSubmitting] = useState(false);
 
   const openJsonEditor = () => {
     // Export current pricing rules as formatted JSON
@@ -425,7 +425,7 @@ function ChargeAction({
               open(false);
             }}
           >
-            CoAI
+            NeoAI
           </DropdownMenuItem>
           <DropdownMenuItem
             onSelect={() => {

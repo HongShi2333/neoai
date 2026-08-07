@@ -115,7 +115,7 @@ function EditorDialog({
   const [form, setForm] = useState<ChannelForm>(emptyForm);
   const [membersRaw, setMembersRaw] = useState("");
   const [postersRaw, setPostersRaw] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [_, setLoading] = useState(false);
 
   useEffectAsync(async () => {
     if (!open) return;

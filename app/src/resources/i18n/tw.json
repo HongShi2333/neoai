@@ -621,7 +621,7 @@
     "error": "請求失敗",
     "default-password": "密碼變更提示",
     "default-password-prompt": "您的管理員密碼為預設密碼，為了您的帳戶安全，請盡快變更密碼。（前往後台管理 - 系統設定 - 變更 Root 密碼）",
-    "chatnio-format-only": "此格式為 CoAI.Dev 獨有格式",
+    "chatnio-format-only": "此格式為 NeoAI.Dev 獨有格式",
     "identity": {
       "normal": "一般使用者",
       "api_paid": "其他付費使用者",
@@ -654,7 +654,7 @@
       "sync-option": "同步選項",
       "sync-site": "上游地址",
       "sync-tip": "同步上游模型市場",
-      "sync-placeholder": "請輸入上游 CoAI.Dev 的 API 地址，如：https://api.chatnio.net",
+      "sync-placeholder": "請輸入上游 NeoAI.Dev 的 API 地址，如：https://api.chatnio.net",
       "sync-failed": "同步失敗",
       "sync-failed-prompt": "地址無法請求或者模型市場模型為空\n（端點：{{endpoint}}）",
       "sync-success": "同步成功",
@@ -704,7 +704,7 @@
       "sync": "同步上游",
       "sync-option": "同步選項",
       "sync-site": "上游地址",
-      "sync-placeholder": "請輸入上游 CoAI.Dev 的 API 地址，如：https://api.chatnio.net",
+      "sync-placeholder": "請輸入上游 NeoAI.Dev 的 API 地址，如：https://api.chatnio.net",
       "sync-result": "發現上游訂閱規則數 {{length}} 個，涵蓋模型 {{models}} 個，是否覆蓋本站台訂閱規則？",
       "discounts": "折扣設定",
       "discounts-tip": "折扣設定(不啟用即為預設設置，半年期訂閱預設90% 一年期訂閱80%)",
@@ -743,11 +743,11 @@
       "create": "建立管道",
       "joint": "對接上游",
       "joint-endpoint": "上游地址",
-      "joint-endpoint-placeholder": "請輸入上游 CoAI.Dev 的 API 地址，如：https://api.chatnio.net",
+      "joint-endpoint-placeholder": "請輸入上游 NeoAI.Dev 的 API 地址，如：https://api.chatnio.net",
       "upstream-endpoint-placeholder": "請輸入上游 OpenAI 地址，如：https://api.openai.com",
       "sync-secret-placeholder": "請輸入上游管道的 API 金鑰",
       "joint-secret": "API 金鑰",
-      "joint-secret-placeholder": "請輸入上游 CoAI.Dev 的 API 金鑰",
+      "joint-secret-placeholder": "請輸入上游 NeoAI.Dev 的 API 金鑰",
       "sync-failed": "同步失敗",
       "sync-failed-prompt": "地址無法請求或者模型市場模型為空\n（端點：{{endpoint}}）",
       "sync-success": "同步成功",
@@ -815,7 +815,7 @@
       "sync-option": "同步選項",
       "sync-site": "上游地址",
       "sync-tip": "同步上游計費規則",
-      "sync-placeholder": "請輸入上游 CoAI.Dev 的 API 地址，如：https://api.chatnio.net",
+      "sync-placeholder": "請輸入上游 NeoAI.Dev 的 API 地址，如：https://api.chatnio.net",
       "sync-failed": "同步失敗",
       "sync-failed-prompt": "地址無法請求或者計費規則為空\n（端點：{{endpoint}}）",
       "sync-prompt": "已從上游取得 {{length}} 個模型的規則，將影響目前 {{influence}} 個模型的規則，是否繼續？",
@@ -1120,7 +1120,7 @@
         "overwrite": "覆蓋已有標題",
         "prompt": "自訂提示詞",
         "promptPlaceholder": "可使用{max_len} 作為佔位符",
-        "tip": "使用LLM 在首輪對話後自動總結並設定會話標題。設定自訂提示詞為空時，預設使用CoAI 內預設配置的提示詞"
+        "tip": "使用LLM 在首輪對話後自動總結並設定會話標題。設定自訂提示詞為空時，預設使用NeoAI 內預設配置的提示詞"
       }
     },
     "logger": {
@@ -1144,7 +1144,7 @@
     "custom-group": "自訂分組",
     "custom-group-action": "設定自訂分組",
     "custom-group-action-desc": "請輸入自訂分組名稱",
-    "coai-format-only": "此格式為CoAI 獨有格式",
+    "coai-format-only": "此格式為NeoAI 獨有格式",
     "delete-broadcast": "刪除通知",
     "delete-broadcast-desc": "是否確定？此操作無法撤銷。這將永久刪除通知。",
     "pay": {
@@ -1179,7 +1179,7 @@
     },
     "license": {
       "title": "授權管理",
-      "description": "CoAI Pro 版本授權管理",
+      "description": "NeoAI Pro 版本授權管理",
       "domain": "授權域名：",
       "digest": "簽名摘要",
       "module": "模組管理",
@@ -1214,12 +1214,12 @@
         },
         "contact-for-price": "訪問文件以取得報價",
         "coai-pro": {
-          "title": "CoAI Pro",
-          "description": "CoAI Pro 商業版授權，解鎖對接多種支付管道、使用者（群組）倍率控制、內容審核、會話日誌等全部商業功能"
+          "title": "NeoAI Pro",
+          "description": "NeoAI Pro 商業版授權，解鎖對接多種支付管道、使用者（群組）倍率控制、內容審核、會話日誌等全部商業功能"
         }
       },
       "purchase": "購買授權",
-      "pro-required": "此功能為CoAI Pro 專屬，請在授權管理頁面購買CoAI Pro 授權以使用該功能"
+      "pro-required": "此功能為NeoAI Pro 專屬，請在授權管理頁面購買NeoAI Pro 授權以使用該功能"
     },
     "community": {
       "title": "社區頻道",

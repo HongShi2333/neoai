@@ -31,7 +31,7 @@ func NewChannelManager() *Manager {
 
 	manager := &Manager{
 		Sequence:          seq,
-		Models:            []string{},
+		Models:            make([]string, 0, len(seq)),
 		PreflightSequence: map[string]Sequence{},
 	}
 	manager.Load()
@@ -47,26 +47,30 @@ func (m *Manager) Load() {
 		}
 	}
 
-	// init support models
-	m.Models = []string{}
-	for _, channel := range m.GetActiveSequence() {
+	active := m.GetActiveSequence()
+
+	// init support models (deduplicated)
+	modelSet := make(map[string]bool, 64)
+	m.Models = m.Models[:0]
+	for _, channel := range active {
 		for _, model := range channel.GetHitModels() {
-			if !utils.Contains(model, m.Models) {
+			if !modelSet[model] {
+				modelSet[model] = true
 				m.Models = append(m.Models, model)
 			}
 		}
 	}
+	m.ModelSet = modelSet
 
-	// init preflight sequence
-	m.PreflightSequence = map[string]Sequence{}
+	// init preflight sequence (deduplicated channel lookup)
+	m.PreflightSequence = make(map[string]Sequence, len(m.Models))
 	for _, model := range m.Models {
 		var seq Sequence
-		for _, channel := range m.GetActiveSequence() {
+		for _, channel := range active {
 			if channel.IsHit(model) {
 				seq = append(seq, channel)
 			}
 		}
-		seq.Sort()
 		m.PreflightSequence[model] = seq
 	}
 
@@ -116,7 +120,7 @@ func (m *Manager) HitSequence(model string) Sequence {
 
 // HasChannel returns whether the channel exists
 func (m *Manager) HasChannel(model string) bool {
-	return utils.Contains(model, m.Models)
+	return m.ModelSet[model]
 }
 
 func (m *Manager) GetTicker(model, group string) *Ticker {

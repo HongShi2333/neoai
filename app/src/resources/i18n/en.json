@@ -554,9 +554,9 @@
       },
       "joint": "Connect upstream",
       "joint-endpoint": "Upstream address",
-      "joint-endpoint-placeholder": "Please enter the API address of the upstream CoAI, for example: https://api.chatnio.net",
+      "joint-endpoint-placeholder": "Please enter the API address of the upstream NeoAI, for example: https://api.chatnio.net",
       "joint-secret": "API keys",
-      "joint-secret-placeholder": "Please enter the API key for upstream CoAI",
+      "joint-secret-placeholder": "Please enter the API key for upstream NeoAI",
       "sync-failed": "Sync Failed",
       "sync-failed-prompt": "Address could not be requested or model market model is empty\n(Endpoint: {{endpoint}})",
       "sync-success": "Sync successful.",
@@ -608,7 +608,7 @@
       "sync-option": "Synchronization Options",
       "sync-site": "Upstream address",
       "sync-tip": "Synchronize upstream billing rules",
-      "sync-placeholder": "Please enter the API address of the upstream CoAI, for example: https://api.chatnio.net",
+      "sync-placeholder": "Please enter the API address of the upstream NeoAI, for example: https://api.chatnio.net",
       "sync-failed": "Sync Failed",
       "sync-failed-prompt": "Address could not be requested or billing rule is empty\n(Endpoint: {{endpoint}})",
       "sync-prompt": "The rules for {{length}} models have been fetched from upstream and will affect the rules for the current {{influence}} models. Do you want to continue?",
@@ -918,7 +918,7 @@
         "overwrite": "Overwrite existing title",
         "prompt": "Custom Prompt",
         "promptPlaceholder": "{max_len} can be used as a placeholder",
-        "tip": "Use LLM to automatically summarize and set the session title after the first round of conversations. When the custom prompt word is set to empty, the default prompt word in the default configuration in CoAI is used."
+        "tip": "Use LLM to automatically summarize and set the session title after the first round of conversations. When the custom prompt word is set to empty, the default prompt word in the default configuration in NeoAI is used."
       }
     },
     "user": "Users",
@@ -957,7 +957,7 @@
       "migrate": "Submit",
       "sync": "Sync upstream",
       "sync-tip": "Synchronize upstream model markets",
-      "sync-placeholder": "Please enter the API address of the upstream CoAI, for example: https://api.chatnio.net",
+      "sync-placeholder": "Please enter the API address of the upstream NeoAI, for example: https://api.chatnio.net",
       "sync-all": "Sync all ({{length}})",
       "sync-self": "Sync supported models ({{length}})",
       "sync-site": "Upstream address",
@@ -1008,7 +1008,7 @@
       "sync": "Sync upstream",
       "sync-option": "Synchronization Options",
       "sync-site": "Upstream address",
-      "sync-placeholder": "Please enter the API address of the upstream CoAI, for example: https://api.chatnio.net",
+      "sync-placeholder": "Please enter the API address of the upstream NeoAI, for example: https://api.chatnio.net",
       "sync-result": "The number of upstream subscription rules was found to be {{length}}, covering {{models}} models. Do you want to overwrite the subscription rules on this site?",
       "discounts": "Discount Settings",
       "discounts-tip": "Discount settings (default if not enabled, default is 90% for semi-annual subscriptions, 80% for one-year subscriptions)",
@@ -1051,7 +1051,7 @@
     "unban-action": " unBlock User",
     "unban-action-desc": "Are you sure you want to unblock this user?",
     "billing": "Income",
-    "coai-format-only": "This format is unique to CoAI",
+    "coai-format-only": "This format is unique to NeoAI",
     "exit": "Exit",
     "view": "View",
     "broadcast-tip": "Notifications will only show the most recent one and will only be notified once. Site announcements can be set in the system settings. The pop-up window will be displayed on the homepage for the first time and subsequent viewing will be supported.",
@@ -1129,14 +1129,14 @@
         "buy-tip": "Please contact your sales representative to purchase this module",
         "contact-for-price": "Access documentation to get a quote",
         "coai-pro": {
-          "title": "CoAI Pro",
-          "description": "CoAI Pro Business Edition authorization to unlock all business functions such as docking multiple payment channels, user (group) magnification control, content review, session logs, etc."
+          "title": "NeoAI Pro",
+          "description": "NeoAI Pro Business Edition authorization to unlock all business functions such as docking multiple payment channels, user (group) magnification control, content review, session logs, etc."
         }
       },
       "info": "License Info:",
-      "description": "CoAI Pro Version License Management",
+      "description": "NeoAI Pro Version License Management",
       "purchase": "Purchase license",
-      "pro-required": "This feature is exclusive to CoAI Pro, please purchase a CoAI Pro license on the license management page to use this feature"
+      "pro-required": "This feature is exclusive to NeoAI Pro, please purchase a NeoAI Pro license on the license management page to use this feature"
     },
     "group": "Grouping",
     "custom-group": "пользовательская подгруппа",
@@ -1446,7 +1446,7 @@
     "plan-total-month": "Total Subscription Months",
     "plan-total-month-tips": "Changes in the number of months due to subscription level upgrades and downgrades do not count towards this statistic",
     "deeptrain": "DeepTrain Unified Account Management",
-    "deeptrain-description": "CoAI is a product of DeepTrain. DeepTrain's unified account management system provides users with unified account management services. You can view your account information, third-party account linking, 2FA settings, wallet settings, authentication information, and more on this page. Deeptrain Unified Account Management is commonly used in CoAI, Fystart, LightNotes and other products.",
+    "deeptrain-description": "NeoAI is a product of DeepTrain. DeepTrain's unified account management system provides users with unified account management services. You can view your account information, third-party account linking, 2FA settings, wallet settings, authentication information, and more on this page. Deeptrain Unified Account Management is commonly used in NeoAI, Fystart, LightNotes and other products.",
     "my-account-description": "Your account information, third-party account linking information, etc.",
     "api-description": "Your global account API information",
     "share-description": "View and manage your history conversations",

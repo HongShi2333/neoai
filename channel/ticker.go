@@ -10,8 +10,6 @@ func NewTicker(seq Sequence, group string) *Ticker {
 		}
 	}
 
-	stack.Sort()
-
 	return &Ticker{
 		Sequence: stack,
 	}
