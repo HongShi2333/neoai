@@ -157,6 +157,34 @@ func emailMigration(db *sql.DB, id int64, email string) error {
 	return err
 }
 
+func usernameMigration(db *sql.DB, cache *redis.Client, id int64, username string) error {
+	username = strings.TrimSpace(username)
+	if len(username) < 2 || len(username) > 24 {
+		return fmt.Errorf("username length must be between 2 and 24")
+	}
+
+	var count int
+	if err := globals.QueryRowDb(db, "SELECT COUNT(*) FROM auth WHERE username = ? AND id != ?", username, id).Scan(&count); err != nil {
+		return err
+	}
+	if count > 0 {
+		return fmt.Errorf("username is already taken")
+	}
+
+	var oldUsername string
+	if err := globals.QueryRowDb(db, "SELECT username FROM auth WHERE id = ?", id).Scan(&oldUsername); err != nil {
+		return err
+	}
+
+	if _, err := globals.ExecDb(db, `UPDATE auth SET username = ? WHERE id = ?`, username, id); err != nil {
+		return err
+	}
+
+	cache.Del(context.Background(), fmt.Sprintf("nio:user:%s", oldUsername))
+
+	return nil
+}
+
 func setAdmin(db *sql.DB, id int64, isAdmin bool) error {
 	_, err := globals.ExecDb(db, `
 		UPDATE auth SET is_admin = ? WHERE id = ?

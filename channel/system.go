@@ -14,6 +14,7 @@ type ApiInfo struct {
 	Logo         string   `json:"logo"`
 	File         string   `json:"file"`
 	Docs         string   `json:"docs"`
+	Backend      string   `json:"backend"`
 	Announcement string   `json:"announcement"`
 	BuyLink      string   `json:"buy_link"`
 	Contact      string   `json:"contact"`
@@ -139,6 +140,7 @@ func (c *SystemConfig) AsInfo() ApiInfo {
 		Logo:         c.General.Logo,
 		File:         c.General.File,
 		Docs:         c.General.Docs,
+		Backend:      c.GetBackend(),
 		Announcement: c.Site.Announcement,
 		Contact:      c.Site.Contact,
 		Footer:       c.Site.Footer,

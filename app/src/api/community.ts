@@ -1,6 +1,6 @@
 import axios from "axios";
 import { getErrorMessage } from "@/utils/base.ts";
-import { websocketEndpoint, tokenField } from "@/conf/bootstrap.ts";
+import { getWebsocketEndpoint, tokenField } from "@/conf/bootstrap.ts";
 import { getMemory } from "@/utils/memory.ts";
 
 export type CommunityChannel = {
@@ -170,7 +170,7 @@ export function openCommunitySocket(
   onMessage: (msg: CommunityMessage) => void,
   onClose?: () => void,
 ): CommunitySocket {
-  const url = `${websocketEndpoint}/community/ws`;
+  const url = `${getWebsocketEndpoint()}/community/ws`;
   let ws: WebSocket | null = null;
   let closed = false;
   let retryTimer: ReturnType<typeof setTimeout> | null = null;

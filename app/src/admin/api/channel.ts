@@ -76,3 +76,22 @@ export async function deactivateChannel(id: number): Promise<CommonResponse> {
     return { status: false, error: getErrorMessage(e) };
   }
 }
+
+export type FetchModelsResponse = CommonResponse & {
+  data?: string[];
+};
+
+export async function fetchChannelModels(
+  endpoint: string,
+  secret: string,
+): Promise<FetchModelsResponse> {
+  try {
+    const response = await axios.post("/admin/channel/fetch-models", {
+      endpoint,
+      secret,
+    });
+    return response.data as FetchModelsResponse;
+  } catch (e) {
+    return { status: false, error: getErrorMessage(e), data: [] };
+  }
+}

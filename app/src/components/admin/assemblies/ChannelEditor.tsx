@@ -32,6 +32,7 @@ import {
   Search,
   Kanban,
   X,
+  Download,
 } from "lucide-react";
 import {
   DropdownMenu,
@@ -47,6 +48,7 @@ import {
 import Markdown from "@/components/Markdown.tsx";
 import {
   createChannel,
+  fetchChannelModels,
   getChannel,
   updateChannel,
 } from "@/admin/api/channel.ts";
@@ -171,6 +173,7 @@ function ChannelEditor({
   const enabled = useMemo(() => validator(edit), [edit]);
 
   const [loading, setLoading] = useState(false);
+  const [fetching, setFetching] = useState(false);
 
   function close(clear?: boolean) {
     if (clear) dispatch({ type: "clear" });
@@ -379,6 +382,28 @@ function ChannelEditor({
                 {t("admin.channels.fill-template-models", {
                   number: info.models.length,
                 })}
+              </Button>
+              <Button
+                variant={`outline`}
+                disabled={fetching || !edit.endpoint}
+                onClick={async () => {
+                  setFetching(true);
+                  const resp = await fetchChannelModels(
+                    edit.endpoint,
+                    edit.secret,
+                  );
+                  setFetching(false);
+                  if (resp.status && resp.data && resp.data.length > 0) {
+                    dispatch({ type: "add-models", value: resp.data });
+                  }
+                }}
+              >
+                {fetching ? (
+                  <Loader2 className={`h-4 w-4 mr-2 animate-spin`} />
+                ) : (
+                  <Download className={`h-4 w-4 mr-2`} />
+                )}
+                {t("admin.channels.fetch-models")}
               </Button>
               <Button
                 variant={`outline`}

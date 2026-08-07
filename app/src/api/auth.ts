@@ -170,3 +170,26 @@ export async function getUserInfo(): Promise<UserInfoResponse> {
     };
   }
 }
+
+export type UpdateUsernameResponse = {
+  status: boolean;
+  error: string;
+  token: string;
+  username: string;
+};
+
+export async function updateMyUsername(
+  username: string,
+): Promise<UpdateUsernameResponse> {
+  try {
+    const response = await axios.post("/update-username", { username });
+    return response.data as UpdateUsernameResponse;
+  } catch (e) {
+    return {
+      status: false,
+      error: getErrorMessage(e),
+      token: "",
+      username: "",
+    };
+  }
+}

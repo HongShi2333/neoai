@@ -13,6 +13,7 @@ func Register(app *gin.RouterGroup) {
 	app.GET("/admin/channel/delete/:id", DeleteChannel)
 	app.GET("/admin/channel/activate/:id", ActivateChannel)
 	app.GET("/admin/channel/deactivate/:id", DeactivateChannel)
+	app.POST("/admin/channel/fetch-models", FetchChannelModels)
 
 	app.GET("/admin/charge/list", GetChargeList)
 	app.POST("/admin/charge/set", SetCharge)

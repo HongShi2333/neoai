@@ -245,6 +245,21 @@ export async function updateEmail(
   }
 }
 
+export async function updateUsername(
+  id: number,
+  username: string,
+): Promise<CommonResponse> {
+  try {
+    const response = await axios.post("/admin/user/username", {
+      id,
+      username,
+    });
+    return response.data as CommonResponse;
+  } catch (e) {
+    return { status: false, message: getErrorMessage(e) };
+  }
+}
+
 export async function quotaOperation(
   id: number,
   quota: number,

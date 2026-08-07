@@ -5,11 +5,90 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"net/http"
+	"strings"
 )
 
 type SyncChargeForm struct {
 	Overwrite bool           `json:"overwrite"`
 	Data      ChargeSequence `json:"data"`
+}
+
+type FetchModelsForm struct {
+	Endpoint string `json:"endpoint"`
+	Secret   string `json:"secret"`
+}
+
+type ModelsResponse struct {
+	Object string         `json:"object"`
+	Data   []ModelItem    `json:"data"`
+}
+
+type ModelItem struct {
+	Id      string `json:"id"`
+	Object  string `json:"object"`
+	Created int64  `json:"created"`
+	OwnedBy string `json:"owned_by"`
+}
+
+func FetchChannelModels(c *gin.Context) {
+	var form FetchModelsForm
+	if err := c.ShouldBindJSON(&form); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"status": false,
+			"error":  err.Error(),
+		})
+		return
+	}
+
+	endpoint := strings.TrimSpace(form.Endpoint)
+	if endpoint == "" {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"status": false,
+			"error":  "endpoint is required",
+		})
+		return
+	}
+
+	if strings.HasSuffix(endpoint, "/") {
+		endpoint = endpoint[:len(endpoint)-1]
+	}
+
+	headers := map[string]string{
+		"Content-Type": "application/json",
+	}
+	if form.Secret != "" {
+		headers["Authorization"] = fmt.Sprintf("Bearer %s", form.Secret)
+	}
+
+	raw, err := utils.GetRaw(fmt.Sprintf("%s/v1/models", endpoint), headers)
+	if err != nil {
+		c.JSON(http.StatusOK, gin.H{
+			"status": false,
+			"error":  err.Error(),
+		})
+		return
+	}
+
+	resp, err := utils.UnmarshalString[ModelsResponse](raw)
+	if err != nil {
+		c.JSON(http.StatusOK, gin.H{
+			"status": false,
+			"error":  err.Error(),
+		})
+		return
+	}
+
+	models := make([]string, 0)
+	for _, item := range resp.Data {
+		if item.Id != "" {
+			models = append(models, item.Id)
+		}
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"status": true,
+		"data":   models,
+	})
 }
 
 func GetInfo(c *gin.Context) {
@@ -25,6 +104,9 @@ func AttachmentService(c *gin.Context) {
 func DeleteChannel(c *gin.Context) {
 	id := c.Param("id")
 	state := ConduitInstance.DeleteChannel(utils.ParseInt(id))
+	if state == nil {
+		ConduitInstance.Load()
+	}
 
 	c.JSON(http.StatusOK, gin.H{
 		"status": state == nil,
@@ -35,6 +117,9 @@ func DeleteChannel(c *gin.Context) {
 func ActivateChannel(c *gin.Context) {
 	id := c.Param("id")
 	state := ConduitInstance.ActivateChannel(utils.ParseInt(id))
+	if state == nil {
+		ConduitInstance.Load()
+	}
 
 	c.JSON(http.StatusOK, gin.H{
 		"status": state == nil,
@@ -45,6 +130,9 @@ func ActivateChannel(c *gin.Context) {
 func DeactivateChannel(c *gin.Context) {
 	id := c.Param("id")
 	state := ConduitInstance.DeactivateChannel(utils.ParseInt(id))
+	if state == nil {
+		ConduitInstance.Load()
+	}
 
 	c.JSON(http.StatusOK, gin.H{
 		"status": state == nil,
@@ -80,6 +168,9 @@ func CreateChannel(c *gin.Context) {
 	}
 
 	state := ConduitInstance.CreateChannel(&channel)
+	if state == nil {
+		ConduitInstance.Load()
+	}
 	c.JSON(http.StatusOK, gin.H{
 		"status": state == nil,
 		"error":  utils.GetError(state),
@@ -100,6 +191,9 @@ func UpdateChannel(c *gin.Context) {
 	channel.Id = utils.ParseInt(id)
 
 	state := ConduitInstance.UpdateChannel(channel.Id, &channel)
+	if state == nil {
+		ConduitInstance.Load()
+	}
 	c.JSON(http.StatusOK, gin.H{
 		"status": state == nil,
 		"error":  utils.GetError(state),

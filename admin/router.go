@@ -34,6 +34,7 @@ func Register(app *gin.RouterGroup) {
 	app.POST("/admin/user/release", ReleaseUsageAPI)
 	app.POST("/admin/user/password", UpdatePasswordAPI)
 	app.POST("/admin/user/email", UpdateEmailAPI)
+	app.POST("/admin/user/username", UpdateUsernameAPI)
 	app.POST("/admin/user/ban", BanAPI)
 	app.POST("/admin/user/admin", SetAdminAPI)
 	app.POST("/admin/user/root", UpdateRootPasswordAPI)

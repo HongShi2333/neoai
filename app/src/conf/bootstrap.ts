@@ -13,8 +13,9 @@ export const dev: boolean = getDev(); // is in development mode (for debugging, 
 export const deploy: boolean = true; // is production environment (for api endpoint)
 export const tokenField = getTokenField(deploy); // token field name for storing token
 
-export let apiEndpoint: string = getRestApi(deploy); // api endpoint for rest api calls
-export let websocketEndpoint: string = getWebsocketApi(deploy); // api endpoint for websocket calls
+export const apiEndpoint: string = getRestApi(deploy); // api endpoint for rest api calls
+export const getWebsocketEndpoint = (): string => getWebsocketApi(deploy); // dynamic websocket endpoint (reflects backend endpoint changes)
+export const websocketEndpoint: string = getWebsocketApi(deploy); // initial websocket endpoint (for backward compat)
 
 setAxiosConfig({
   endpoint: apiEndpoint,

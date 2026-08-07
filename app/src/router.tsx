@@ -15,7 +15,6 @@ import { lazyFactor } from "@/utils/loader.tsx";
 import { useSelector } from "react-redux";
 import { selectAdmin, selectAuthenticated, selectInit } from "@/store/auth.ts";
 import Index from "@/routes/Index.tsx";
-import License from "@/routes/admin/License.tsx";
 
 const Model = lazyFactor(() => import("@/routes/Model.tsx"));
 const Wallet = lazyFactor(() => import("@/routes/Wallet.tsx"));
@@ -31,7 +30,6 @@ const AdminDashboard = lazyFactor(() => import("@/routes/admin/DashBoard.tsx"));
 const AdminMarket = lazyFactor(() => import("@/routes/admin/Market.tsx"));
 const AdminChannel = lazyFactor(() => import("@/routes/admin/Channel.tsx"));
 const AdminSystem = lazyFactor(() => import("@/routes/admin/System.tsx"));
-const AdminLicense = lazyFactor(() => import("@/routes/admin/License.tsx"));
 const AdminCharge = lazyFactor(() => import("@/routes/admin/Charge.tsx"));
 const AdminUsers = lazyFactor(() => import("@/routes/admin/Users.tsx"));
 const AdminBroadcast = lazyFactor(() => import("@/routes/admin/Broadcast.tsx"));
@@ -78,33 +76,6 @@ const router = createBrowserRouter([
           </Suspense>
         ),
       },
-      // {
-      //   id: "log",
-      //   path: "log",
-      //   element: (
-      //     <Suspense>
-      //       <License />
-      //     </Suspense>
-      //   ),
-      // },
-      // {
-      //   id: "preset",
-      //   path: "preset",
-      //   element: (
-      //     <Suspense>
-      //       <Preset />
-      //     </Suspense>
-      //   ),
-      // },
-      // {
-      //   id: "key",
-      //   path: "key",
-      //   element: (
-      //     <Suspense>
-      //       <License />
-      //     </Suspense>
-      //   ),
-      // },
       {
         id: "account",
         path: "account",
@@ -193,24 +164,6 @@ const router = createBrowserRouter([
             ),
           },
           {
-            id: "admin-warm-up",
-            path: "warmup",
-            element: (
-              <Suspense>
-                <License />
-              </Suspense>
-            ),
-          },
-          {
-            id: "admin-license",
-            path: "license",
-            element: (
-              <Suspense>
-                <AdminLicense />
-              </Suspense>
-            ),
-          },
-          {
             id: "admin-charge",
             path: "charge",
             element: (
@@ -243,24 +196,6 @@ const router = createBrowserRouter([
             element: (
               <Suspense>
                 <AdminSubscription />
-              </Suspense>
-            ),
-          },
-          {
-            id: "admin-record",
-            path: "record",
-            element: (
-              <Suspense>
-                <License />
-              </Suspense>
-            ),
-          },
-          {
-            id: "admin-payment",
-            path: "pay",
-            element: (
-              <Suspense>
-                <License />
               </Suspense>
             ),
           },

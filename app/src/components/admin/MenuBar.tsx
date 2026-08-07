@@ -5,15 +5,11 @@ import {
   BookCopy,
   CalendarRange,
   CloudCog,
-  CopyrightIcon,
-  CreditCard,
   FileClock,
   Gauge,
   GitFork,
-  History,
   Hash,
   Radio,
-  ServerCrash,
   Settings,
   Users,
 } from "lucide-react";
@@ -22,17 +18,15 @@ import { useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { mobile } from "@/utils/device.ts";
 import { cn } from "@/components/ui/lib/utils.ts";
-import { Badge } from "@/components/ui/badge.tsx";
 
 type MenuItemProps = {
   title: string;
   icon: React.ReactNode;
   path: string;
   exit?: boolean;
-  pro?: boolean;
 };
 
-function MenuItem({ title, icon, path, exit, pro }: MenuItemProps) {
+function MenuItem({ title, icon, path, exit }: MenuItemProps) {
   const location = useLocation();
   const dispatch = useDispatch();
   const active = useMemo(
@@ -54,12 +48,6 @@ function MenuItem({ title, icon, path, exit, pro }: MenuItemProps) {
     <div className={cn("menu-item", active && "active")} onClick={redirect}>
       <div className={`menu-item-icon`}>{icon}</div>
       <div className={`menu-item-title`}>{title}</div>
-
-      {pro && (
-        <Badge className={`menu-item-badge ml-2`} variant={`gold`}>
-          Pro
-        </Badge>
-      )}
     </div>
   );
 }
@@ -98,19 +86,6 @@ function MenuBar() {
         path={"/subscription"}
       />
       <MenuItem
-        title={t("admin.payment")}
-        icon={<CreditCard />}
-        path={"/pay"}
-        pro
-      />
-      <MenuItem
-        pro
-        title={t("record.title")}
-        icon={<History />}
-        path={"/record"}
-      />
-      <MenuItem
-        // pro
         title={t("admin.settings")}
         icon={<Settings />}
         path={"/system"}
@@ -119,18 +94,6 @@ function MenuBar() {
         title={t("admin.logger.title")}
         icon={<FileClock />}
         path={"/logger"}
-      />
-      <MenuItem
-        pro
-        title={t("admin.cdn.warmup")}
-        icon={<ServerCrash />}
-        path={"/warmup"}
-      />
-      <MenuItem
-        pro
-        title={t("admin.license.title")}
-        icon={<CopyrightIcon />}
-        path={"/license"}
       />
     </div>
   );

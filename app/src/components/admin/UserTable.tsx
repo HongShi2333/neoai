@@ -17,6 +17,7 @@ import {
   subscriptionOperation,
   updateEmail,
   updatePassword,
+  updateUsername,
   UserFilterProps,
 } from "@/admin/api/chart.ts";
 import { useEffectAsync } from "@/utils/hook.ts";
@@ -54,6 +55,7 @@ import {
   Search,
   Shield,
   ShieldMinus,
+  UserRoundCog,
 } from "lucide-react";
 import { Input } from "@/components/ui/input.tsx";
 import PopupDialog, { popupTypes } from "@/components/PopupDialog.tsx";
@@ -116,6 +118,7 @@ function OperationMenu({ user, onRefresh }: OperationMenuProps) {
 
   const [passwordOpen, setPasswordOpen] = useState<boolean>(false);
   const [emailOpen, setEmailOpen] = useState<boolean>(false);
+  const [usernameOpen, setUsernameOpen] = useState<boolean>(false);
   const [quotaOpen, setQuotaOpen] = useState<boolean>(false);
   const [quotaSetOpen, setQuotaSetOpen] = useState<boolean>(false);
   const [subscriptionOpen, setSubscriptionOpen] = useState<boolean>(false);
@@ -145,6 +148,25 @@ function OperationMenu({ user, onRefresh }: OperationMenuProps) {
             onRefresh?.();
           }
 
+          return resp.status;
+        }}
+      />
+      <PopupDialog
+        type={popupTypes.Text}
+        title={t("admin.username-action")}
+        name={t("admin.username")}
+        description={t("admin.username-action-desc")}
+        open={usernameOpen}
+        setOpen={setUsernameOpen}
+        defaultValue={user.username}
+        onSubmit={async (newUsername) => {
+          const resp = await updateUsername(user.id, newUsername);
+          doToast(t, resp);
+
+          if (resp.status) {
+            username === user.username && location.reload();
+            onRefresh?.();
+          }
           return resp.status;
         }}
       />
@@ -309,6 +331,10 @@ function OperationMenu({ user, onRefresh }: OperationMenuProps) {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent className={`min-w-[8.75rem]`}>
+          <DropdownMenuItem onClick={() => setUsernameOpen(true)}>
+            <UserRoundCog className={`h-4 w-4 mr-2`} />
+            {t("admin.username-action")}
+          </DropdownMenuItem>
           <DropdownMenuItem onClick={() => setPasswordOpen(true)}>
             <KeyRound className={`h-4 w-4 mr-2`} />
             {t("admin.password-action")}
