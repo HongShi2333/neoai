@@ -1,9 +1,9 @@
 package analysis
 
 import (
-	"chat/channel"
-	"chat/globals"
-	"chat/utils"
+	"neoai/channel"
+	"neoai/globals"
+	"neoai/utils"
 	"database/sql"
 	"time"
 

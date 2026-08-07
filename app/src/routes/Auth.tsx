@@ -3,7 +3,7 @@ import { useEffect, useReducer } from "react";
 import Loader from "@/components/Loader.tsx";
 import "@/assets/pages/auth.less";
 import { validateToken } from "@/store/auth.ts";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import router from "@/router.tsx";
 import { useTranslation } from "react-i18next";
 import { getQueryParam } from "@/utils/path.ts";
@@ -20,6 +20,11 @@ import { doLogin, LoginForm } from "@/api/auth.ts";
 import { getErrorMessage, isEnter } from "@/utils/base.ts";
 import { ScrollArea } from "@/components/ui/scroll-area.tsx";
 import { toast } from "sonner";
+import {
+  infoLinuxDoOAuthSelector,
+  infoGitHubOAuthSelector,
+} from "@/store/info.ts";
+import { Github } from "lucide-react";
 
 function DeepAuth() {
   const { t } = useTranslation();
@@ -111,7 +116,7 @@ function Login() {
 
       if (
         form.username.trim() === "root" &&
-        form.password.trim() === "coai123456"
+        form.password.trim() === "neoai123456"
       ) {
         toast.warning(t("admin.default-password"), {
           description: t("admin.default-password-prompt"),
@@ -195,6 +200,8 @@ function Login() {
               >
                 {t("login")}
               </Button>
+
+              <OAuthButtons />
             </div>
           </CardContent>
         </Card>
@@ -220,5 +227,61 @@ function Login() {
 function Auth() {
   return useDeeptrain ? <DeepAuth /> : <Login />;
 }
+
+// OAuthButtons — renders LinuxDO / GitHub login buttons if those OAuth
+// providers are configured on the backend. The /info endpoint exposes
+// `linuxdo_oauth_enabled` and `github_oauth_enabled` flags.
+//
+// Clicking a button navigates to /api/oauth/<provider>/login which
+// redirects to the provider's authorize URL. The OAuth callback then
+// redirects back to the frontend with #access_token=<jwt> which the
+// bootstrap reads and stores.
+function OAuthButtons() {
+  const linuxDoEnabled = useSelector(infoLinuxDoOAuthSelector);
+  const githubEnabled = useSelector(infoGitHubOAuthSelector);
+  const apiBase =
+    (axios.defaults.baseURL as string | undefined) || "/api";
+
+  if (!linuxDoEnabled && !githubEnabled) return null;
+
+  return (
+    <div className="mt-3 space-y-2">
+      <div className="flex items-center gap-2 text-xs text-muted-foreground">
+        <div className="h-px bg-border flex-1" />
+        <span>or continue with</span>
+        <div className="h-px bg-border flex-1" />
+      </div>
+      <div className="grid grid-cols-2 gap-2">
+        {linuxDoEnabled && (
+          <Button
+            variant="outline"
+            className="w-full"
+            onClick={() => {
+              window.location.href = `${apiBase}/oauth/linuxdo/login`;
+            }}
+          >
+            <span className="mr-1.5 font-bold text-[#f5a623]">L</span>
+            LinuxDO
+          </Button>
+        )}
+        {githubEnabled && (
+          <Button
+            variant="outline"
+            className="w-full"
+            onClick={() => {
+              window.location.href = `${apiBase}/oauth/github/login`;
+            }}
+          >
+            <Github className="h-4 w-4 mr-1.5" />
+            GitHub
+          </Button>
+        )}
+      </div>
+    </div>
+  );
+}
+
+// silence unused-import warnings on axios if not already imported
+import axios from "axios";
 
 export default Auth;

@@ -1,8 +1,8 @@
 package midjourney
 
 import (
-	factory "chat/adapter/common"
-	"chat/globals"
+	factory "neoai/adapter/common"
+	"neoai/globals"
 	"fmt"
 )
 

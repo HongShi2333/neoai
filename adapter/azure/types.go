@@ -1,6 +1,6 @@
 package azure
 
-import "chat/globals"
+import "neoai/globals"
 
 type ImageUrl struct {
 	Url    string  `json:"url"`

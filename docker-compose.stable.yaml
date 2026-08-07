@@ -6,16 +6,16 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: chatnio
-      MYSQL_USER: chatnio
-      MYSQL_PASSWORD: chatnio123456!
+      MYSQL_DATABASE: neoai
+      MYSQL_USER: neoai
+      MYSQL_PASSWORD: neoai123456!
       TZ: Asia/Shanghai
     expose:
       - "3306"
     volumes:
       - ./db:/var/lib/mysql
     networks:
-      - chatnio-network
+      - neoai-network
 
   redis:
     image: redis:8.2.1
@@ -26,11 +26,11 @@ services:
     volumes:
       - ./redis:/data
     networks:
-      - chatnio-network
+      - neoai-network
 
-  chatnio:
-    image: programzmh/chatnio:stable
-    container_name: chatnio
+  neoai:
+    image: programzmh/neoai:stable
+    container_name: neoai
     restart: always
     ports:
       - "8000:8094"
@@ -46,9 +46,9 @@ services:
         hard: 65535
     environment:
       MYSQL_HOST: mysql
-      MYSQL_USER: chatnio
-      MYSQL_PASSWORD: chatnio123456!
-      MYSQL_DB: chatnio
+      MYSQL_USER: neoai
+      MYSQL_PASSWORD: neoai123456!
+      MYSQL_DB: neoai
       REDIS_HOST: redis
       REDIS_PORT: 6379
       REDIS_PASSWORD: ""
@@ -59,8 +59,8 @@ services:
       - ./logs:/logs
       - ./storage:/storage
     networks:
-      - chatnio-network
+      - neoai-network
 
 networks:
-  chatnio-network:
+  neoai-network:
     driver: bridge

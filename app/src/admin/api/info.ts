@@ -2,7 +2,6 @@ import axios from "axios";
 import {
   setAppLogo,
   setAppName,
-  setBackendEndpoint,
   setBlobEndpoint,
   setBuyLink,
   setDocsUrl,
@@ -32,6 +31,10 @@ export type SiteInfo = {
   payment_aggregation: boolean;
   ga_tracking_id?: string;
   broadcast?: BroadcastEvent;
+  // NeoAI additions
+  registration_code?: boolean;
+  linuxdo_oauth_enabled?: boolean;
+  github_oauth_enabled?: boolean;
 };
 
 export async function getSiteInfo(): Promise<SiteInfo> {
@@ -78,7 +81,6 @@ export function syncSiteInfo() {
     setDocsUrl(info.docs);
     setBlobEndpoint(info.file);
     setBuyLink(info.buy_link);
-    if (info.backend) setBackendEndpoint(info.backend);
     initGoogleAnalytics(info.ga_tracking_id);
 
     infoEvent.emit(info);

@@ -1,7 +1,7 @@
 package generation
 
 import (
-	"chat/utils"
+	"neoai/utils"
 	"fmt"
 	"time"
 )

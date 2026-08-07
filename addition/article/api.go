@@ -1,9 +1,9 @@
 package article
 
 import (
-	"chat/auth"
-	"chat/globals"
-	"chat/utils"
+	"neoai/auth"
+	"neoai/globals"
+	"neoai/utils"
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"strings"

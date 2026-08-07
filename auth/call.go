@@ -1,7 +1,7 @@
 package auth
 
 import (
-	"chat/utils"
+	"neoai/utils"
 	"github.com/goccy/go-json"
 	"github.com/spf13/viper"
 )

@@ -1,8 +1,8 @@
 package midjourney
 
 import (
-	"chat/connection"
-	"chat/utils"
+	"neoai/connection"
+	"neoai/utils"
 	"fmt"
 )
 

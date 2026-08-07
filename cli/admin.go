@@ -1,8 +1,8 @@
 package cli
 
 import (
-	"chat/admin"
-	"chat/connection"
+	"neoai/admin"
+	"neoai/connection"
 	"errors"
 )
 

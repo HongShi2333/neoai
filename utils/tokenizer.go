@@ -1,7 +1,7 @@
 package utils
 
 import (
-	"chat/globals"
+	"neoai/globals"
 	"fmt"
 	"strings"
 

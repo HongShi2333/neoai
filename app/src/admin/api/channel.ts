@@ -77,19 +77,25 @@ export async function deactivateChannel(id: number): Promise<CommonResponse> {
   }
 }
 
+// Auto-discover available models from an upstream OpenAI-compatible
+// /v1/models endpoint. Returns a list of model IDs that the admin can
+// then bulk-import into the channel.
+export type FetchModelsForm = {
+  type: string;
+  endpoint: string;
+  secret: string;
+};
+
 export type FetchModelsResponse = CommonResponse & {
   data?: string[];
+  note?: string;
 };
 
 export async function fetchChannelModels(
-  endpoint: string,
-  secret: string,
+  form: FetchModelsForm,
 ): Promise<FetchModelsResponse> {
   try {
-    const response = await axios.post("/admin/channel/fetch-models", {
-      endpoint,
-      secret,
-    });
+    const response = await axios.post("/admin/channel/fetch-models", form);
     return response.data as FetchModelsResponse;
   } catch (e) {
     return { status: false, error: getErrorMessage(e), data: [] };

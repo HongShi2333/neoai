@@ -1,8 +1,7 @@
 package manager
 
 import (
-	"chat/manager/broadcast"
-	"chat/manager/community"
+	"neoai/manager/broadcast"
 
 	"github.com/gin-gonic/gin"
 )
@@ -21,5 +20,4 @@ func Register(app *gin.RouterGroup) {
 	app.GET("/v1/videos/:id/content", VideosContentRelayAPI)
 
 	broadcast.Register(app)
-	community.Register(app)
 }

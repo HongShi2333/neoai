@@ -1,8 +1,8 @@
 package slack
 
 import (
-	factory "chat/adapter/common"
-	"chat/globals"
+	factory "neoai/adapter/common"
+	"neoai/globals"
 	"fmt"
 	"github.com/bincooo/claude-api"
 	"github.com/bincooo/claude-api/types"

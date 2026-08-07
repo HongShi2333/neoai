@@ -1,8 +1,8 @@
 package zhinao
 
 import (
-	"chat/globals"
-	"chat/utils"
+	"neoai/globals"
+	"neoai/utils"
 	"errors"
 	"fmt"
 	"strings"

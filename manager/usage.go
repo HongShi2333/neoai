@@ -1,8 +1,8 @@
 package manager
 
 import (
-	"chat/auth"
-	"chat/utils"
+	"neoai/auth"
+	"neoai/utils"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )

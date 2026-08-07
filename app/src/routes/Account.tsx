@@ -9,8 +9,6 @@ import {
   selectAuthenticated,
   selectInit,
   selectUsername,
-  setToken,
-  setUsername,
 } from "@/store/auth.ts";
 import { Badge } from "@/components/ui/badge.tsx";
 import { copyClipboard, useClipboard } from "@/utils/dom.ts";
@@ -34,15 +32,13 @@ import {
   Undo2,
   UserRoundCog,
   UserRoundIcon,
-  Check,
-  X,
 } from "lucide-react";
 import { Button } from "@/components/ui/button.tsx";
 import { useEffectAsync } from "@/utils/hook.ts";
 import {
   getUserInfo,
   initialUserInfo,
-  updateMyUsername,
+  updateProfileUsername,
   UserInfo,
 } from "@/api/auth.ts";
 import { CommonResponse, withNotify } from "@/api/common.ts";
@@ -52,7 +48,8 @@ import Tips from "@/components/Tips.tsx";
 import { getSharedLink, SharingPreviewForm } from "@/api/sharing.ts";
 import { openWindow } from "@/utils/device.ts";
 import { dataSelector, deleteData, syncData } from "@/store/sharing.ts";
-import { docsEndpoint } from "@/conf/env.ts";
+import { DeeptrainOnly } from "@/conf/deeptrain.tsx";
+import { deeptrainEndpoint, docsEndpoint } from "@/conf/env.ts";
 import { getApiKey, keySelector, regenerateApiKey } from "@/store/api.ts";
 import { Input } from "@/components/ui/input.tsx";
 import {
@@ -68,7 +65,6 @@ import {
 } from "@/components/ui/alert-dialog.tsx";
 import { toast } from "sonner";
 import Emoji from "@/components/Emoji";
-
 type AccountCardProps = {
   title: string;
   description: string;
@@ -208,39 +204,6 @@ function Account() {
   const [loadingApiKey, setLoadingApiKey] = useState(false);
   const [openResetApiKey, setOpenResetApiKey] = useState(false);
 
-  const [editingUsername, setEditingUsername] = useState(false);
-  const [newUsername, setNewUsername] = useState("");
-  const [savingUsername, setSavingUsername] = useState(false);
-
-  async function saveUsername() {
-    const trimmed = newUsername.trim();
-    if (trimmed.length < 2 || trimmed.length > 24) {
-      toast.error(t("auth.username-length-error"));
-      return;
-    }
-    if (trimmed === username) {
-      setEditingUsername(false);
-      return;
-    }
-
-    setSavingUsername(true);
-    const resp = await updateMyUsername(trimmed);
-    setSavingUsername(false);
-
-    if (resp.status) {
-      dispatch(setToken(resp.token));
-      dispatch(setUsername(resp.username));
-      setEditingUsername(false);
-      toast.success(t("admin.operate-success"), {
-        description: t("admin.operate-success-prompt"),
-      });
-    } else {
-      toast.error(t("admin.operate-failed"), {
-        description: resp.error,
-      });
-    }
-  }
-
   const getSystemKey = async () => {
     if (!init) return;
 
@@ -322,14 +285,23 @@ function Account() {
                 {t("login")}
               </Button>
             ) : (
-              <Button
-                classNameWrapper={`ml-auto`}
-                className={`flex flex-row items-center`}
-                onClick={() => dispatch(logout())}
-              >
-                <Undo2 className={`h-4 w-4 mr-1.5`} />
-                {t("logout")}
-              </Button>
+              <>
+                <EditUsernameButton
+                  current={username}
+                  onRenamed={(newName) => {
+                    // reload so the navbar / menu picks up the change
+                    if (newName !== username) location.reload();
+                  }}
+                />
+                <Button
+                  classNameWrapper={`ml-auto`}
+                  className={`flex flex-row items-center`}
+                  onClick={() => dispatch(logout())}
+                >
+                  <Undo2 className={`h-4 w-4 mr-1.5`} />
+                  {t("logout")}
+                </Button>
+              </>
             )
           }
         >
@@ -339,67 +311,16 @@ function Account() {
                 username={username}
                 className="w-16 h-16 shrink-0 shadow text-lg rounded-full"
               />
-              <div className="flex flex-row w-full items-center">
-                {editingUsername ? (
-                  <div className="flex flex-row items-center w-full">
-                    <Input
-                      value={newUsername}
-                      onChange={(e) => setNewUsername(e.target.value)}
-                      onKeyDown={(e) => {
-                        if (e.key === "Enter") saveUsername();
-                        if (e.key === "Escape") setEditingUsername(false);
-                      }}
-                      className="text-xl font-semibold h-9 max-w-[200px]"
-                      autoFocus
-                      maxLength={24}
-                    />
-                    <Button
-                      size="icon"
-                      variant="default"
-                      className="ml-1 shrink-0"
-                      onClick={saveUsername}
-                      disabled={savingUsername}
-                    >
-                      <Check className="h-4 w-4" />
-                    </Button>
-                    <Button
-                      size="icon"
-                      variant="outline"
-                      className="ml-1 shrink-0"
-                      onClick={() => setEditingUsername(false)}
-                      disabled={savingUsername}
-                    >
-                      <X className="h-4 w-4" />
-                    </Button>
-                  </div>
-                ) : (
-                  <div className="flex flex-row items-center w-full">
-                    <div className="flex flex-col w-fit">
-                      <p
-                        className="text-xl font-semibold cursor-pointer select-none"
-                        onClick={() => copy(username)}
-                      >
-                        {auth ? username : t("anonymous")}
-                      </p>
-                      <p className="text-sm text-muted-foreground">
-                        #{info.id}
-                      </p>
-                    </div>
-                    {auth && (
-                      <Button
-                        size="icon"
-                        variant="ghost"
-                        className="ml-2 shrink-0"
-                        onClick={() => {
-                          setNewUsername(username);
-                          setEditingUsername(true);
-                        }}
-                      >
-                        <UserRoundCog className="h-4 w-4" />
-                      </Button>
-                    )}
-                  </div>
-                )}
+              <div className="flex flex-row w-full">
+                <div className="flex flex-col w-fit">
+                  <p
+                    className="text-xl font-semibold cursor-pointer select-none"
+                    onClick={() => copy(username)}
+                  >
+                    {auth ? username : t("anonymous")}
+                  </p>
+                  <p className="text-sm text-muted-foreground">#{info.id}</p>
+                </div>
               </div>
             </div>
 
@@ -453,6 +374,45 @@ function Account() {
             </div>
           </div>
         </AccountCard>
+        <DeeptrainOnly>
+          <AccountCard
+            title={"account.deeptrain"}
+            description={t("account.deeptrain-description")}
+            icon={<UserRoundCog />}
+            footer={
+              auth ? (
+                <Button
+                  className={`flex flex-row items-center`}
+                  classNameWrapper={`ml-auto`}
+                  onClick={() => openWindow(`${deeptrainEndpoint}/home`)}
+                >
+                  <ExternalLink className={`h-4 w-4 mr-1.5`} />
+                  {t("manage")}
+                </Button>
+              ) : (
+                <Button classNameWrapper={`ml-auto`} onClick={goAuth}>
+                  <HandIcon className={`h-4 w-4 mr-1.5`} />
+                  {t("login")}
+                </Button>
+              )
+            }
+          >
+            <div className={`flex flex-row items-center space-x-2`}>
+              <img
+                src={`${deeptrainEndpoint}/favicon.ico`}
+                alt={``}
+                className={`w-12 h-12 select-none cursor-pointer`}
+                onClick={() => openWindow(`${deeptrainEndpoint}/home`)}
+              />
+              <div className={`inline-flex flex-col`}>
+                <p className={`text-common text-sm font-bold`}>DeepTrain SSO</p>
+                <p className={`text-secondary text-xs`}>
+                  {t("account.deeptrain-description")}
+                </p>
+              </div>
+            </div>
+          </AccountCard>
+        </DeeptrainOnly>
         <AccountCard
           title={"api.title"}
           description={t("account.api-description")}
@@ -569,6 +529,97 @@ function Account() {
         </AccountCard>
       </div>
     </ScrollArea>
+  );
+}
+
+// EditUsernameButton — opens a small dialog to rename the current user.
+// Calls POST /profile/username on submit, then reloads the page so the
+// navbar / menu reflects the new username.
+function EditUsernameButton(props: {
+  current: string;
+  onRenamed?: (newName: string) => void;
+}) {
+  const { t } = useTranslation();
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState(props.current);
+  const [loading, setLoading] = useState(false);
+
+  async function submit() {
+    const trimmed = value.trim();
+    if (trimmed.length < 2 || trimmed.length > 24) {
+      toast.error(
+        t("account.username-length-error") ||
+          "Username must be 2-24 characters",
+      );
+      return;
+    }
+    if (trimmed === props.current) {
+      setOpen(false);
+      return;
+    }
+    setLoading(true);
+    const resp = await updateProfileUsername(trimmed);
+    setLoading(false);
+    if (resp.status) {
+      toast.success(
+        t("account.username-changed") || "Username updated",
+      );
+      setOpen(false);
+      props.onRenamed?.(resp.username || trimmed);
+    } else {
+      toast.error(resp.error || "Failed to update username");
+    }
+  }
+
+  return (
+    <>
+      <Button
+        variant="outline"
+        size="sm"
+        className="ml-auto"
+        onClick={() => {
+          setValue(props.current);
+          setOpen(true);
+        }}
+      >
+        <UserRoundCog className="h-4 w-4 mr-1.5" />
+        {t("account.edit-username") || "Edit username"}
+      </Button>
+      <AlertDialog open={open} onOpenChange={setOpen}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>
+              {t("account.edit-username") || "Edit username"}
+            </AlertDialogTitle>
+            <AlertDialogDescription>
+              {t("account.edit-username-desc") ||
+                "Choose a new username (2-24 characters). Your existing login token stays valid."}
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <Input
+            value={value}
+            onChange={(e) => setValue(e.target.value)}
+            maxLength={24}
+            placeholder={props.current}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") submit();
+            }}
+          />
+          <AlertDialogFooter>
+            <AlertDialogCancel>{t("cancel")}</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={(e) => {
+                e.preventDefault();
+                submit();
+              }}
+              disabled={loading}
+            >
+              {loading ? "..." : t("confirm")}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+    </>
   );
 }
 

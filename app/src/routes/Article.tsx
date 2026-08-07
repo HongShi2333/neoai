@@ -19,7 +19,7 @@ import { Label } from "@/components/ui/label.tsx";
 import {
   apiEndpoint,
   tokenField,
-  getWebsocketEndpoint,
+  websocketEndpoint,
 } from "@/conf/bootstrap.ts";
 import { getMemory } from "@/utils/memory.ts";
 import { Progress } from "@/components/ui/progress.tsx";
@@ -95,7 +95,7 @@ function ArticleContent() {
 
   function generate() {
     setProgress(true);
-    const connection = new WebSocket(`${getWebsocketEndpoint()}/article/create`);
+    const connection = new WebSocket(`${websocketEndpoint}/article/create`);
 
     connection.onopen = () => {
       connection.send(

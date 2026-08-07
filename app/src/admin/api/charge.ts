@@ -74,3 +74,37 @@ export async function fetchUpstreamCharge(
     return { status: false, error: getErrorMessage(e), data: [] };
   }
 }
+
+// --- JSON bulk import / export ------------------------------------------
+//
+// Matches the backend endpoints:
+//   POST /admin/charge/json?mode=replace|merge
+//   GET  /admin/charge/json
+//
+// Body shape: a ChargeProps[] array (or `{ "rules": [...] }`).
+
+export type ChargeJSONMode = "replace" | "merge";
+
+export async function applyChargeJSON(
+  rules: ChargeProps[],
+  mode: ChargeJSONMode = "replace",
+): Promise<ChargeListResponse> {
+  try {
+    const response = await axios.post(
+      `/admin/charge/json?mode=${mode}`,
+      rules,
+    );
+    return response.data as ChargeListResponse;
+  } catch (e) {
+    return { status: false, error: getErrorMessage(e), data: [] };
+  }
+}
+
+export async function exportChargeJSON(): Promise<ChargeListResponse> {
+  try {
+    const response = await axios.get(`/admin/charge/json`);
+    return response.data as ChargeListResponse;
+  } catch (e) {
+    return { status: false, error: getErrorMessage(e), data: [] };
+  }
+}

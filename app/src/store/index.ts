@@ -10,6 +10,7 @@ import subscriptionReducer from "./subscription";
 import apiReducer from "./api";
 import sharingReducer from "./sharing";
 import settingsReducer from "./settings";
+import recordReducer from "./record";
 import avatarReducer from "./avatar";
 
 const store = configureStore({
@@ -25,6 +26,7 @@ const store = configureStore({
     api: apiReducer,
     sharing: sharingReducer,
     settings: settingsReducer,
+    record: recordReducer,
     avatar: avatarReducer,
   },
 });

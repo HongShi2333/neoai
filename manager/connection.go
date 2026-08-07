@@ -1,9 +1,9 @@
 package manager
 
 import (
-	"chat/globals"
-	"chat/manager/conversation"
-	"chat/utils"
+	"neoai/globals"
+	"neoai/manager/conversation"
+	"neoai/utils"
 	"database/sql"
 	"fmt"
 	"github.com/gin-gonic/gin"

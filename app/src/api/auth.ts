@@ -30,6 +30,7 @@ export type RegisterForm = {
   repassword: string;
   email: string;
   code: string;
+  registration_code?: string;
 };
 
 export type RegisterResponse = {
@@ -171,25 +172,22 @@ export async function getUserInfo(): Promise<UserInfoResponse> {
   }
 }
 
-export type UpdateUsernameResponse = {
+export type UpdateProfileUsernameResponse = {
   status: boolean;
-  error: string;
-  token: string;
-  username: string;
+  error?: string;
+  username?: string;
 };
 
-export async function updateMyUsername(
+// Self-service username change.
+// Backend endpoint: POST /profile/username
+// Body: { "username": "<new name>" }
+export async function updateProfileUsername(
   username: string,
-): Promise<UpdateUsernameResponse> {
+): Promise<UpdateProfileUsernameResponse> {
   try {
-    const response = await axios.post("/update-username", { username });
-    return response.data as UpdateUsernameResponse;
+    const response = await axios.post("/profile/username", { username });
+    return response.data as UpdateProfileUsernameResponse;
   } catch (e) {
-    return {
-      status: false,
-      error: getErrorMessage(e),
-      token: "",
-      username: "",
-    };
+    return { status: false, error: getErrorMessage(e) };
   }
 }

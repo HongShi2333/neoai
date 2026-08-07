@@ -20,7 +20,6 @@ import {
   CloudOff,
   Gem,
   Sparkles,
-  Kanban,
   Award,
   EyeIcon,
   Globe,
@@ -44,7 +43,6 @@ import {
   SelectItem,
   SelectGroup as SelectGroupUI,
   SelectLabel,
-  SelectSeparator,
 } from "@/components/ui/select.tsx";
 import { ChatAction } from "@/components/home/assemblies/ChatAction.tsx";
 import Icon from "@/components/utils/Icon.tsx";
@@ -200,7 +198,6 @@ export function ModelArea() {
   const student = useSelector(teenagerSelector);
 
   const supportModels = useSelector(selectSupportModels);
-  const modelList = useSelector(selectModelList);
   const subscriptionData = useSelector(subscriptionDataSelector);
 
   modelEvent.bind((target: string) => {
@@ -211,6 +208,11 @@ export function ModelArea() {
     }
   });
 
+  // NeoAI: render ONE flat list of every model the user is allowed to
+  // see (the backend `/v1/market` endpoint already filters by group —
+  // admins see everything, non-admins see only what their group can
+  // invoke). No more starred/unstarred split, no more "jump to market"
+  // entry — just one scrollable list of models.
   const models = useMemo(() => {
     const raw =
       supportModels.length > 0
@@ -222,36 +224,29 @@ export function ModelArea() {
             } as Model,
           ];
 
-    return raw.map((model) => formatModel(subscriptionData, model, level, t));
-  }, [supportModels, subscriptionData, level, student, modelList, t]);
-
-  const starredModels = useMemo(() => {
-    return models.filter((model) => modelList.includes(model.name));
-  }, [models, modelList]);
-
-  const unstarredModels = useMemo(() => {
-    return models.filter((model) => !modelList.includes(model.name));
-  }, [models, modelList]);
-
-  const showStarred = starredModels.length > 0;
+    // Sort alphabetically by display name so the list is predictable.
+    const formatted = raw.map((m) =>
+      formatModel(subscriptionData, m, level, t),
+    );
+    formatted.sort((a, b) => (a.value || a.name).localeCompare(b.value || b.name));
+    return formatted;
+  }, [supportModels, subscriptionData, level, student, t]);
 
   const current = useMemo((): SelectItemProps => {
     const raw = models.find((item) => item.name === model);
     return raw || models[0];
-  }, [models, model, supportModels, modelList]);
+  }, [models, model, supportModels]);
 
   return (
     <Select
       value={current.name}
       onValueChange={(value: string) => {
-        if (value === "market") {
-          router.navigate("/model");
-          return;
-        }
-        const model = GetModel(supportModels, value);
-        console.debug(`[model] select model: ${model.name} (id: ${model.id})`);
+        const selected = GetModel(supportModels, value);
+        console.debug(
+          `[model] select model: ${selected.name} (id: ${selected.id})`,
+        );
 
-        if (!auth && model.auth) {
+        if (!auth && selected.auth) {
           toast(t("login-require"), {
             action: {
               label: t("login"),
@@ -270,40 +265,10 @@ export function ModelArea() {
       </NativeSelectTrigger>
       <SelectContent>
         <SelectGroupUI>
-          <SelectLabel>{t("market.title")}</SelectLabel>
-          <SelectItem value="market">
-            <GroupSelectItem
-              icon={
-                <Kanban
-                  className={`h-6 w-6 p-1 rounded-full bg-amber-500/10 text-amber-500`}
-                />
-              }
-              name="market"
-              value={t("market.model")}
-            />
-          </SelectItem>
-        </SelectGroupUI>
-        <SelectSeparator />
-
-        {showStarred && (
-          <>
-            <SelectGroupUI>
-              <SelectLabel>{t("starred")}</SelectLabel>
-              {starredModels.map((model, idx) => (
-                <SelectItem key={idx} value={model.name}>
-                  <GroupSelectItem {...model} />
-                </SelectItem>
-              ))}
-            </SelectGroupUI>
-            <SelectSeparator />
-          </>
-        )}
-
-        <SelectGroupUI>
-          <SelectLabel>{t("unstarred")}</SelectLabel>
-          {unstarredModels.map((model, idx) => (
-            <SelectItem key={idx} value={model.name}>
-              <GroupSelectItem {...model} />
+          <SelectLabel>{t("model")}</SelectLabel>
+          {models.map((m, idx) => (
+            <SelectItem key={idx} value={m.name}>
+              <GroupSelectItem {...m} />
             </SelectItem>
           ))}
         </SelectGroupUI>

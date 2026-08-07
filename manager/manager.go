@@ -1,9 +1,9 @@
 package manager
 
 import (
-	"chat/auth"
-	"chat/manager/conversation"
-	"chat/utils"
+	"neoai/auth"
+	"neoai/manager/conversation"
+	"neoai/utils"
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"strconv"

@@ -1,6 +1,6 @@
 package sparkdesk
 
-import "chat/globals"
+import "neoai/globals"
 
 // ChatRequest is the request body for sparkdesk
 type ChatRequest struct {

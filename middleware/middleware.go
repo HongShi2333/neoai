@@ -1,21 +1,29 @@
 package middleware
 
 import (
-	"chat/connection"
-	"github.com/gin-gonic/gin"
+        "neoai/connection"
+        "neoai/utils"
+
+        "github.com/gin-gonic/gin"
 )
 
 func RegisterMiddleware(app *gin.Engine) func() {
-	db := connection.InitMySQLSafe()
-	cache := connection.InitRedisSafe()
+        db := connection.InitMySQLSafe()
+        cache := connection.InitRedisSafe()
 
-	app.Use(CORSMiddleware())
-	app.Use(BuiltinMiddleWare(db, cache))
-	app.Use(ThrottleMiddleware())
-	app.Use(AuthMiddleware())
+        // Expose the global DB / cache handles to packages that can't import
+        // `connection` directly (e.g. `utils`, which `connection` itself
+        // imports).
+        utils.GlobalDB = db
+        utils.GlobalCache = cache
 
-	return func() {
-		db.Close()
-		cache.Close()
-	}
+        app.Use(CORSMiddleware())
+        app.Use(BuiltinMiddleWare(db, cache))
+        app.Use(ThrottleMiddleware())
+        app.Use(AuthMiddleware())
+
+        return func() {
+                db.Close()
+                cache.Close()
+        }
 }

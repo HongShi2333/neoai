@@ -2,7 +2,7 @@ package utils
 
 import (
 	"bufio"
-	"chat/globals"
+	"neoai/globals"
 	"errors"
 	"fmt"
 	"io"

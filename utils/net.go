@@ -2,7 +2,7 @@ package utils
 
 import (
 	"bytes"
-	"chat/globals"
+	"neoai/globals"
 	"context"
 	"crypto/tls"
 	"fmt"

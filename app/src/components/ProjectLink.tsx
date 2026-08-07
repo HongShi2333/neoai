@@ -22,7 +22,7 @@ function ProjectLink() {
       variant="outline"
       size="icon-md"
       className="rounded-full overflow-hidden"
-      onClick={() => openWindow("https://github.com/coaidev/coai")}
+      onClick={() => openWindow("https://github.com/neoaidev/neoai")}
     >
       <Github className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100" />
     </Button>
