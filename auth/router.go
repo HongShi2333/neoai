@@ -13,6 +13,11 @@ func Register(app *gin.RouterGroup) {
         app.GET("/userinfo", UserInfoAPI)
         app.POST("/resetkey", ResetKeyAPI)
         app.POST("/profile/username", UpdateProfileUsernameAPI)
+
+        // OAuth2 — public endpoints (no auth required to start the flow)
+        app.GET("/oauth/:provider/login", OAuthLoginAPI)
+        app.GET("/oauth/:provider/callback", OAuthCallbackAPI)
+
         app.GET("/package", PackageAPI)
         app.GET("/quota", QuotaAPI)
         app.POST("/buy", BuyAPI)

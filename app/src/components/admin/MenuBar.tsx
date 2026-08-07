@@ -11,6 +11,9 @@ import {
   Radio,
   Settings,
   Users,
+  Hash,
+  Ticket,
+  Key,
 } from "lucide-react";
 import router from "@/router.tsx";
 import { useLocation } from "react-router-dom";
@@ -57,7 +60,21 @@ function MenuBar() {
   return (
     <div className={cn("admin-menu", open && "open")}>
       <MenuItem title={t("admin.dashboard")} icon={<Gauge />} path={"/"} />
-      <MenuItem title={t("admin.user")} icon={<Users />} path={"/users"} />
+      <MenuItem
+        title={t("admin.user")}
+        icon={<Users />}
+        path={"/users"}
+      />
+      <MenuItem
+        title={t("admin.reg-code.title") || "Registration Codes"}
+        icon={<Ticket />}
+        path={"/reg-code"}
+      />
+      <MenuItem
+        title={t("admin.oauth.title") || "OAuth Login"}
+        icon={<Key />}
+        path={"/oauth"}
+      />
       <MenuItem
         title={t("admin.market.title")}
         icon={<BookCopy />}
@@ -72,6 +89,11 @@ function MenuBar() {
         title={t("admin.channel")}
         icon={<GitFork />}
         path={"/channel"}
+      />
+      <MenuItem
+        title={t("admin.community.title") || "Community"}
+        icon={<Hash />}
+        path={"/community"}
       />
       <MenuItem title={t("admin.prize")} icon={<CloudCog />} path={"/charge"} />
       <MenuItem

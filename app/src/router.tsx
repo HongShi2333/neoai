@@ -29,6 +29,9 @@ const AdminPage = lazyFactor(() => import("@/routes/Admin.tsx"));
 const AdminDashboard = lazyFactor(() => import("@/routes/admin/DashBoard.tsx"));
 const AdminMarket = lazyFactor(() => import("@/routes/admin/Market.tsx"));
 const AdminChannel = lazyFactor(() => import("@/routes/admin/Channel.tsx"));
+const AdminCommunity = lazyFactor(
+  () => import("@/routes/admin/Community.tsx"),
+);
 const AdminSystem = lazyFactor(() => import("@/routes/admin/System.tsx"));
 const AdminCharge = lazyFactor(() => import("@/routes/admin/Charge.tsx"));
 const AdminUsers = lazyFactor(() => import("@/routes/admin/Users.tsx"));
@@ -37,6 +40,10 @@ const AdminSubscription = lazyFactor(
   () => import("@/routes/admin/Subscription.tsx"),
 );
 const AdminLogger = lazyFactor(() => import("@/routes/admin/Logger.tsx"));
+const AdminRegistrationCode = lazyFactor(
+  () => import("@/routes/admin/RegistrationCode.tsx"),
+);
+const AdminOAuth = lazyFactor(() => import("@/routes/admin/OAuth.tsx"));
 
 const router = createBrowserRouter([
   {
@@ -178,6 +185,15 @@ const router = createBrowserRouter([
             ),
           },
           {
+            id: "admin-community",
+            path: "community",
+            element: (
+              <Suspense>
+                <AdminCommunity />
+              </Suspense>
+            ),
+          },
+          {
             id: "admin-system",
             path: "system",
             element: (
@@ -219,6 +235,24 @@ const router = createBrowserRouter([
             element: (
               <Suspense>
                 <AdminLogger />
+              </Suspense>
+            ),
+          },
+          {
+            id: "admin-reg-code",
+            path: "reg-code",
+            element: (
+              <Suspense>
+                <AdminRegistrationCode />
+              </Suspense>
+            ),
+          },
+          {
+            id: "admin-oauth",
+            path: "oauth",
+            element: (
+              <Suspense>
+                <AdminOAuth />
               </Suspense>
             ),
           },

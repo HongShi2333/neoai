@@ -31,6 +31,10 @@ export type SiteInfo = {
   payment_aggregation: boolean;
   ga_tracking_id?: string;
   broadcast?: BroadcastEvent;
+  // NeoAI additions
+  registration_code?: boolean;
+  linuxdo_oauth_enabled?: boolean;
+  github_oauth_enabled?: boolean;
 };
 
 export async function getSiteInfo(): Promise<SiteInfo> {

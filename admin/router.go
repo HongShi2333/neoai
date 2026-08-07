@@ -41,6 +41,18 @@ func Register(app *gin.RouterGroup) {
 
         app.POST("/admin/market/update", UpdateMarketAPI)
 
+        // Registration code system (gated registration)
+        app.GET("/admin/registration-code/list", ListRegCodesAPI)
+        app.POST("/admin/registration-code/generate", GenerateRegCodesAPI)
+        app.GET("/admin/registration-code/state", GetRegCodeStateAPI)
+        app.POST("/admin/registration-code/state", SetRegCodeStateAPI)
+        app.POST("/admin/registration-code/disable", DisableRegCodeAPI)
+        app.GET("/admin/registration-code/delete/:id", DeleteRegCodeAPI)
+
+        // OAuth provider config (LinuxDO / GitHub)
+        app.GET("/admin/oauth/config", GetOAuthConfigAPI)
+        app.POST("/admin/oauth/config", SetOAuthConfigAPI)
+
         app.GET("/admin/logger/list", ListLoggerAPI)
         app.GET("/admin/logger/download", DownloadLoggerAPI)
         app.GET("/admin/logger/console", ConsoleLoggerAPI)

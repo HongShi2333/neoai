@@ -105,7 +105,11 @@
       "dingtalk": "釘釘",
       "alipay": "支付寶",
       "microsoft": "微軟"
-    }
+    },
+    "reg-code": "注册码",
+    "reg-code-placeholder": "REG-XXXXXXXX",
+    "reg-code-tip": "本站注册需要注册码。",
+    "reg-code-required": "请输入注册码"
   },
   "tag": {
     "free": "免費",
@@ -1212,7 +1216,54 @@
       "pro-required": "此功能為CoAI Pro 專屬，請在授權管理頁面購買CoAI Pro 授權以使用該功能"
     },
     "username-action": "修改用户名",
-    "username-action-desc": "重命名用户，其现有登录令牌仍然有效"
+    "username-action-desc": "重命名用户，其现有登录令牌仍然有效",
+    "community": {
+      "title": "社区频道",
+      "create": "创建频道",
+      "edit": "编辑",
+      "edit-channel": "编辑频道",
+      "create-channel": "创建频道",
+      "name": "频道名称",
+      "topic": "频道主题",
+      "visibility": "可见性",
+      "visible-roles": "可见角色（逗号分隔）",
+      "visible-users": "可见用户 ID（逗号分隔）",
+      "send-permission": "发送权限",
+      "senders": "允许发送的用户 ID",
+      "delete": "删除频道",
+      "confirm-delete": "确定要删除此频道吗？所有消息将一并删除。",
+      "no-channels": "暂无频道"
+    },
+    "reg-code": {
+      "title": "注册码",
+      "generate": "生成注册码",
+      "generate-title": "生成注册码",
+      "number": "生成数量",
+      "max-uses": "每个码最大使用次数",
+      "bonus-quota": "附赠额度（可选）",
+      "note": "备注（可选）",
+      "code": "注册码",
+      "uses": "使用次数",
+      "quota": "附赠额度",
+      "status": "状态",
+      "require-label": "注册时需要注册码",
+      "require-desc": "开启后，新用户注册时必须填写有效的注册码。已注册用户不受影响。",
+      "enabled": "已开启注册码限制",
+      "disabled": "已关闭注册码限制",
+      "copied": "注册码已复制",
+      "disable": "禁用",
+      "delete": "删除",
+      "confirm-delete": "确定要删除此注册码吗？",
+      "no-codes": "暂无注册码"
+    },
+    "oauth": {
+      "title": "OAuth 登录",
+      "description": "配置第三方 OAuth 登录提供商。client_id 留空则禁用该提供商。",
+      "saved": "OAuth 配置已保存",
+      "redirect-hint": "需要在 OAuth 提供商处注册的回调地址：",
+      "frontend-url": "前端 URL（登录后重定向）",
+      "frontend-url-tip": "OAuth 回调完成后跳转到此 URL。通常为前端根地址（如 https://app.example.com）。Token 会以 #access_token=... 形式追加在 URL 后。"
+    }
   },
   "mask": {
     "title": "預設設定",

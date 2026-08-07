@@ -1137,7 +1137,54 @@
     "notifications": "Push to site",
     "notify-all": "Notify all users",
     "username-action": "Change username",
-    "username-action-desc": "Rename the user. Their existing JWT stays valid."
+    "username-action-desc": "Rename the user. Their existing JWT stays valid.",
+    "community": {
+      "title": "Community Channels",
+      "create": "Create Channel",
+      "edit": "Edit",
+      "edit-channel": "Edit Channel",
+      "create-channel": "Create Channel",
+      "name": "Channel name",
+      "topic": "Topic",
+      "visibility": "Visibility",
+      "visible-roles": "Visible roles (comma separated)",
+      "visible-users": "Visible user IDs",
+      "send-permission": "Send permission",
+      "senders": "Allowed sender IDs",
+      "delete": "Delete Channel",
+      "confirm-delete": "Delete this channel? All messages will be removed too.",
+      "no-channels": "No channels yet"
+    },
+    "reg-code": {
+      "title": "Registration Codes",
+      "generate": "Generate",
+      "generate-title": "Generate registration codes",
+      "number": "Number of codes",
+      "max-uses": "Max uses per code",
+      "bonus-quota": "Bonus quota (optional)",
+      "note": "Note (optional)",
+      "code": "Code",
+      "uses": "Uses",
+      "quota": "Bonus quota",
+      "status": "Status",
+      "require-label": "Require registration code",
+      "require-desc": "When enabled, new users must supply a valid registration code during signup.",
+      "enabled": "Registration code requirement enabled",
+      "disabled": "Registration code requirement disabled",
+      "copied": "Code copied",
+      "disable": "Disable",
+      "delete": "Delete",
+      "confirm-delete": "Delete this registration code?",
+      "no-codes": "No codes yet"
+    },
+    "oauth": {
+      "title": "OAuth Login",
+      "description": "Configure third-party OAuth providers. Leave client_id empty to disable a provider.",
+      "saved": "OAuth config saved",
+      "redirect-hint": "Redirect URI to register with the provider:",
+      "frontend-url": "Frontend URL (post-login redirect)",
+      "frontend-url-tip": "Where to send the user after the OAuth callback completes."
+    }
   },
   "mask": {
     "title": "Preset",
@@ -1217,7 +1264,11 @@
       "dingtalk": "Dingtalk",
       "alipay": "Alipay",
       "microsoft": "Microsoft"
-    }
+    },
+    "reg-code": "Registration code",
+    "reg-code-placeholder": "REG-XXXXXXXX",
+    "reg-code-tip": "A registration code is required to sign up on this site.",
+    "reg-code-required": "Registration code is required"
   },
   "reset": "Reset",
   "request-error": "Request failed for {{reason}}",

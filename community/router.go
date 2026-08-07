@@ -139,10 +139,16 @@ func ListChannelsAPI(c *gin.Context) {
                 return
         }
 
-        // filter by visibility for the caller
+        // ?all=1 — admins can see every channel regardless of visibility
+        // rules. Non-admin callers are always filtered by CanView.
+        showAll := c.Query("all") == "1"
+        isAdmin := user != nil && user.IsAdmin(db)
+
         out := make([]*Channel, 0, len(channels))
         for i := range channels {
-                if CanView(db, &channels[i], user) {
+                if showAll && isAdmin {
+                        out = append(out, &channels[i])
+                } else if CanView(db, &channels[i], user) {
                         out = append(out, &channels[i])
                 }
         }

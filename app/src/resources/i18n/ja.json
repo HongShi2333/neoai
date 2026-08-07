@@ -1137,7 +1137,54 @@
     "notifications": "プッシュセンター",
     "notify-all": "すべてのユーザーに通知",
     "username-action": "ユーザー名変更",
-    "username-action-desc": "ユーザー名を変更します。既存の JWT は引き続き有効です"
+    "username-action-desc": "ユーザー名を変更します。既存の JWT は引き続き有効です",
+    "community": {
+      "title": "コミュニティチャンネル",
+      "create": "チャンネル作成",
+      "edit": "編集",
+      "edit-channel": "チャンネル編集",
+      "create-channel": "チャンネル作成",
+      "name": "チャンネル名",
+      "topic": "トピック",
+      "visibility": "可視性",
+      "visible-roles": "閲覧可能ロール",
+      "visible-users": "閲覧可能ユーザー ID",
+      "send-permission": "投稿権限",
+      "senders": "投稿可能ユーザー ID",
+      "delete": "チャンネル削除",
+      "confirm-delete": "このチャンネルを削除しますか？すべてのメッセージも削除されます。",
+      "no-channels": "チャンネルがありません"
+    },
+    "reg-code": {
+      "title": "登録コード",
+      "generate": "コード生成",
+      "generate-title": "登録コード生成",
+      "number": "生成数",
+      "max-uses": "コードごとの最大使用回数",
+      "bonus-quota": "付与クレジット（任意）",
+      "note": "メモ（任意）",
+      "code": "コード",
+      "uses": "使用回数",
+      "quota": "付与クレジット",
+      "status": "状態",
+      "require-label": "登録コード必須",
+      "require-desc": "有効化すると、新規ユーザー登録時に有効な登録コードの入力が必須になります。",
+      "enabled": "登録コード制限を有効化しました",
+      "disabled": "登録コード制限を無効化しました",
+      "copied": "コードをコピーしました",
+      "disable": "無効化",
+      "delete": "削除",
+      "confirm-delete": "この登録コードを削除しますか？",
+      "no-codes": "登録コードがありません"
+    },
+    "oauth": {
+      "title": "OAuth ログイン",
+      "description": "サードパーティ OAuth プロバイダを設定します。client_id が空の場合は無効になります。",
+      "saved": "OAuth 設定を保存しました",
+      "redirect-hint": "プロバイダに登録するリダイレクト URI：",
+      "frontend-url": "フロントエンド URL（ログイン後のリダイレクト先）",
+      "frontend-url-tip": "OAuth コールバック完了後のリダイレクト先。通常はフロントエンドのルート URL。"
+    }
   },
   "mask": {
     "title": "プリセット",
@@ -1217,7 +1264,11 @@
       "dingtalk": "ダボ",
       "alipay": "Alipay",
       "microsoft": "Microsoft"
-    }
+    },
+    "reg-code": "登録コード",
+    "reg-code-placeholder": "REG-XXXXXXXX",
+    "reg-code-tip": "このサイトでは登録コードが必要です。",
+    "reg-code-required": "登録コードを入力してください"
   },
   "reset": "リセット",
   "request-error": "{{reason}}のためにリクエストできませんでした",

@@ -52,3 +52,24 @@ system:
   search:
     endpoint: https://duckduckgo-api.vercel.app
     query: 5
+
+  # NeoAI: gated registration. When enabled, new users must supply a
+  # valid registration code during signup. Toggle at runtime via the
+  # admin "Registration Codes" page.
+  registration:
+    require_code: false
+
+  # NeoAI: OAuth provider config. Leave client_id empty to disable.
+  # Configure from the admin "OAuth Login" page; values below are
+  # written there.
+  oauth:
+    linuxdo:
+      client_id: ""
+      client_secret: ""
+    github:
+      client_id: ""
+      client_secret: ""
+    # Where to redirect the user after OAuth callback completes.
+    # e.g. https://app.example.com
+    frontend_url: ""
+

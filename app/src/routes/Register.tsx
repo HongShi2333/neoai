@@ -16,7 +16,10 @@ import TickButton from "@/components/TickButton.tsx";
 import { validateToken } from "@/store/auth.ts";
 import { useDispatch, useSelector } from "react-redux";
 import { appLogo, appName } from "@/conf/env.ts";
-import { infoMailSelector } from "@/store/info.ts";
+import {
+  infoMailSelector,
+  infoRegistrationCodeSelector,
+} from "@/store/info.ts";
 import { ScrollArea } from "@/components/ui/scroll-area.tsx";
 import { toast } from "sonner";
 
@@ -127,6 +130,7 @@ function doFormat(form: RegisterForm): RegisterForm {
     repassword: form.repassword.trim(),
     email: form.email.trim(),
     code: form.code.trim(),
+    registration_code: (form.registration_code || "").trim(),
   };
 }
 
@@ -135,12 +139,18 @@ function Verify({ form, dispatch, setNext }: CompProps) {
   const globalDispatch = useDispatch();
 
   const mail = useSelector(infoMailSelector);
+  const regCodeRequired = useSelector(infoRegistrationCodeSelector);
 
   const onSubmit = async () => {
     const data = doFormat(form);
 
     if (!isEmailValid(data.email)) return;
     if (mail && data.code.trim().length === 0) return;
+    // If registration code is required, refuse empty.
+    if (regCodeRequired && !data.registration_code) {
+      toast.error(t("auth.reg-code-required") || "Registration code is required");
+      return;
+    }
 
     const resp = await doRegister(data);
     if (!resp.status) {
@@ -209,6 +219,29 @@ function Verify({ form, dispatch, setNext }: CompProps) {
         </TickButton>
       </div>
 
+      {regCodeRequired && (
+        <>
+          <Label>
+            <Require />
+            {t("auth.reg-code") || "Registration code"}
+          </Label>
+          <Input
+            placeholder={t("auth.reg-code-placeholder") || "REG-XXXXXXXX"}
+            value={form.registration_code || ""}
+            onChange={(e) =>
+              dispatch({
+                type: "update:registration_code",
+                payload: e.target.value,
+              })
+            }
+          />
+          <p className="text-xs text-muted-foreground -mt-2">
+            {t("auth.reg-code-tip") ||
+              "A registration code is required to sign up on this site."}
+          </p>
+        </>
+      )}
+
       <Button
         tapScale={0.975}
         classNameWrapper={`mt-2`}
@@ -241,6 +274,7 @@ function Register() {
     repassword: "",
     email: "",
     code: "",
+    registration_code: "",
   });
 
   return (

@@ -285,14 +285,23 @@ function Account() {
                 {t("login")}
               </Button>
             ) : (
-              <Button
-                classNameWrapper={`ml-auto`}
-                className={`flex flex-row items-center`}
-                onClick={() => dispatch(logout())}
-              >
-                <Undo2 className={`h-4 w-4 mr-1.5`} />
-                {t("logout")}
-              </Button>
+              <>
+                <EditUsernameButton
+                  current={username}
+                  onRenamed={(newName) => {
+                    // reload so the navbar / menu picks up the change
+                    if (newName !== username) location.reload();
+                  }}
+                />
+                <Button
+                  classNameWrapper={`ml-auto`}
+                  className={`flex flex-row items-center`}
+                  onClick={() => dispatch(logout())}
+                >
+                  <Undo2 className={`h-4 w-4 mr-1.5`} />
+                  {t("logout")}
+                </Button>
+              </>
             )
           }
         >
@@ -312,15 +321,6 @@ function Account() {
                   </p>
                   <p className="text-sm text-muted-foreground">#{info.id}</p>
                 </div>
-                {auth && (
-                  <EditUsernameButton
-                    current={username}
-                    onRenamed={(newName) => {
-                      // reload so the navbar / menu picks up the change
-                      if (newName !== username) location.reload();
-                    }}
-                  />
-                )}
               </div>
             </div>
 

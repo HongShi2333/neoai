@@ -73,6 +73,10 @@ func main() {
                 if err := community.Migrate(db); err != nil {
                         globals.Warn(fmt.Sprintf("[community] migration failed: %s", err.Error()))
                 }
+                // NeoAI: ensure the registration_code table exists. We can't
+                // do this from the connection package (import cycle), so we
+                // do it here right after middleware init.
+                auth.EnsureRegistrationCodeTable(db)
         }
 
         // Health endpoints — must be registered BEFORE AuthMiddleware kicks in

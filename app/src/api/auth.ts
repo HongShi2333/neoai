@@ -30,6 +30,7 @@ export type RegisterForm = {
   repassword: string;
   email: string;
   code: string;
+  registration_code?: string;
 };
 
 export type RegisterResponse = {
